@@ -108,7 +108,10 @@ tps.forEach(t => {
   const L = Array.from(p.querySelectorAll('.L .tile')), R = Array.from(p.querySelectorAll('.R .tile'));
   ok(L.length === 6 && R.length === 6, t + ': six pairs', L.length + '/' + R.length);
   click(L[0]); click(R[R.length - 1]);
-  L.forEach(l => { for (const r of R) { if (r.classList.contains('done')) continue; click(l); click(r); if (l.classList.contains('done')) break; } });
+  L.forEach(l => {
+    if (l.classList.contains('done')) return;                 // already matched (the warm-up click can land on the right pair)
+    for (const r of R) { if (r.classList.contains('done')) continue; click(l); click(r); if (l.classList.contains('done')) break; }
+  });
   ok(p.querySelectorAll('.tile.done').length === 12, t + ': every pair can be matched', p.querySelectorAll('.tile.done').length);
   ok(p.querySelector('.banner') && p.querySelector('.banner').textContent.length > 10, t + ': round-complete banner with a verdict');
   click(p.querySelector('.toolbar .btn')); ok(p.querySelectorAll('.tile.done').length === 0, t + ': new round resets');
