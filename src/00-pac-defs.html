@@ -1,0 +1,79 @@
+<svg width="0" height="0" style="position:absolute;width:0;height:0" aria-hidden="true" focusable="false">
+  <defs>
+    <path id="lf" d="M0 0 C4 -2.7 9.5 -2.7 14 0 C9.5 2.7 4 2.7 0 0 Z"/>
+    <path id="st" d="M0 -10 L2.245 -3.09 L9.51 -3.09 L3.633 1.18 L5.88 8.09 L0 3.82 L-5.88 8.09 L-3.633 1.18 L-9.51 -3.09 L-2.245 -3.09 Z"/>
+  </defs>
+  <!-- laurel spray with a star at each tip and one in the middle -->
+  <symbol id="flourish" viewBox="0 0 320 44">
+    <g id="flh">
+      <g fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round">
+        <path d="M158 23 C120 23 92 10 42 15 C34 15.8 28 19 24 24"/>
+        <path d="M156 30 C126 33 104 26 70 27 C58 27.4 50 30 44 33" stroke-width=".8" opacity=".7"/>
+        <path d="M44 33 c-5 -1 -9 3 -7 7 c2 3 6 2 6 -1" stroke-width=".8" opacity=".7"/>
+      </g>
+      <g fill="currentColor">
+        <use href="#lf" transform="translate(140 22.5) rotate(205) scale(.9)"/>
+        <use href="#lf" transform="translate(126 21) rotate(150) scale(.9)"/>
+        <use href="#lf" transform="translate(112 18.5) rotate(207) scale(.9)"/>
+        <use href="#lf" transform="translate(98 15.8) rotate(152) scale(.9)"/>
+        <use href="#lf" transform="translate(84 14.3) rotate(209) scale(.9)"/>
+        <use href="#lf" transform="translate(70 14) rotate(154) scale(.9)"/>
+        <use href="#lf" transform="translate(56 14.5) rotate(210) scale(.9)"/>
+        <use href="#lf" transform="translate(42 15.5) rotate(156) scale(.85)"/>
+        <use href="#st" transform="translate(24 24) scale(.36)"/>
+      </g>
+    </g>
+    <use href="#flh" transform="matrix(-1 0 0 1 320 0)"/>
+    <use href="#st" transform="translate(160 22) scale(.72)" fill="currentColor"/>
+  </symbol>
+  <!-- card corner: the ruled L, a star in the pocket, two leaves along the inner line -->
+  <symbol id="corner" viewBox="0 0 60 60">
+    <g fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round">
+      <path d="M4 58 V26 C4 12 12 4 26 4 H58"/>
+      <path d="M12 52 V30 C12 20 20 12 30 12 H52" stroke-width=".7" opacity=".7"/>
+    </g>
+    <g fill="currentColor">
+      <use href="#st" transform="translate(7.2 7.2) scale(.42)"/>
+      <use href="#lf" transform="translate(30 12) rotate(-10) scale(.9)" opacity=".8"/>
+      <use href="#lf" transform="translate(12 30) rotate(80) scale(.9)" opacity=".8"/>
+    </g>
+  </symbol>
+  <!-- masthead emblem: a laurel wreath around a star, ringed like a seal -->
+  <symbol id="emblem" viewBox="0 0 120 120">
+    <circle cx="60" cy="60" r="56.5" fill="none" stroke="currentColor" stroke-width=".9" opacity=".55"/>
+    <circle cx="60" cy="60" r="59" fill="none" stroke="currentColor" stroke-width=".5" opacity=".35"/>
+    <g id="wreath">
+      <path d="M56.5 99.8 A40 40 0 0 0 46.3 22.4" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+      <g fill="currentColor" opacity=".9">
+        <use href="#lf" transform="translate(53.1 99.4) rotate(155)"/>
+        <use href="#lf" transform="translate(41.2 95.3) rotate(243)"/>
+        <use href="#lf" transform="translate(31.2 87.8) rotate(191)"/>
+        <use href="#lf" transform="translate(24 77.5) rotate(279)"/>
+        <use href="#lf" transform="translate(20.4 65.6) rotate(227)"/>
+        <use href="#lf" transform="translate(20.6 53.1) rotate(315)"/>
+        <use href="#lf" transform="translate(24.7 41.2) rotate(263)"/>
+        <use href="#lf" transform="translate(32.2 31.2) rotate(351)"/>
+        <use href="#lf" transform="translate(42.5 24) rotate(299)"/>
+      </g>
+    </g>
+    <use href="#wreath" transform="matrix(-1 0 0 1 120 0)"/>
+    <use href="#st" transform="translate(60 60) scale(2.2)" fill="currentColor"/>
+    <use href="#st" transform="translate(60 17) scale(.42)" fill="currentColor"/>
+  </symbol>
+</svg>
+
+<div class="rail left" aria-hidden="true">
+  <span class="stem"></span>
+  <span class="bead top"></span>
+  <svg class="vine" viewBox="0 0 44 320" aria-hidden="true"><g transform="translate(44,0) rotate(90)"><use href="#flourish" width="320" height="44"/></g></svg>
+  <span class="bead bot"></span>
+  <span class="stem"></span>
+</div>
+<div class="rail right" aria-hidden="true">
+  <span class="stem"></span>
+  <span class="bead top"></span>
+  <svg class="vine" viewBox="0 0 44 320" aria-hidden="true"><g transform="translate(44,0) rotate(90)"><use href="#flourish" width="320" height="44"/></g></svg>
+  <span class="bead bot"></span>
+  <span class="stem"></span>
+</div>
+

@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>PAC artwork</title>
+<style>
+:root{--bg:#f5f1e8;--surface:#fffdf7;--ink:#1d1b17;--muted:#8c8475;--gold:#9a7a44;--gold-soft:#c6a469;
+  --serif:"Palatino Linotype","Book Antiqua",Palatino,Cambria,"Times New Roman",serif;
+  --sans:Optima,Candara,"Segoe UI",-apple-system,"Helvetica Neue",Arial,sans-serif}
+html,body{margin:0;height:100%}
+body{font-family:var(--serif);color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased;overflow:hidden}
+.page{position:relative;width:1200px;height:630px;background:var(--bg);background-image:radial-gradient(760px 420px at 50% 30%,#fffdf7 0%,rgba(255,253,247,0) 72%)}
+.frame{position:absolute;inset:30px;border:2px solid rgba(154,122,68,.5)}
+.frame::before{content:"";position:absolute;inset:10px;border:1px solid rgba(154,122,68,.28)}
+.frame .st{position:absolute;width:16px;height:16px;color:var(--gold)}
+.frame .st.tl{left:-9px;top:-9px}.frame .st.tr{right:-9px;top:-9px}.frame .st.bl{left:-9px;bottom:-9px}.frame .st.br{right:-9px;bottom:-9px}
+.inner{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 80px}
+.emblem{width:92px;height:92px;color:var(--gold-soft);margin-bottom:18px}
+.eyebrow{font-family:var(--sans);font-size:16px;letter-spacing:.34em;text-transform:uppercase;color:var(--gold);margin:0 0 14px}
+h1{font-weight:400;font-size:66px;line-height:1.08;margin:0;letter-spacing:.005em}
+.orn{color:var(--gold-soft);width:340px;height:auto;margin:22px auto 0;display:block}
+.sub{margin:18px 0 0;color:var(--muted);font-style:italic;font-size:21px}
+.sub2{margin:6px 0 0;color:var(--muted);font-size:16px;font-family:var(--sans);letter-spacing:.14em;text-transform:uppercase}
+/* icon */
+body.icon .page{width:512px;height:512px;background-image:radial-gradient(360px 300px at 50% 36%,#fffdf7 0%,rgba(255,253,247,0) 72%)}
+body.icon .frame{inset:24px}
+body.icon .emblem{width:280px;height:280px;margin:0 0 10px}
+body.icon .eyebrow,body.icon h1,body.icon .orn,body.icon .sub,body.icon .sub2{display:none}
+body.icon .pac{font-family:var(--sans);font-size:30px;letter-spacing:.42em;text-transform:uppercase;color:var(--gold);margin:0 0 0 .42em}
+.pac{display:none}
+body.icon .pac{display:block}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <path id="lf" d="M0 0 C4 -2.7 9.5 -2.7 14 0 C9.5 2.7 4 2.7 0 0 Z"/>
+    <path id="st" d="M0 -10 L2.245 -3.09 L9.51 -3.09 L3.633 1.18 L5.88 8.09 L0 3.82 L-5.88 8.09 L-3.633 1.18 L-9.51 -3.09 L-2.245 -3.09 Z"/>
+  </defs>
+  <symbol id="flourish" viewBox="0 0 320 44">
+    <g id="flh">
+      <g fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round">
+        <path d="M158 23 C120 23 92 10 42 15 C34 15.8 28 19 24 24"/>
+        <path d="M156 30 C126 33 104 26 70 27 C58 27.4 50 30 44 33" stroke-width=".8" opacity=".7"/>
+        <path d="M44 33 c-5 -1 -9 3 -7 7 c2 3 6 2 6 -1" stroke-width=".8" opacity=".7"/>
+      </g>
+      <g fill="currentColor">
+        <use href="#lf" transform="translate(140 22.5) rotate(205) scale(.9)"/>
+        <use href="#lf" transform="translate(126 21) rotate(150) scale(.9)"/>
+        <use href="#lf" transform="translate(112 18.5) rotate(207) scale(.9)"/>
+        <use href="#lf" transform="translate(98 15.8) rotate(152) scale(.9)"/>
+        <use href="#lf" transform="translate(84 14.3) rotate(209) scale(.9)"/>
+        <use href="#lf" transform="translate(70 14) rotate(154) scale(.9)"/>
+        <use href="#lf" transform="translate(56 14.5) rotate(210) scale(.9)"/>
+        <use href="#lf" transform="translate(42 15.5) rotate(156) scale(.85)"/>
+        <use href="#st" transform="translate(24 24) scale(.36)"/>
+      </g>
+    </g>
+    <use href="#flh" transform="matrix(-1 0 0 1 320 0)"/>
+    <use href="#st" transform="translate(160 22) scale(.72)" fill="currentColor"/>
+  </symbol>
+  <symbol id="emblem" viewBox="0 0 120 120">
+    <circle cx="60" cy="60" r="56.5" fill="none" stroke="currentColor" stroke-width=".9" opacity=".55"/>
+    <circle cx="60" cy="60" r="59" fill="none" stroke="currentColor" stroke-width=".5" opacity=".35"/>
+    <g id="wreath">
+      <path d="M56.5 99.8 A40 40 0 0 0 46.3 22.4" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+      <g fill="currentColor" opacity=".9">
+        <use href="#lf" transform="translate(53.1 99.4) rotate(155)"/>
+        <use href="#lf" transform="translate(41.2 95.3) rotate(243)"/>
+        <use href="#lf" transform="translate(31.2 87.8) rotate(191)"/>
+        <use href="#lf" transform="translate(24 77.5) rotate(279)"/>
+        <use href="#lf" transform="translate(20.4 65.6) rotate(227)"/>
+        <use href="#lf" transform="translate(20.6 53.1) rotate(315)"/>
+        <use href="#lf" transform="translate(24.7 41.2) rotate(263)"/>
+        <use href="#lf" transform="translate(32.2 31.2) rotate(351)"/>
+        <use href="#lf" transform="translate(42.5 24) rotate(299)"/>
+      </g>
+    </g>
+    <use href="#wreath" transform="matrix(-1 0 0 1 120 0)"/>
+    <use href="#st" transform="translate(60 60) scale(2.2)" fill="currentColor"/>
+    <use href="#st" transform="translate(60 17) scale(.42)" fill="currentColor"/>
+  </symbol>
+</svg>
+<div class="page">
+  <div class="frame">
+    <svg class="st tl" viewBox="-10 -10 20 20"><use href="#st" fill="currentColor"/></svg>
+    <svg class="st tr" viewBox="-10 -10 20 20"><use href="#st" fill="currentColor"/></svg>
+    <svg class="st bl" viewBox="-10 -10 20 20"><use href="#st" fill="currentColor"/></svg>
+    <svg class="st br" viewBox="-10 -10 20 20"><use href="#st" fill="currentColor"/></svg>
+  </div>
+  <div class="inner">
+    <svg class="emblem" viewBox="0 0 120 120"><use href="#emblem"/></svg>
+    <p class="pac">PAC</p>
+    <p class="eyebrow">Study Guide</p>
+    <h1>Politics &amp; American Culture</h1>
+    <svg class="orn" viewBox="0 0 320 44"><use href="#flourish"/></svg>
+    <p class="sub">Democracy &middot; the Constitution &middot; federalism &middot; political culture &middot; civil liberties</p>
+    <p class="sub2">Notes &middot; flashcards &middot; match &middot; quizzes &middot; practice exam</p>
+  </div>
+</div>
+<script>if(/icon/.test(location.search)) document.body.className = "icon";</script>
+</body>
+</html>
