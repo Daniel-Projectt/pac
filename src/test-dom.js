@@ -34,8 +34,19 @@ function answerQuiz(root, label) {
   while (guard++ < 80) {
     const opts = Array.from(root.querySelectorAll('.qbody .opt'));
     if (!opts.length) break;
-    click(opts[Math.floor(Math.random() * opts.length)]);
-    ok(root.querySelectorAll('.qbody .opt.correct').length === 1, label + ': the right answer is revealed');
+    const check = root.querySelector('.qbody .check');
+    if (check) {                                   // a "name them" question: pick n, then Check
+      const n = parseInt((root.querySelector('.qbody .picked').textContent.match(/of (\d+)/) || [0, 0])[1], 10);
+      ok(n >= 2 && n < opts.length, label + ': name-them asks for fewer than all the choices', n + ' of ' + opts.length);
+      opts.slice(0, n).forEach(click);
+      ok(root.querySelector('.qbody .picked').textContent === n + ' of ' + n + ' picked', label + ': the counter follows the picks', root.querySelector('.qbody .picked').textContent);
+      click(check);
+      ok(root.querySelectorAll('.qbody .opt.correct, .qbody .opt.missedone').length === n, label + ': every right item is revealed after Check');
+      ok(root.querySelectorAll('.qbody .opt:disabled').length === opts.length && check.hidden, label + ': locked after Check');
+    } else {
+      click(opts[Math.floor(Math.random() * opts.length)]);
+      ok(root.querySelectorAll('.qbody .opt.correct').length === 1, label + ': the right answer is revealed');
+    }
     ok(root.querySelector('.qbody .feedback').textContent.length > 10, label + ': feedback explains');
     const nb = root.querySelector('.qbody .next'); ok(nb && !nb.hidden, label + ': next appears');
     click(nb);
@@ -50,6 +61,7 @@ const items = $$('#guideRoot .gitem');
 ok(items.length === 34, 'guide shows all 34 review items', items.length);
 ok(/0 of 34/.test($('#gCount').textContent), 'progress starts at 0 of 34', $('#gCount').textContent);
 ok($$('#guideRoot .record tbody tr').length === 5, 'quiz record has five rows');
+ok(/chapter 7/.test($('#guideRoot .box.next').textContent), 'the Guide shows the coming chapter 7 quiz');
 ok($$('#guideRoot [data-missed]').length === 2, 'two quizzes offer "only the misses"');
 
 head('guide checkboxes and jumps');
@@ -136,8 +148,34 @@ tps.forEach(t => {
   click(root.querySelector('.again')); ok(root.querySelectorAll('.dots i').length === 10, t + ': new quiz has ten');
 });
 topic('c1'); mode('c1', 'quiz');
-key('1'); ok($$('#c1Quiz .qbody .opt:disabled').length > 0, 'key 1 answers');
+if ($('#c1Quiz .qbody .check')) {
+  key('1'); ok($$('#c1Quiz .qbody .opt.sel').length === 1, 'key 1 toggles a pick on a name-them question');
+  key('Enter'); ok($$('#c1Quiz .qbody .opt:disabled').length > 0, 'Enter checks the picks');
+} else {
+  key('1'); ok($$('#c1Quiz .qbody .opt:disabled').length > 0, 'key 1 answers');
+}
 key('Enter'); ok(/Question 2/.test($('#c1Quiz .qnum').textContent), 'Enter moves on', $('#c1Quiz .qnum').textContent);
+
+head('name them');
+topic('guide');
+const lists = $$('#guideRoot details.namelist');
+ok(lists.length === 18, 'eighteen lists on the Guide', lists.length);
+ok(/five elements/.test(lists[0].querySelector('summary').textContent) && lists[0].querySelectorAll('ol li').length === 5, 'the first list is the five elements, five items');
+lists[0].open = true; ok(/Liberty/.test(lists[0].querySelector('ol').textContent) && /Individual responsibility/.test(lists[0].querySelector('ol').textContent), 'opening it shows the five');
+click($('#gLists'));
+ok(visible(panel('exam/mock')) && $$('#mockExam .dots i').length === 18, 'Drill the lists starts an 18-question name-them exam', $$('#mockExam .dots i').length);
+ok(!!$('#mockExam .qbody .check') && /Name them/.test($('#mockExam .qtag').textContent), 'first question is a name-them with a Check button');
+const nOpts = $$('#mockExam .qbody .opt').length;
+key('2'); ok($$('#mockExam .qbody .opt.sel').length === 1, 'a number key toggles a pick');
+key('2'); ok($$('#mockExam .qbody .opt.sel').length === 0, 'the same key untoggles it');
+key('Enter');
+ok($$('#mockExam .qbody .opt.missedone').length >= 2 && /Not quite/.test($('#mockExam .qbody .feedback').textContent), 'checking with nothing picked shows every missed item and says not quite');
+ok($$('#mockExam .qbody .opt:disabled').length === nOpts, 'all choices lock after Check');
+key('Enter'); ok(/Question 2/.test($('#mockExam .qnum').textContent), 'Enter moves to the next list');
+const lres = answerQuiz($('#mockExam'), 'lists');
+ok(lres && /\/18/.test(lres.querySelector('.big').textContent), 'name-them exam scores out of 18', lres && lres.querySelector('.big').textContent);
+ok(/"types":"lists"/.test(w.localStorage.getItem('pac.mockcfg') || ''), 'the drill sets the exam type to lists');
+click(lres.querySelector('.setupbtn')); ok(!!$('#mxStart') && $('#mxT button[data-t="lists"][aria-pressed="true"]'), 'back to setup with Name them selected');
 
 head('practice exam');
 topic('exam'); mode('exam', 'mock');
@@ -168,7 +206,8 @@ head('paper checklist');
 topic('faith'); mode('faith', 'paper');
 const c0 = $('#paperChecks input'); c0.checked = true; c0.dispatchEvent(new w.Event('change', { bubbles: true }));
 ok(c0.parentNode.classList.contains('done') && /"0":true/.test(w.localStorage.getItem('pac.paper') || ''), 'paper check saved');
-mode('faith', 'log'); ok($$('#logRoot .logday').length === 9, 'nine class days in the log');
+mode('faith', 'log'); ok($$('#logRoot .logday').length === 10, 'ten class days in the log');
+ok(/Sep 24/.test($$('#logRoot .logday').pop().textContent) && /chapter 7/.test($$('#logRoot .logday').pop().textContent), 'the Sep 24 exam notes are the last entry');
 mode('faith', 'faith'); ok($$('#faithRoot .verse').length >= 10 && $$('#faithRoot .rule').length === 4, 'verses and Thomas themes rendered');
 
 head('remembers where you were');

@@ -1,8 +1,8 @@
 /* ---- the pure parts can be tested outside a browser ---- */
 if(typeof window === "undefined"){
-  module.exports = {CH:CH, COURSE:COURSE, QUIZ_RECORD:QUIZ_RECORD, CLASS_LOG:CLASS_LOG, PAPER:PAPER, GUIDE:GUIDE, FAITH:FAITH,
+  module.exports = {CH:CH, COURSE:COURSE, QUIZ_RECORD:QUIZ_RECORD, CLASS_LOG:CLASS_LOG, PAPER:PAPER, GUIDE:GUIDE, FAITH:FAITH, LISTS:LISTS,
     QB:QB, PAIRSETS:PAIRSETS, VERDICTS:VERDICTS, CHAPTERS:CHAPTERS, TOPIC_NAMES:TOPIC_NAMES,
-    fromBank:fromBank, fromPair:fromPair, topicQuestions:topicQuestions, mockQuestions:mockQuestions, questionsByKeys:questionsByKeys,
+    fromBank:fromBank, fromPair:fromPair, fromList:fromList, listsFor:listsFor, topicQuestions:topicQuestions, mockQuestions:mockQuestions, questionsByKeys:questionsByKeys,
     realKeys:realKeys, deckFor:deckFor, matchRound:matchRound, verdictFor:verdictFor};
   return;
 }
@@ -110,40 +110,65 @@ function makeQuiz(root, gen, opts){
     });
   }
   function tagFor(q){
-    var t = q.ap ? "Application" : (q.kind === "tf" ? "True or false" : (q.kind === "id" ? "Identification" : "Multiple choice"));
+    var t = q.ap ? "Application" : (q.kind === "tf" ? "True or false" : (q.kind === "id" ? "Identification" : (q.kind === "list" ? "Name them" : "Multiple choice")));
     return '<span class="qtag">'+t+'</span>' + (q.real ? '<span class="qtag real">Canvas quiz &middot; Q'+q.real+'</span>' : '');
   }
   function render(){
     var body = shell(); dots();
     if(qi >= qs.length){ results(); return; }
     var q = qs[qi]; answered = false;
+    var isList = q.kind === "list";
     body.innerHTML =
       '<div class="qcard card-corners">'+CORNERS+
         '<div class="qnum">Question '+(qi+1)+' of '+qs.length+(opts.showTopic ? ' &middot; '+TOPIC_NAMES[q.tp] : '')+'</div>'+
         '<div style="text-align:center;margin-top:10px">'+tagFor(q)+'</div>'+
         '<p class="qtext">'+q.text+'</p>'+
         '<div class="opts'+(q.kind === "tf" ? " two" : "")+'"></div><p class="feedback"></p>'+
-        '<div class="qfoot"><button class="btn primary next" type="button" hidden>Next &rsaquo;</button></div>'+
+        '<div class="qfoot">'+(isList ? '<span class="picked"></span><button class="btn primary check" type="button">Check</button>' : '')+
+        '<button class="btn primary next" type="button" hidden>Next &rsaquo;</button></div>'+
       '</div>';
     var wrap = $(".opts", body);
     q.opts.forEach(function(o, i){
       var b = document.createElement("button");
-      b.type = "button"; b.className = "opt " + (o.cls || "");
+      b.type = "button"; b.className = "opt " + (o.cls || "") + (isList ? " pick" : "");
       b.innerHTML = '<span class="k">'+(i+1)+'</span>' + o.html;
-      b.addEventListener("click", function(){ answer(o, b); });
+      b.addEventListener("click", function(){ isList ? toggle(b) : answer(o, b); });
       wrap.appendChild(b);
     });
+    if(isList){ $(".check", body).addEventListener("click", checkList); countPicked(); }
     $(".next", body).addEventListener("click", function(){ qi++; render(); });
+  }
+  function countPicked(){
+    var body = $(".qbody", root), q = qs[qi], n = $$(".opt.sel", body).length;
+    $(".picked", body).textContent = n + " of " + q.n + " picked";
+  }
+  function toggle(b){ if(answered) return; b.classList.toggle("sel"); countPicked(); }
+  function finish(q, right, body, wrongWord){
+    q.got = right; answered = true;
+    if(right){ score++; $(".feedback", body).innerHTML = "<b>Correct.</b> " + q.explain; }
+    else { missed.push(q); $(".feedback", body).innerHTML = wrongWord + " " + q.explain; }
+    dots();
+    var nb = $(".next", body); nb.hidden = false; nb.textContent = (qi === qs.length-1) ? "See results" : "Next"; nb.focus();
+  }
+  function checkList(){
+    if(answered) return;
+    var q = qs[qi], body = $(".qbody", root), right = true;
+    $$(".opt", body).forEach(function(b, i){
+      var chosen = b.classList.contains("sel"), ok = q.opts[i].ok;
+      b.disabled = true;
+      if(ok && chosen) b.classList.add("correct");
+      else if(ok && !chosen){ b.classList.add("missedone"); right = false; }
+      else if(!ok && chosen){ b.classList.add("wrong"); right = false; }
+    });
+    $(".check", body).hidden = true; $(".picked", body).hidden = true;
+    finish(q, right, body, "<b>Not quite.</b>");
   }
   function answer(o, node){
     if(answered) return;
-    answered = true;
-    var q = qs[qi], body = $(".qbody", root); q.got = o.ok;
+    var q = qs[qi], body = $(".qbody", root);
     $$(".opt", body).forEach(function(b, i){ b.disabled = true; if(q.opts[i].ok) b.classList.add("correct"); });
-    if(o.ok){ score++; $(".feedback", body).innerHTML = "<b>Correct.</b> " + q.explain; }
-    else { node.classList.add("wrong"); missed.push(q); $(".feedback", body).innerHTML = "<b>Not this one.</b> " + q.explain; }
-    dots();
-    var nb = $(".next", body); nb.hidden = false; nb.textContent = (qi === qs.length-1) ? "See results" : "Next"; nb.focus();
+    if(!o.ok) node.classList.add("wrong");
+    finish(q, o.ok, body, "<b>Not this one.</b>");
   }
   function results(){
     var body = $(".qbody", root);
@@ -174,8 +199,11 @@ function makeQuiz(root, gen, opts){
     reset:function(){ started = false; qs = []; root.innerHTML = ""; },
     keys:function(e){
       var body = $(".qbody", root); if(!body) return false;
-      if(/^[1-4]$/.test(e.key)){ var b = $$(".opt", body)[parseInt(e.key,10)-1]; if(b && !b.disabled){ b.click(); return true; } }
-      else if(e.key === "Enter"){ var nb = $(".next", body); if(nb && !nb.hidden){ nb.click(); return true; } }
+      if(/^[1-9]$/.test(e.key)){ var b = $$(".opt", body)[parseInt(e.key,10)-1]; if(b && !b.disabled){ b.click(); return true; } }
+      else if(e.key === "Enter"){
+        var ck = $(".check", body); if(ck && !ck.hidden && !answered){ ck.click(); return true; }
+        var nb = $(".next", body); if(nb && !nb.hidden){ nb.click(); return true; }
+      }
       return false;
     }
   };

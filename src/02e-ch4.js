@@ -15,12 +15,13 @@ CH.c4 = {n:4, title:"American Political Culture", short:"Culture",
   {id:"c4-five", h:"The five elements of the American political system", know:true, body:
    '<p class="knowline"><span class="know">Know them</span></p>'+
    '<div class="tblwrap"><table class="tbl n0"><tbody>'+
-   '<tr><td class="head">Liberty</td><td class="sm">Americans think of themselves as having rights against government.</td></tr>'+
-   '<tr><td class="head">Equality</td><td class="sm">Everybody should have an equal vote and an equal chance to participate and succeed.</td></tr>'+
-   '<tr><td class="head">Democracy</td><td class="sm">Government officials should be accountable to the people.</td></tr>'+
-   '<tr><td class="head">Civic duty</td><td class="sm">A belief that one has an obligation to participate in civic and political affairs.</td></tr>'+
-   '<tr><td class="head">Individual responsibility</td><td class="sm">Individuals are responsible for their own actions and well-being.</td></tr>'+
+   '<tr><td class="head">Liberty</td><td class="sm">Americans are <b>preoccupied with their rights</b>. They believe they should be free to do pretty much as they please, with some exceptions, as long as they don’t hurt other people. (In a phrase: rights against government.)</td></tr>'+
+   '<tr><td class="head">Equality</td><td class="sm">Everybody should have an <b>equal vote</b> and an equal chance to participate and succeed.</td></tr>'+
+   '<tr><td class="head">Democracy</td><td class="sm">Government officials should be <b>accountable to the people</b>.</td></tr>'+
+   '<tr><td class="head">Civic duty</td><td class="sm">People ought to take <b>community affairs seriously</b> and help out when they can — an obligation to participate in civic and political affairs.</td></tr>'+
+   '<tr><td class="head">Individual responsibility</td><td class="sm">A characteristically American view: barring some disability, individuals are <b>responsible for their own actions and well-being</b>.</td></tr>'+
    '</tbody></table></div>'+
+   '<div class="exam-tip"><b>How the exam asks it (Sep 24 notes)</b>“What are the five?” — Liberty, Equality, Democracy, Civic Duty, Individual Responsibility. Then a definition, and you name the element. Drill both on the Guide tab under <i>Name them</i>.</div>'+
    '<h3>The economic system</h3><ul><li>A free-enterprise economic system, with government regulations present to prevent abuse.</li><li><b>Equality of opportunity</b>, not equality of results.</li><li>Polls show Americans are willing to help people “truly in need” — older adults and the disabled — but not others able to help themselves.</li><li>A majority of people in Germany, Italy and Poland think success in life is determined by forces outside an individual’s control; Americans disagree.</li></ul>'},
   {id:"c4-compare", h:"4.2 · The U.S. vs. the world; 4.3 · Where culture comes from", body:
    '<ul><li>The average American is more likely than the average European to <b>believe in God, pray on a daily basis, and acknowledge clear standards of right and wrong</b>.</li>'+
@@ -52,6 +53,7 @@ CH.c4 = {n:4, title:"American Political Culture", short:"Culture",
    ["The five elements","Liberty, equality, democracy, civic duty, individual responsibility"],
    ["Liberty","Americans think of themselves as having rights against government"],
    ["Equality","Everybody should have an equal vote and an equal chance to participate and succeed"],
+   ["Democracy (the element)","Government officials should be accountable to the people"],
    ["Civic duty","A belief that one has an obligation to participate in civic and political affairs"],
    ["Individual responsibility","Individuals are responsible for their own actions and well-being"],
    ["Equality of opportunity","What Americans favor — rather than equality of results"],

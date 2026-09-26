@@ -71,19 +71,32 @@ function fromPair(tp, idx, reverse){
   return q;
 }
 function bankFor(tp){ var out = []; QB.forEach(function(b, i){ if(!tp || b.tp === tp) out.push({b:b, i:i}); }); return out; }
+/* "Name them": pick all n items out of a spread of choices — the exam's "what are the five" */
+var WORDS = ["","one","two","three","four","five","six","seven","eight","nine"];
+function fromList(i){
+  var l = LISTS[i];
+  var total = Math.min(9, Math.max(6, l.n + 3));
+  var opts = l.items.map(function(t){ return {html:t, ok:true}; }).concat(pick(l.extra, total - l.n).map(function(t){ return {html:t, ok:false}; }));
+  return {key:"L:"+i, tp:l.tp, ap:false, real:0, kind:"list", n:l.n, text:"What are "+l.q+"? <i>Pick all "+WORDS[l.n]+".</i>",
+          opts:shuffle(opts), explain:l.e, miss:"What are "+l.q+"? — <b>"+l.items.join(", ")+"</b>"};
+}
+function listsFor(tp){ var out = []; LISTS.forEach(function(l, i){ if(!tp || l.tp === tp) out.push(i); }); return out; }
 
-/* A chapter quiz: mostly written questions, about a third identification */
+/* A chapter quiz: mostly written questions, about a third identification, plus one or two lists */
 function topicQuestions(tp, keys, n){
   n = n || 10;
   if(keys && keys.length) return shuffle(questionsByKeys(keys)).slice(0, n);
   var bank = bankFor(tp).map(function(x){ return fromBank(x.b, x.i); });
   var gen = PAIRSETS[tp].pairs.map(function(p, i){ return fromPair(tp, i, Math.random() < 0.5); });
+  var lists = pick(listsFor(tp), 2).map(fromList);
   var nGen = Math.min(gen.length, Math.floor(n/3));
-  return shuffle(pick(bank, n - nGen).concat(pick(gen, nGen)));
+  return shuffle(pick(bank, n - nGen - lists.length).concat(pick(gen, nGen), lists));
 }
-/* Rebuild exact questions from their keys ("tp:i" bank, "tp:pN" / "tp:pNr" pairs); anything malformed is dropped */
+/* Rebuild exact questions from their keys ("tp:i" bank, "tp:pN" / "tp:pNr" pairs, "L:i" lists); anything malformed is dropped */
 function questionsByKeys(keys){
   return uniqBy(keys, function(k){ return k; }).map(function(k){
+    var L = /^L:(\d+)$/.exec(k);
+    if(L){ var li = parseInt(L[1],10); return li < LISTS.length ? fromList(li) : null; }
     var m = /^([a-z0-9]+):p(\d+)(r?)$/.exec(k);
     if(m){
       var set = PAIRSETS[m[1]], i = parseInt(m[2],10);
@@ -95,11 +108,15 @@ function questionsByKeys(keys){
     return (QB[j] && QB[j].tp === b[1]) ? fromBank(QB[j], j) : null;
   }).filter(Boolean);
 }
-/* The practice exam: every chapter, reshuffled; types all / mc / tf / ap / real (Canvas only) */
+/* The practice exam: every chapter, reshuffled; types all / mc / tf / ap / real (Canvas only) / lists (name them) */
 function mockQuestions(cfg){
   var tps = cfg.topics && cfg.topics.length ? cfg.topics : CHAPTERS.slice();
   var n = cfg.n || 25;
   var pool = [];
+  if(cfg.types === "lists"){
+    tps.forEach(function(tp){ listsFor(tp).forEach(function(i){ pool.push(fromList(i)); }); });
+    return shuffle(pool).slice(0, n);
+  }
   QB.forEach(function(b, i){
     if(tps.indexOf(b.tp) < 0) return;
     if(cfg.types === "mc" && b.t !== "mc") return;
@@ -113,8 +130,19 @@ function mockQuestions(cfg){
       pick(PAIRSETS[tp].pairs.map(function(p, i){ return i; }), 3).forEach(function(i){ pool.push(fromPair(tp, i, Math.random() < 0.5)); });
     });
   }
-  /* spread across chapters */
-  var byTp = {}; tps.forEach(function(t){ byTp[t] = shuffle(pool.filter(function(q){ return q.tp === t; })); });
+  if(cfg.types === "all" || !cfg.types){
+    tps.forEach(function(tp){ pick(listsFor(tp), 2).forEach(function(i){ pool.push(fromList(i)); }); });
+  }
+  /* spread across chapters; about a fifth of a full exam is "name them", one per chapter, asked first so they always make the cut */
+  var want = Math.max(1, Math.round(n / 5)), placed = 0;
+  var byTp = {}; tps.forEach(function(t){
+    var qs = shuffle(pool.filter(function(q){ return q.tp === t; }));
+    if(placed < want){
+      var li = -1; qs.some(function(q, i){ if(q.kind === "list"){ li = i; return true; } return false; });
+      if(li >= 0){ qs.unshift(qs.splice(li, 1)[0]); placed++; }
+    }
+    byTp[t] = qs;
+  });
   var out = [], k = 0;
   while(out.length < n){
     var t = tps[k % tps.length], list = byTp[t];

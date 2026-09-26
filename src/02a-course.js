@@ -28,7 +28,9 @@ var COURSE = {
   "Undisclosed use is an academic integrity violation — “not a warning, a report.”",
   "<b>Quizzes and discussion posts: no.</b> This page is for studying beforehand, not for use during a quiz.",
   "The paper cites a class discussion by date: “Something that was not in this room cannot write it.”"],
- virtues:"Humility · curiosity · respect · open-heartedness · confidence"
+ virtues:"Humility · curiosity · respect · open-heartedness · confidence",
+ next:"Quiz on <b>chapter 7</b> on Thursday, October 1 (Sep 24 notes). Chapters 6 and 7 are not on this page yet — send the slides or notes and they will be added.",
+ examStyle:"The exam asks lists and definitions in the professor’s words: “What are the five?” (Liberty, Equality, Democracy, Civic Duty, Individual Responsibility); “Which clause says…?”; “Define probable cause.” The <i>Name them</i> drill below and the quizzes now ask that way."
 };
 
 /* Scores copied from the Canvas quiz results */
@@ -94,7 +96,13 @@ var CLASS_LOG = [
        "Vietnam, Watergate and the decline of trust; orthodox vs. progressive; the economic system.",
        "Civic role of religion — Romans 12:2, John 15:19, Revelation 7:9–10, Romans 1:16, Colossians 2:8.",
        "Is there a culture war, or is it made up? Civil society.",
-       "Housekeeping: the next quiz is on chapter 5."]}
+       "Housekeeping: the next quiz is on chapter 5."]},
+ {d:"Thu, Sep 24", h:"Your exam notes — civil liberties and political culture", note:true,
+  pts:["Civil liberties: the Constitution and the Bill of Rights contain a list of competing rights and duties (pp. 97–98); war has usually been the crisis that restricted the liberty of some minority; laws once made it illegal to advocate overthrowing the government by force.",
+       "The Fourteenth and First Amendments: the due process clause and the equal protection clause (p. 100); freedom of expression and freedom of religion; the clear-and-present-danger test; libel and obscenity; the free exercise and establishment clauses; probable cause.",
+       "Political culture: a patterned and sustained way of thinking; the five — liberty, equality, democracy, civic duty, individual responsibility — with the definitions; religious people give three times as much; orthodox vs. progressive; Watergate and Vietnam.",
+       "Federalism reminders: only the federal government regulates immigration; the Tenth Amendment is states’ rights. Legitimacy requires the consent of the governed.",
+       "Housekeeping: quiz on chapter 7 on Thursday."]}
 ];
 
 /* The paper, from the syllabus slide */

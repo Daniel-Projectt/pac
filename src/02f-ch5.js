@@ -8,14 +8,18 @@ CH.c5 = {n:5, title:"Civil Liberties", short:"Liberties",
    '<div class="box"><h4>Civil rights</h4><p>Claims to equal treatment — protection against discrimination by government and others. The Fourteenth Amendment’s <b>equal protection of the laws</b>.</p></div></div>'+
    '<ul><li><b>Bill of Rights / Constitution</b> — most liberties are in the first ten amendments, but the original Constitution already had some: <b>Article I, Section 9</b> protects habeas corpus and bans bills of attainder and ex post facto laws.</li>'+
    '<li><b>The libertarian view of personal freedom</b> — people should be free to do as they choose so long as they do not harm others; government’s main job is to protect that freedom.</li>'+
-   '<li><b>Rights in conflict</b> — a free press vs. a fair trial; free speech vs. public order; free exercise of religion vs. general laws. Clashes over rights usually end up in <b>the courts</b>.</li>'+
+   '<li><b>Competing rights and duties</b> — the Constitution and the Bill of Rights contain a <i>list of competing rights and duties</i> (Wilson pp. 97–98): a free press vs. a fair trial; free speech vs. public order; free exercise of religion vs. general laws. Clashes over rights usually end up in <b>the courts</b>.</li>'+
    '<li>Wilson: the broad language of the Constitution and the personal beliefs of judges have led to a general <b>expansion</b> of civil liberties, not a decrease.</li></ul>'},
   {id:"c5-culture", h:"Culture, crisis, and liberty", body:
    '<ul><li><b>Original diversity in the U.S.:</b> ethnic, religious and cultural. The <b>potato famine</b> brought a wave of Irish Catholic immigrants and a wave of anti-Catholic feeling — cultural conflict has always shaped which liberties get protected.</li>'+
-   '<li><b>War and crisis narrow the limits of speech and the press.</b> Examples: the <b>Sedition Act of 1798</b> (Jefferson pardoned those convicted under it), the Civil War, World War I (sedition and espionage laws), World War II, the Cold War — and after September 11, the <b>Patriot Act</b>, enacted in <b>October 2001</b>.</li>'+
+   '<li><b>War and crisis narrow the limits of speech and the press.</b> In the exam notes’ words: <i>war has usually been the crisis that has restricted the liberty of some minority</i>. Examples: the <b>Sedition Act of 1798</b> (Jefferson pardoned those convicted under it), the Civil War, World War I (sedition and espionage laws), World War II, the Cold War — and after September 11, the <b>Patriot Act</b>, enacted in <b>October 2001</b>.</li>'+
+   '<li>There were laws that made it <b>illegal to advocate the overthrow of the U.S. government by force or violence</b> — the Cold War’s anti-subversion laws.</li>'+
    '<li>The Patriot Act broadened wiretaps and internet surveillance, allowed detention of non-citizens, and eased searches in terrorism cases.</li></ul>'},
   {id:"c5-states", h:"Applying the Bill of Rights to the states", body:
-   '<p>The Bill of Rights originally limited only the federal government. The <b>Fourteenth Amendment</b> (1868) changed that: no state shall “deprive any person of life, liberty, or property without <b>due process of law</b>; nor deny to any person… the <b>equal protection of the laws</b>.”</p>'+
+   '<p>The Bill of Rights originally limited only the federal government. The <b>Fourteenth Amendment</b> (1868) changed that: no state shall “deprive any person of life, liberty, or property without <b>due process of law</b>; nor deny to any person within its jurisdiction the <b>equal protection of the laws</b>.”</p>'+
+   '<div class="boxrow"><div class="box"><h4>Due process clause</h4><p>“No state shall deprive any person of life, liberty, or property without due process of law.”</p></div>'+
+   '<div class="box"><h4>Equal protection clause</h4><p>“Nor deny to any person within its jurisdiction the equal protection of the laws.”</p></div></div>'+
+   '<p class="ask" style="margin:0 0 12px">Your Sep 24 notes point to <b>p. 100</b> for the two clauses. Know each by name and by its line.</p>'+
    '<div class="tblwrap"><table class="tbl"><thead><tr><th>Case</th><th>What it did</th></tr></thead><tbody>'+
    '<tr><td class="head">Gitlow v. New York (1925)</td><td class="sm">First applied the First Amendment (speech and press) to the states through the due process clause — the start of “incorporation.”</td></tr>'+
    '<tr><td class="head">Palko v. Connecticut (1937)</td><td class="sm">Selective incorporation: only rights “implicit in the concept of ordered liberty” apply to the states, one at a time.</td></tr>'+
@@ -25,7 +29,7 @@ CH.c5 = {n:5, title:"Civil Liberties", short:"Liberties",
    '<p><b>Exceptions</b> — a few parts of the Bill of Rights still do not bind the states: the grand jury requirement, the Third Amendment, the civil-jury requirement, and (arguably) excessive bail.</p>'},
   {id:"c5-speech", h:"Freedom of expression", body:
    '<ul><li><b>Press freedom from prior restraint</b> — <b>William Blackstone</b>: liberty of the press means no censorship <i>before</i> publication. Prior restraint is also called censorship; the government may punish after, not stop before.</li>'+
-   '<li><b>Tests for expression</b> — the <b>clear-and-present-danger test</b> (Schenck, 1919): speech may be punished when it creates a clear and present danger of harm the government may prevent. Later narrowed to speech inciting imminent lawless action.</li>'+
+   '<li><b>Tests for expression</b> — the <b>clear-and-present-danger test</b> (Schenck, 1919), in Justice Holmes’s words: “The question in every case is whether the words used are used in such circumstances and are of such a nature as to create a clear and present danger that they will bring about the substantive evils that Congress has a right to prevent.” Later narrowed to speech inciting imminent lawless action.</li>'+
    '<li><b>Sedition laws</b> — from 1798 onward, wartime governments have punished criticism; Jefferson’s pardons after the Sedition Act of 1798 were the first pushback.</li></ul>'+
    '<h3>Four kinds of speaking and writing not automatically protected</h3>'+
    '<div class="tblwrap"><table class="tbl n0"><tbody>'+
@@ -43,6 +47,7 @@ CH.c5 = {n:5, title:"Civil Liberties", short:"Liberties",
    '<li><b>Free exercise</b> — government may not target religion, but a neutral law of general application can still burden a religious practice.</li></ul>'},
   {id:"c5-crime", h:"Crime and due process", body:
    '<ul><li><b>Exclusionary rule</b> — evidence gathered in violation of the Constitution cannot be used in a trial. Applied to the states in 1961 (<i>Mapp v. Ohio</i>).</li>'+
+   '<li><b>Probable cause</b> — reasonable cause for issuing a search warrant or making an arrest; <i>more than mere suspicion</i>. (The notes wrote “probable clause”; the term is probable cause.)</li>'+
    '<li><b>Two ways a search is reasonable</b> — with a <b>warrant</b> issued on probable cause, or <b>incident to a lawful arrest</b> (the person, things in plain view, things under immediate control). A good-faith exception softens the rule.</li>'+
    '<li><b>Miranda warnings</b> (1966) — the right to remain silent and to counsel before questioning.</li>'+
    '<li><b>Civil forfeiture</b> — law-enforcement officers taking assets (money or property) from people suspected of involvement with illegal activity but not charged with a crime.</li>'+
@@ -54,6 +59,9 @@ CH.c5 = {n:5, title:"Civil Liberties", short:"Liberties",
    ["Civil rights","Claims to equal treatment; protection against discrimination"],
    ["Equal protection of the laws","The Fourteenth Amendment’s guarantee behind civil rights"],
    ["Due process of law","The Fourteenth Amendment: no state shall deprive any person of life, liberty or property without it"],
+   ["Due process clause","“No state shall deprive any person of life, liberty, or property without due process of law” — Fourteenth Amendment, p. 100"],
+   ["Equal protection clause","“Nor deny to any person within its jurisdiction the equal protection of the laws” — Fourteenth Amendment, p. 100"],
+   ["Probable cause","Reasonable cause for issuing a search warrant or making an arrest — more than mere suspicion"],
    ["Article I, Section 9","Rights in the original Constitution: habeas corpus, no bills of attainder, no ex post facto laws"],
    ["Libertarian view of personal freedom","Free to do as you choose so long as you harm no one; government exists to protect that freedom"],
    ["Incorporation","Applying the Bill of Rights to the states through the Fourteenth Amendment, one right at a time"],

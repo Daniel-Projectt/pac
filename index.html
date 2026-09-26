@@ -387,6 +387,22 @@ kbd{font-family:var(--sans);font-size:10px;border:1px solid var(--line-strong);b
 .misslist > div{flex-direction:column;gap:4px}
 .misslist .t{font-style:normal}
 
+/* "name them" questions: pick several, then check */
+.opt.pick{cursor:pointer}
+.opt.pick.sel{border-color:var(--gold);box-shadow:inset 0 0 0 1px var(--gold);background:var(--surface)}
+.opt.pick.sel .k{color:var(--gold)}
+.opt.missedone{border-style:dashed;border-color:var(--ok);color:var(--ok);background:var(--surface)}
+.qfoot{gap:12px;align-items:center;flex-wrap:wrap}
+.qfoot .picked{font-family:var(--sans);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+details.namelist{background:var(--surface);border:1px solid var(--line);border-radius:3px;margin:0 0 8px;box-shadow:var(--shadow)}
+details.namelist summary{cursor:pointer;list-style:none;padding:13px 16px;font-family:var(--serif);font-size:17.5px;line-height:1.35;display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+details.namelist summary::-webkit-details-marker{display:none}
+details.namelist summary::before{content:"\25B8";font-size:11px;color:var(--gold);display:inline-block;transition:transform .2s}
+details.namelist[open] summary::before{transform:rotate(90deg)}
+details.namelist summary .nb{font-family:var(--sans);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line-strong);border-radius:2px;padding:1px 6px;margin-left:auto}
+details.namelist ol{margin:0;padding:0 18px 14px 44px;font-size:15px;line-height:1.55}
+.box.next{border-color:var(--gold-soft)}
+
 /* text tiles for Match */
 .tiles.text{grid-template-columns:1fr;gap:8px}
 .tiles.text .tile{aspect-ratio:auto;display:block;min-height:48px;padding:11px 14px;font-family:var(--serif);font-size:15px;line-height:1.4;text-align:left}
@@ -423,6 +439,19 @@ kbd{font-family:var(--sans);font-size:10px;border:1px solid var(--line-strong);b
   .secnav,.gitem .btn,.gitem input,.gprog .bar,.record .rec-btns,.emblem{display:none!important}
   .gitem{grid-template-columns:1fr;box-shadow:none;break-inside:avoid;padding:8px 10px}
   .gitem.ok{background:none}
+}
+
+/* exam setup: six question types sit in a tidy 3×2 grid (2×3 on phones) instead of wrapping with a gap */
+#mxT{display:grid;grid-template-columns:repeat(3,1fr)}
+#mxT button{border-bottom:1px solid var(--line)}
+#mxT button:nth-child(3n){border-right:0}
+#mxT button:nth-last-child(-n+3){border-bottom:0}
+@media (max-width:640px){
+  #mxT{grid-template-columns:repeat(2,1fr)}
+  #mxT button:nth-child(3n){border-right:1px solid var(--line)}
+  #mxT button:nth-child(2n){border-right:0}
+  #mxT button:nth-last-child(-n+3){border-bottom:1px solid var(--line)}
+  #mxT button:nth-last-child(-n+2){border-bottom:0}
 }
 </style>
 </head>
@@ -554,7 +583,7 @@ kbd{font-family:var(--sans);font-size:10px;border:1px solid var(--line-strong);b
         <div id="c1Cards"></div>
       </div>
       <div class="panel" data-panel="c1/match" hidden><p class="hint">Tap a term, then the line that defines it.</p><div id="c1Match"></div></div>
-      <div class="panel" data-panel="c1/quiz" hidden><p class="hint">Multiple choice and true/false, like the Canvas quizzes. Keys <kbd>1</kbd>&ndash;<kbd>4</kbd> answer, <kbd>Enter</kbd> moves on.</p><div id="c1Quiz"></div></div>
+      <div class="panel" data-panel="c1/quiz" hidden><p class="hint">Multiple choice and true/false like the Canvas quizzes, plus &ldquo;name them&rdquo; lists like the exam. Keys <kbd>1</kbd>&ndash;<kbd>9</kbd> answer or toggle, <kbd>Enter</kbd> checks and moves on.</p><div id="c1Quiz"></div></div>
     </section>
 
     <!-- ================= CHAPTER 2 ================= -->
@@ -656,8 +685,8 @@ kbd{font-family:var(--sans);font-size:10px;border:1px solid var(--line-strong);b
   </main>
 
   <footer>
-    <p>Built from the class slides, your notes from Aug 20 &ndash; Sep 15, and your chapter 1&ndash;5 quizzes. Wilson, <i>American Government: Institutions and Policies</i>; Thomas, <i>Politics and Culture: A Christian Perspective</i>.</p>
-    <span class="keys">Flashcards <kbd>&larr;</kbd> <kbd>&rarr;</kbd> <kbd>Space</kbd> &nbsp;&middot;&nbsp; Quizzes <kbd>1</kbd>&ndash;<kbd>4</kbd> <kbd>Enter</kbd></span>
+    <p>Built from the class slides, your notes from Aug 20 &ndash; Sep 24, and your chapter 1&ndash;5 quizzes. Wilson, <i>American Government: Institutions and Policies</i>; Thomas, <i>Politics and Culture: A Christian Perspective</i>.</p>
+    <span class="keys">Flashcards <kbd>&larr;</kbd> <kbd>&rarr;</kbd> <kbd>Space</kbd> &nbsp;&middot;&nbsp; Quizzes <kbd>1</kbd>&ndash;<kbd>9</kbd> <kbd>Enter</kbd></span>
   </footer>
 
 </div>
@@ -694,7 +723,9 @@ var COURSE = {
   "Undisclosed use is an academic integrity violation — “not a warning, a report.”",
   "<b>Quizzes and discussion posts: no.</b> This page is for studying beforehand, not for use during a quiz.",
   "The paper cites a class discussion by date: “Something that was not in this room cannot write it.”"],
- virtues:"Humility · curiosity · respect · open-heartedness · confidence"
+ virtues:"Humility · curiosity · respect · open-heartedness · confidence",
+ next:"Quiz on <b>chapter 7</b> on Thursday, October 1 (Sep 24 notes). Chapters 6 and 7 are not on this page yet — send the slides or notes and they will be added.",
+ examStyle:"The exam asks lists and definitions in the professor’s words: “What are the five?” (Liberty, Equality, Democracy, Civic Duty, Individual Responsibility); “Which clause says…?”; “Define probable cause.” The <i>Name them</i> drill below and the quizzes now ask that way."
 };
 
 /* Scores copied from the Canvas quiz results */
@@ -760,7 +791,13 @@ var CLASS_LOG = [
        "Vietnam, Watergate and the decline of trust; orthodox vs. progressive; the economic system.",
        "Civic role of religion — Romans 12:2, John 15:19, Revelation 7:9–10, Romans 1:16, Colossians 2:8.",
        "Is there a culture war, or is it made up? Civil society.",
-       "Housekeeping: the next quiz is on chapter 5."]}
+       "Housekeeping: the next quiz is on chapter 5."]},
+ {d:"Thu, Sep 24", h:"Your exam notes — civil liberties and political culture", note:true,
+  pts:["Civil liberties: the Constitution and the Bill of Rights contain a list of competing rights and duties (pp. 97–98); war has usually been the crisis that restricted the liberty of some minority; laws once made it illegal to advocate overthrowing the government by force.",
+       "The Fourteenth and First Amendments: the due process clause and the equal protection clause (p. 100); freedom of expression and freedom of religion; the clear-and-present-danger test; libel and obscenity; the free exercise and establishment clauses; probable cause.",
+       "Political culture: a patterned and sustained way of thinking; the five — liberty, equality, democracy, civic duty, individual responsibility — with the definitions; religious people give three times as much; orthodox vs. progressive; Watergate and Vietnam.",
+       "Federalism reminders: only the federal government regulates immigration; the Tenth Amendment is states’ rights. Legitimacy requires the consent of the governed.",
+       "Housekeeping: quiz on chapter 7 on Thursday."]}
 ];
 
 /* The paper, from the syllabus slide */
@@ -1441,12 +1478,13 @@ CH.c4 = {n:4, title:"American Political Culture", short:"Culture",
   {id:"c4-five", h:"The five elements of the American political system", know:true, body:
    '<p class="knowline"><span class="know">Know them</span></p>'+
    '<div class="tblwrap"><table class="tbl n0"><tbody>'+
-   '<tr><td class="head">Liberty</td><td class="sm">Americans think of themselves as having rights against government.</td></tr>'+
-   '<tr><td class="head">Equality</td><td class="sm">Everybody should have an equal vote and an equal chance to participate and succeed.</td></tr>'+
-   '<tr><td class="head">Democracy</td><td class="sm">Government officials should be accountable to the people.</td></tr>'+
-   '<tr><td class="head">Civic duty</td><td class="sm">A belief that one has an obligation to participate in civic and political affairs.</td></tr>'+
-   '<tr><td class="head">Individual responsibility</td><td class="sm">Individuals are responsible for their own actions and well-being.</td></tr>'+
+   '<tr><td class="head">Liberty</td><td class="sm">Americans are <b>preoccupied with their rights</b>. They believe they should be free to do pretty much as they please, with some exceptions, as long as they don’t hurt other people. (In a phrase: rights against government.)</td></tr>'+
+   '<tr><td class="head">Equality</td><td class="sm">Everybody should have an <b>equal vote</b> and an equal chance to participate and succeed.</td></tr>'+
+   '<tr><td class="head">Democracy</td><td class="sm">Government officials should be <b>accountable to the people</b>.</td></tr>'+
+   '<tr><td class="head">Civic duty</td><td class="sm">People ought to take <b>community affairs seriously</b> and help out when they can — an obligation to participate in civic and political affairs.</td></tr>'+
+   '<tr><td class="head">Individual responsibility</td><td class="sm">A characteristically American view: barring some disability, individuals are <b>responsible for their own actions and well-being</b>.</td></tr>'+
    '</tbody></table></div>'+
+   '<div class="exam-tip"><b>How the exam asks it (Sep 24 notes)</b>“What are the five?” — Liberty, Equality, Democracy, Civic Duty, Individual Responsibility. Then a definition, and you name the element. Drill both on the Guide tab under <i>Name them</i>.</div>'+
    '<h3>The economic system</h3><ul><li>A free-enterprise economic system, with government regulations present to prevent abuse.</li><li><b>Equality of opportunity</b>, not equality of results.</li><li>Polls show Americans are willing to help people “truly in need” — older adults and the disabled — but not others able to help themselves.</li><li>A majority of people in Germany, Italy and Poland think success in life is determined by forces outside an individual’s control; Americans disagree.</li></ul>'},
   {id:"c4-compare", h:"4.2 · The U.S. vs. the world; 4.3 · Where culture comes from", body:
    '<ul><li>The average American is more likely than the average European to <b>believe in God, pray on a daily basis, and acknowledge clear standards of right and wrong</b>.</li>'+
@@ -1478,6 +1516,7 @@ CH.c4 = {n:4, title:"American Political Culture", short:"Culture",
    ["The five elements","Liberty, equality, democracy, civic duty, individual responsibility"],
    ["Liberty","Americans think of themselves as having rights against government"],
    ["Equality","Everybody should have an equal vote and an equal chance to participate and succeed"],
+   ["Democracy (the element)","Government officials should be accountable to the people"],
    ["Civic duty","A belief that one has an obligation to participate in civic and political affairs"],
    ["Individual responsibility","Individuals are responsible for their own actions and well-being"],
    ["Equality of opportunity","What Americans favor — rather than equality of results"],
@@ -1554,14 +1593,18 @@ CH.c5 = {n:5, title:"Civil Liberties", short:"Liberties",
    '<div class="box"><h4>Civil rights</h4><p>Claims to equal treatment — protection against discrimination by government and others. The Fourteenth Amendment’s <b>equal protection of the laws</b>.</p></div></div>'+
    '<ul><li><b>Bill of Rights / Constitution</b> — most liberties are in the first ten amendments, but the original Constitution already had some: <b>Article I, Section 9</b> protects habeas corpus and bans bills of attainder and ex post facto laws.</li>'+
    '<li><b>The libertarian view of personal freedom</b> — people should be free to do as they choose so long as they do not harm others; government’s main job is to protect that freedom.</li>'+
-   '<li><b>Rights in conflict</b> — a free press vs. a fair trial; free speech vs. public order; free exercise of religion vs. general laws. Clashes over rights usually end up in <b>the courts</b>.</li>'+
+   '<li><b>Competing rights and duties</b> — the Constitution and the Bill of Rights contain a <i>list of competing rights and duties</i> (Wilson pp. 97–98): a free press vs. a fair trial; free speech vs. public order; free exercise of religion vs. general laws. Clashes over rights usually end up in <b>the courts</b>.</li>'+
    '<li>Wilson: the broad language of the Constitution and the personal beliefs of judges have led to a general <b>expansion</b> of civil liberties, not a decrease.</li></ul>'},
   {id:"c5-culture", h:"Culture, crisis, and liberty", body:
    '<ul><li><b>Original diversity in the U.S.:</b> ethnic, religious and cultural. The <b>potato famine</b> brought a wave of Irish Catholic immigrants and a wave of anti-Catholic feeling — cultural conflict has always shaped which liberties get protected.</li>'+
-   '<li><b>War and crisis narrow the limits of speech and the press.</b> Examples: the <b>Sedition Act of 1798</b> (Jefferson pardoned those convicted under it), the Civil War, World War I (sedition and espionage laws), World War II, the Cold War — and after September 11, the <b>Patriot Act</b>, enacted in <b>October 2001</b>.</li>'+
+   '<li><b>War and crisis narrow the limits of speech and the press.</b> In the exam notes’ words: <i>war has usually been the crisis that has restricted the liberty of some minority</i>. Examples: the <b>Sedition Act of 1798</b> (Jefferson pardoned those convicted under it), the Civil War, World War I (sedition and espionage laws), World War II, the Cold War — and after September 11, the <b>Patriot Act</b>, enacted in <b>October 2001</b>.</li>'+
+   '<li>There were laws that made it <b>illegal to advocate the overthrow of the U.S. government by force or violence</b> — the Cold War’s anti-subversion laws.</li>'+
    '<li>The Patriot Act broadened wiretaps and internet surveillance, allowed detention of non-citizens, and eased searches in terrorism cases.</li></ul>'},
   {id:"c5-states", h:"Applying the Bill of Rights to the states", body:
-   '<p>The Bill of Rights originally limited only the federal government. The <b>Fourteenth Amendment</b> (1868) changed that: no state shall “deprive any person of life, liberty, or property without <b>due process of law</b>; nor deny to any person… the <b>equal protection of the laws</b>.”</p>'+
+   '<p>The Bill of Rights originally limited only the federal government. The <b>Fourteenth Amendment</b> (1868) changed that: no state shall “deprive any person of life, liberty, or property without <b>due process of law</b>; nor deny to any person within its jurisdiction the <b>equal protection of the laws</b>.”</p>'+
+   '<div class="boxrow"><div class="box"><h4>Due process clause</h4><p>“No state shall deprive any person of life, liberty, or property without due process of law.”</p></div>'+
+   '<div class="box"><h4>Equal protection clause</h4><p>“Nor deny to any person within its jurisdiction the equal protection of the laws.”</p></div></div>'+
+   '<p class="ask" style="margin:0 0 12px">Your Sep 24 notes point to <b>p. 100</b> for the two clauses. Know each by name and by its line.</p>'+
    '<div class="tblwrap"><table class="tbl"><thead><tr><th>Case</th><th>What it did</th></tr></thead><tbody>'+
    '<tr><td class="head">Gitlow v. New York (1925)</td><td class="sm">First applied the First Amendment (speech and press) to the states through the due process clause — the start of “incorporation.”</td></tr>'+
    '<tr><td class="head">Palko v. Connecticut (1937)</td><td class="sm">Selective incorporation: only rights “implicit in the concept of ordered liberty” apply to the states, one at a time.</td></tr>'+
@@ -1571,7 +1614,7 @@ CH.c5 = {n:5, title:"Civil Liberties", short:"Liberties",
    '<p><b>Exceptions</b> — a few parts of the Bill of Rights still do not bind the states: the grand jury requirement, the Third Amendment, the civil-jury requirement, and (arguably) excessive bail.</p>'},
   {id:"c5-speech", h:"Freedom of expression", body:
    '<ul><li><b>Press freedom from prior restraint</b> — <b>William Blackstone</b>: liberty of the press means no censorship <i>before</i> publication. Prior restraint is also called censorship; the government may punish after, not stop before.</li>'+
-   '<li><b>Tests for expression</b> — the <b>clear-and-present-danger test</b> (Schenck, 1919): speech may be punished when it creates a clear and present danger of harm the government may prevent. Later narrowed to speech inciting imminent lawless action.</li>'+
+   '<li><b>Tests for expression</b> — the <b>clear-and-present-danger test</b> (Schenck, 1919), in Justice Holmes’s words: “The question in every case is whether the words used are used in such circumstances and are of such a nature as to create a clear and present danger that they will bring about the substantive evils that Congress has a right to prevent.” Later narrowed to speech inciting imminent lawless action.</li>'+
    '<li><b>Sedition laws</b> — from 1798 onward, wartime governments have punished criticism; Jefferson’s pardons after the Sedition Act of 1798 were the first pushback.</li></ul>'+
    '<h3>Four kinds of speaking and writing not automatically protected</h3>'+
    '<div class="tblwrap"><table class="tbl n0"><tbody>'+
@@ -1589,6 +1632,7 @@ CH.c5 = {n:5, title:"Civil Liberties", short:"Liberties",
    '<li><b>Free exercise</b> — government may not target religion, but a neutral law of general application can still burden a religious practice.</li></ul>'},
   {id:"c5-crime", h:"Crime and due process", body:
    '<ul><li><b>Exclusionary rule</b> — evidence gathered in violation of the Constitution cannot be used in a trial. Applied to the states in 1961 (<i>Mapp v. Ohio</i>).</li>'+
+   '<li><b>Probable cause</b> — reasonable cause for issuing a search warrant or making an arrest; <i>more than mere suspicion</i>. (The notes wrote “probable clause”; the term is probable cause.)</li>'+
    '<li><b>Two ways a search is reasonable</b> — with a <b>warrant</b> issued on probable cause, or <b>incident to a lawful arrest</b> (the person, things in plain view, things under immediate control). A good-faith exception softens the rule.</li>'+
    '<li><b>Miranda warnings</b> (1966) — the right to remain silent and to counsel before questioning.</li>'+
    '<li><b>Civil forfeiture</b> — law-enforcement officers taking assets (money or property) from people suspected of involvement with illegal activity but not charged with a crime.</li>'+
@@ -1600,6 +1644,9 @@ CH.c5 = {n:5, title:"Civil Liberties", short:"Liberties",
    ["Civil rights","Claims to equal treatment; protection against discrimination"],
    ["Equal protection of the laws","The Fourteenth Amendment’s guarantee behind civil rights"],
    ["Due process of law","The Fourteenth Amendment: no state shall deprive any person of life, liberty or property without it"],
+   ["Due process clause","“No state shall deprive any person of life, liberty, or property without due process of law” — Fourteenth Amendment, p. 100"],
+   ["Equal protection clause","“Nor deny to any person within its jurisdiction the equal protection of the laws” — Fourteenth Amendment, p. 100"],
+   ["Probable cause","Reasonable cause for issuing a search warrant or making an arrest — more than mere suspicion"],
    ["Article I, Section 9","Rights in the original Constitution: habeas corpus, no bills of attainder, no ex post facto laws"],
    ["Libertarian view of personal freedom","Free to do as you choose so long as you harm no one; government exists to protect that freedom"],
    ["Incorporation","Applying the Bill of Rights to the states through the Fourteenth Amendment, one right at a time"],
@@ -1722,6 +1769,117 @@ var FAITH = {
  ]
 };
 
+/* ================================================================ the lists
+   The exam asks "what are the five…" — from the Sep 24 exam notes. Each list
+   becomes a "Name them" question (pick all n out of a spread of choices), a card,
+   and a line on the Guide. `extra` are the wrong choices mixed in.             */
+var LISTS = [
+ {tp:"c4", id:"five-elements", q:"the five elements of the American political system", n:5,
+  items:["Liberty","Equality","Democracy","Civic duty","Individual responsibility"],
+  extra:["Prosperity","Security","Tradition","Patriotism"],
+  e:"Liberty, equality, democracy, civic duty, individual responsibility — the exam’s “what are the five.”"},
+ {tp:"c4", id:"three-differences", q:"the three major differences between countries", n:3,
+  items:["Constitutional","Demographic","Cultural"],
+  extra:["Economic","Geographic","Religious","Military"],
+  e:"Countries differ constitutionally, demographically and culturally."},
+ {tp:"c4", id:"culture-war", q:"the two sides of the culture war", n:2,
+  items:["Orthodox","Progressive"],
+  extra:["Liberal","Conservative","Traditionalist","Secular"],
+  e:"Orthodox (morality and religion decisive) vs. progressive (personal freedom and social problems first)."},
+ {tp:"c4", id:"trust", q:"the two events considered huge contributors to the decline of trust in government", n:2,
+  items:["The Vietnam War","The Watergate scandal"],
+  extra:["The Great Depression","World War II","The Iraq War","The 2008 financial crisis"],
+  e:"Vietnam and Watergate."},
+ {tp:"c5", id:"religion-clauses", q:"the two religion clauses of the First Amendment", n:2,
+  items:["Establishment clause","Free exercise clause"],
+  extra:["Supremacy clause","Due process clause","Equal protection clause","Elastic clause"],
+  e:"“No law respecting an establishment of religion” (establishment) “or prohibiting the free exercise thereof” (free exercise)."},
+ {tp:"c5", id:"fourteenth-clauses", q:"the two clauses of the Fourteenth Amendment from your notes (p. 100)", n:2,
+  items:["Due process clause","Equal protection clause"],
+  extra:["Establishment clause","Free exercise clause","Supremacy clause","Commerce clause"],
+  e:"“Nor deprive any person of life, liberty, or property without due process of law” and “nor deny to any person within its jurisdiction the equal protection of the laws.”"},
+ {tp:"c5", id:"unprotected", q:"the four kinds of speaking and writing that are not automatically protected", n:4,
+  items:["Libel","Obscenity","Symbolic speech","False advertising"],
+  extra:["Criticism of the president","Religious speech","Campaign speech","Editorials"],
+  e:"Libel, obscenity, symbolic speech and false advertising."},
+ {tp:"c5", id:"search", q:"the two ways a search can be reasonable", n:2,
+  items:["With a warrant issued on probable cause","Incident to a lawful arrest"],
+  extra:["With a neighbor’s consent","In daylight","For a serious enough crime","With a prosecutor’s note"],
+  e:"A warrant on probable cause, or a search incident to a lawful arrest."},
+ {tp:"c5", id:"lemon", q:"the three parts of the Lemon test", n:3,
+  items:["A secular purpose","Neither advances nor inhibits religion","No excessive entanglement with religion"],
+  extra:["Passed by two-thirds of Congress","Applies only to public schools","Approved by the president"],
+  e:"Secular purpose; neither advances nor inhibits religion; no excessive entanglement."},
+ {tp:"c5", id:"incorporation", q:"the three cases in the notes that applied the Bill of Rights to the states", n:3,
+  items:["Gitlow v. New York (1925)","Palko v. Connecticut (1937)","McDonald v. Chicago (2010)"],
+  extra:["Schenck v. United States (1919)","Texas v. Johnson (1989)","Lemon v. Kurtzman (1971)"],
+  e:"Gitlow began incorporation, Palko made it selective, McDonald added the Second Amendment."},
+ {tp:"c1", id:"five-views", q:"the five views of who governs", n:5,
+  items:["Class (Marxist)","Power elite","Bureaucratic","Pluralist","Creedal passion"],
+  extra:["Majoritarian","Federalist","Populist","Libertarian"],
+  e:"Class (Marxist), power elite, bureaucratic, pluralist, creedal passion."},
+ {tp:"c1", id:"four-types", q:"the four types of politics", n:4,
+  items:["Majoritarian","Interest group","Client","Entrepreneurial"],
+  extra:["Pluralist","Bureaucratic","Coalition","Partisan"],
+  e:"Majoritarian, interest group, client, entrepreneurial — by who bears the costs and who gets the benefits."},
+ {tp:"c2", id:"six-principles", q:"the six principles of the Constitution", n:6,
+  items:["Popular sovereignty","Limited government","Separation of powers","Checks and balances","Federalism","Judicial review"],
+  extra:["Direct democracy","Parliamentary supremacy","Unitary government"],
+  e:"Popular sovereignty, limited government, separation of powers, checks and balances, federalism, judicial review."},
+ {tp:"c2", id:"plans", q:"the two plans and the two compromises of the Convention", n:4,
+  items:["Virginia Plan","New Jersey Plan","Great Compromise","Three-Fifths Compromise"],
+  extra:["Hamilton Plan","Madison Compromise","Two-Thirds Compromise","Boston Plan"],
+  e:"Virginia and New Jersey Plans; the Great and Three-Fifths Compromises."},
+ {tp:"c2", id:"powers", q:"the three kinds of powers", n:3,
+  items:["Enumerated","Reserved","Concurrent"],
+  extra:["Absolute","Emergency","Sovereign","Royal"],
+  e:"Enumerated (national), reserved (the states, Tenth Amendment), concurrent (both)."},
+ {tp:"c3", id:"systems", q:"the three kinds of systems", n:3,
+  items:["Unitary","Confederal","Federal"],
+  extra:["Parliamentary","Presidential","Unicameral","Bicameral"],
+  e:"Unitary, confederal, federal."},
+ {tp:"c3", id:"cases", q:"the three landmark federalism cases", n:3,
+  items:["Gibbons v. Ogden (1824)","Wabash (1886)","Arizona v. United States (2012)"],
+  extra:["Gitlow v. New York (1925)","McDonald v. Chicago (2010)","Marbury v. Madison (1803)"],
+  e:"Gibbons: Congress regulates interstate commerce. Wabash: states may not. Arizona: only the federal government regulates immigration."},
+ {tp:"c3", id:"grants", q:"the three kinds of grants-in-aid", n:3,
+  items:["Land grants","Categorical grants","Block grants"],
+  extra:["Mandates","Conditions of aid","Devolution grants","Matching bonds"],
+  e:"Land grants, categorical grants (specific purposes), block grants (broad purposes)."}
+];
+
+/* ================================================================ from the Sep 24 exam notes
+   Questions in the professor's own phrasing: a definition or a quoted line, and
+   you supply the term, the clause, or the element.                             */
+QB = QB.concat([
+ /* chapter 1 */
+ {tp:"c1",t:"tf",q:"Legitimacy requires the consent of the governed.",a:true,e:"True — your Sep 24 notes: “LEGITIMACY requires consent of the governed.” Authority is legitimate when the people accept it as rightful."},
+ {tp:"c1",t:"mc",q:"Your exam notes say legitimacy “requires consent of the…”",a:"governed",w:["courts","majority party","president"],e:"The consent of the governed — the idea the Declaration of Independence rests on."},
+ /* chapter 3 */
+ {tp:"c3",t:"tf",q:"Only the federal government may regulate immigration.",a:true,e:"True — Arizona v. United States (2012); it is in your Sep 24 exam notes word for word."},
+ {tp:"c3",t:"mc",q:"Your exam notes describe the Tenth Amendment in two words. Which?",a:"states’ rights",w:["free speech","due process","judicial review"],e:"“10th amendment is states’ rights” — powers not delegated are reserved to the states or the people."},
+ /* chapter 4 */
+ {tp:"c4",t:"mc",q:"Americans are preoccupied with their rights and believe they should be free to do pretty much as they please, as long as they don’t hurt other people. Which element is this?",a:"Liberty",w:["Equality","Democracy","Civic duty"],e:"Liberty — the first of the five elements, in the exam notes’ wording."},
+ {tp:"c4",t:"mc",q:"Americans think government officials should be accountable to the people. Which element is this?",a:"Democracy",w:["Liberty","Equality","Individual responsibility"],e:"Democracy — accountability of officials to the people."},
+ {tp:"c4",t:"mc",q:"Americans generally believe people ought to take community affairs seriously and help out when they can. Which element is this?",a:"Civic duty",w:["Democracy","Equality","Liberty"],e:"Civic duty."},
+ {tp:"c4",t:"mc",q:"Barring some disability, individuals are responsible for their own actions and well-being. Which element is this?",a:"Individual responsibility",w:["Liberty","Civic duty","Equality"],e:"Individual responsibility — “a characteristically American view.”"},
+ {tp:"c4",t:"mc",q:"Political culture is a ___ way of thinking about how political and economic life ought to be carried out.",a:"patterned and sustained",w:["partisan and shifting","personal and private","legal and formal"],e:"Patterned and sustained — the two words the exam notes keep."},
+ {tp:"c4",t:"mc",q:"For the orthodox side of the culture war, what is of decisive importance?",a:"Morality and religion",w:["Personal preferences","Solving social problems","Economic growth"],e:"Orthodox: morality and religion are of decisive importance."},
+ {tp:"c4",t:"mc",q:"For the progressive side of the culture war, what matters more than religion?",a:"Personal preferences and solving social problems",w:["Morality","Tradition","National security"],e:"Progressive: personal preferences and social problems come before religion."},
+ /* chapter 5 */
+ {tp:"c5",t:"mc",q:"Reasonable cause for issuing a search warrant or making an arrest; more than mere suspicion. Which term?",a:"Probable cause",w:["Reasonable doubt","Due process","The exclusionary rule"],e:"Probable cause — the Fourth Amendment standard. (Your notes wrote “probable clause”; the term is probable cause.)"},
+ {tp:"c5",t:"tf",q:"Probable cause means nothing more than an officer’s suspicion.",a:false,e:"False — it is more than mere suspicion: reasonable cause for a warrant or an arrest."},
+ {tp:"c5",t:"mc",q:"“No state shall deprive any person of life, liberty, or property without due process of law.” Which clause is this?",a:"Due process clause",w:["Equal protection clause","Establishment clause","Supremacy clause"],e:"The due process clause of the Fourteenth Amendment (p. 100)."},
+ {tp:"c5",t:"mc",q:"“…nor deny to any person within its jurisdiction the equal protection of the laws.” Which clause is this?",a:"Equal protection clause",w:["Due process clause","Free exercise clause","Commerce clause"],e:"The equal protection clause of the Fourteenth Amendment (p. 100)."},
+ {tp:"c5",t:"mc",q:"The due process clause and the equal protection clause are both found in which amendment?",a:"The Fourteenth",w:["The First","The Tenth","The Fifth"],e:"The Fourteenth Amendment (1868)."},
+ {tp:"c5",t:"mc",q:"According to your exam notes, war has usually been the crisis that restricted the liberty of:",a:"some minority",w:["the majority","Congress","the courts"],e:"“War has usually been the crisis that has restricted the liberty of some minority.”"},
+ {tp:"c5",t:"tf",q:"There were laws that made it illegal to advocate the overthrow of the U.S. government by force or violence.",a:true,e:"True — from the exam notes; the sedition and anti-subversion laws of wartime and the Cold War."},
+ {tp:"c5",t:"mc",q:"“The question in every case is whether the words used are used in such circumstances and are of such a nature as to create a clear and present danger…” Which test begins this way?",a:"The clear-and-present-danger test",w:["The Lemon test","The Miller test","Selective incorporation"],e:"Justice Holmes in Schenck v. United States (1919)."},
+ {tp:"c5",t:"mc",q:"Libel and obscenity are examples of:",a:"expression that is not automatically protected",w:["prior restraint","symbolic speech","protected political speech"],e:"Two of the four kinds of expression the First Amendment does not automatically protect."},
+ {tp:"c5",t:"mc",q:"The free exercise clause and the establishment clause both belong to:",a:"freedom of religion",w:["freedom of expression","due process","equal protection"],e:"Both are the First Amendment’s religion language."},
+ {tp:"c5",t:"mc",q:"Your notes say the Constitution and the Bill of Rights contain a list of:",a:"competing rights and duties",w:["ranked rights, highest first","absolute rights","rights that never conflict"],e:"Competing rights and duties (Wilson pp. 97–98) — which is why clashes end up in the courts."}
+]);
+
 /* ================================================================ helpers */
 function $(s,r){ return (r||document).querySelector(s); }
 function $$(s,r){ return Array.prototype.slice.call((r||document).querySelectorAll(s)); }
@@ -1795,19 +1953,32 @@ function fromPair(tp, idx, reverse){
   return q;
 }
 function bankFor(tp){ var out = []; QB.forEach(function(b, i){ if(!tp || b.tp === tp) out.push({b:b, i:i}); }); return out; }
+/* "Name them": pick all n items out of a spread of choices — the exam's "what are the five" */
+var WORDS = ["","one","two","three","four","five","six","seven","eight","nine"];
+function fromList(i){
+  var l = LISTS[i];
+  var total = Math.min(9, Math.max(6, l.n + 3));
+  var opts = l.items.map(function(t){ return {html:t, ok:true}; }).concat(pick(l.extra, total - l.n).map(function(t){ return {html:t, ok:false}; }));
+  return {key:"L:"+i, tp:l.tp, ap:false, real:0, kind:"list", n:l.n, text:"What are "+l.q+"? <i>Pick all "+WORDS[l.n]+".</i>",
+          opts:shuffle(opts), explain:l.e, miss:"What are "+l.q+"? — <b>"+l.items.join(", ")+"</b>"};
+}
+function listsFor(tp){ var out = []; LISTS.forEach(function(l, i){ if(!tp || l.tp === tp) out.push(i); }); return out; }
 
-/* A chapter quiz: mostly written questions, about a third identification */
+/* A chapter quiz: mostly written questions, about a third identification, plus one or two lists */
 function topicQuestions(tp, keys, n){
   n = n || 10;
   if(keys && keys.length) return shuffle(questionsByKeys(keys)).slice(0, n);
   var bank = bankFor(tp).map(function(x){ return fromBank(x.b, x.i); });
   var gen = PAIRSETS[tp].pairs.map(function(p, i){ return fromPair(tp, i, Math.random() < 0.5); });
+  var lists = pick(listsFor(tp), 2).map(fromList);
   var nGen = Math.min(gen.length, Math.floor(n/3));
-  return shuffle(pick(bank, n - nGen).concat(pick(gen, nGen)));
+  return shuffle(pick(bank, n - nGen - lists.length).concat(pick(gen, nGen), lists));
 }
-/* Rebuild exact questions from their keys ("tp:i" bank, "tp:pN" / "tp:pNr" pairs); anything malformed is dropped */
+/* Rebuild exact questions from their keys ("tp:i" bank, "tp:pN" / "tp:pNr" pairs, "L:i" lists); anything malformed is dropped */
 function questionsByKeys(keys){
   return uniqBy(keys, function(k){ return k; }).map(function(k){
+    var L = /^L:(\d+)$/.exec(k);
+    if(L){ var li = parseInt(L[1],10); return li < LISTS.length ? fromList(li) : null; }
     var m = /^([a-z0-9]+):p(\d+)(r?)$/.exec(k);
     if(m){
       var set = PAIRSETS[m[1]], i = parseInt(m[2],10);
@@ -1819,11 +1990,15 @@ function questionsByKeys(keys){
     return (QB[j] && QB[j].tp === b[1]) ? fromBank(QB[j], j) : null;
   }).filter(Boolean);
 }
-/* The practice exam: every chapter, reshuffled; types all / mc / tf / ap / real (Canvas only) */
+/* The practice exam: every chapter, reshuffled; types all / mc / tf / ap / real (Canvas only) / lists (name them) */
 function mockQuestions(cfg){
   var tps = cfg.topics && cfg.topics.length ? cfg.topics : CHAPTERS.slice();
   var n = cfg.n || 25;
   var pool = [];
+  if(cfg.types === "lists"){
+    tps.forEach(function(tp){ listsFor(tp).forEach(function(i){ pool.push(fromList(i)); }); });
+    return shuffle(pool).slice(0, n);
+  }
   QB.forEach(function(b, i){
     if(tps.indexOf(b.tp) < 0) return;
     if(cfg.types === "mc" && b.t !== "mc") return;
@@ -1837,8 +2012,19 @@ function mockQuestions(cfg){
       pick(PAIRSETS[tp].pairs.map(function(p, i){ return i; }), 3).forEach(function(i){ pool.push(fromPair(tp, i, Math.random() < 0.5)); });
     });
   }
-  /* spread across chapters */
-  var byTp = {}; tps.forEach(function(t){ byTp[t] = shuffle(pool.filter(function(q){ return q.tp === t; })); });
+  if(cfg.types === "all" || !cfg.types){
+    tps.forEach(function(tp){ pick(listsFor(tp), 2).forEach(function(i){ pool.push(fromList(i)); }); });
+  }
+  /* spread across chapters; about a fifth of a full exam is "name them", one per chapter, asked first so they always make the cut */
+  var want = Math.max(1, Math.round(n / 5)), placed = 0;
+  var byTp = {}; tps.forEach(function(t){
+    var qs = shuffle(pool.filter(function(q){ return q.tp === t; }));
+    if(placed < want){
+      var li = -1; qs.some(function(q, i){ if(q.kind === "list"){ li = i; return true; } return false; });
+      if(li >= 0){ qs.unshift(qs.splice(li, 1)[0]); placed++; }
+    }
+    byTp[t] = qs;
+  });
   var out = [], k = 0;
   while(out.length < n){
     var t = tps[k % tps.length], list = byTp[t];
@@ -1872,9 +2058,9 @@ function matchRound(tp, n){
 
 /* ---- the pure parts can be tested outside a browser ---- */
 if(typeof window === "undefined"){
-  module.exports = {CH:CH, COURSE:COURSE, QUIZ_RECORD:QUIZ_RECORD, CLASS_LOG:CLASS_LOG, PAPER:PAPER, GUIDE:GUIDE, FAITH:FAITH,
+  module.exports = {CH:CH, COURSE:COURSE, QUIZ_RECORD:QUIZ_RECORD, CLASS_LOG:CLASS_LOG, PAPER:PAPER, GUIDE:GUIDE, FAITH:FAITH, LISTS:LISTS,
     QB:QB, PAIRSETS:PAIRSETS, VERDICTS:VERDICTS, CHAPTERS:CHAPTERS, TOPIC_NAMES:TOPIC_NAMES,
-    fromBank:fromBank, fromPair:fromPair, topicQuestions:topicQuestions, mockQuestions:mockQuestions, questionsByKeys:questionsByKeys,
+    fromBank:fromBank, fromPair:fromPair, fromList:fromList, listsFor:listsFor, topicQuestions:topicQuestions, mockQuestions:mockQuestions, questionsByKeys:questionsByKeys,
     realKeys:realKeys, deckFor:deckFor, matchRound:matchRound, verdictFor:verdictFor};
   return;
 }
@@ -1982,40 +2168,65 @@ function makeQuiz(root, gen, opts){
     });
   }
   function tagFor(q){
-    var t = q.ap ? "Application" : (q.kind === "tf" ? "True or false" : (q.kind === "id" ? "Identification" : "Multiple choice"));
+    var t = q.ap ? "Application" : (q.kind === "tf" ? "True or false" : (q.kind === "id" ? "Identification" : (q.kind === "list" ? "Name them" : "Multiple choice")));
     return '<span class="qtag">'+t+'</span>' + (q.real ? '<span class="qtag real">Canvas quiz &middot; Q'+q.real+'</span>' : '');
   }
   function render(){
     var body = shell(); dots();
     if(qi >= qs.length){ results(); return; }
     var q = qs[qi]; answered = false;
+    var isList = q.kind === "list";
     body.innerHTML =
       '<div class="qcard card-corners">'+CORNERS+
         '<div class="qnum">Question '+(qi+1)+' of '+qs.length+(opts.showTopic ? ' &middot; '+TOPIC_NAMES[q.tp] : '')+'</div>'+
         '<div style="text-align:center;margin-top:10px">'+tagFor(q)+'</div>'+
         '<p class="qtext">'+q.text+'</p>'+
         '<div class="opts'+(q.kind === "tf" ? " two" : "")+'"></div><p class="feedback"></p>'+
-        '<div class="qfoot"><button class="btn primary next" type="button" hidden>Next &rsaquo;</button></div>'+
+        '<div class="qfoot">'+(isList ? '<span class="picked"></span><button class="btn primary check" type="button">Check</button>' : '')+
+        '<button class="btn primary next" type="button" hidden>Next &rsaquo;</button></div>'+
       '</div>';
     var wrap = $(".opts", body);
     q.opts.forEach(function(o, i){
       var b = document.createElement("button");
-      b.type = "button"; b.className = "opt " + (o.cls || "");
+      b.type = "button"; b.className = "opt " + (o.cls || "") + (isList ? " pick" : "");
       b.innerHTML = '<span class="k">'+(i+1)+'</span>' + o.html;
-      b.addEventListener("click", function(){ answer(o, b); });
+      b.addEventListener("click", function(){ isList ? toggle(b) : answer(o, b); });
       wrap.appendChild(b);
     });
+    if(isList){ $(".check", body).addEventListener("click", checkList); countPicked(); }
     $(".next", body).addEventListener("click", function(){ qi++; render(); });
+  }
+  function countPicked(){
+    var body = $(".qbody", root), q = qs[qi], n = $$(".opt.sel", body).length;
+    $(".picked", body).textContent = n + " of " + q.n + " picked";
+  }
+  function toggle(b){ if(answered) return; b.classList.toggle("sel"); countPicked(); }
+  function finish(q, right, body, wrongWord){
+    q.got = right; answered = true;
+    if(right){ score++; $(".feedback", body).innerHTML = "<b>Correct.</b> " + q.explain; }
+    else { missed.push(q); $(".feedback", body).innerHTML = wrongWord + " " + q.explain; }
+    dots();
+    var nb = $(".next", body); nb.hidden = false; nb.textContent = (qi === qs.length-1) ? "See results" : "Next"; nb.focus();
+  }
+  function checkList(){
+    if(answered) return;
+    var q = qs[qi], body = $(".qbody", root), right = true;
+    $$(".opt", body).forEach(function(b, i){
+      var chosen = b.classList.contains("sel"), ok = q.opts[i].ok;
+      b.disabled = true;
+      if(ok && chosen) b.classList.add("correct");
+      else if(ok && !chosen){ b.classList.add("missedone"); right = false; }
+      else if(!ok && chosen){ b.classList.add("wrong"); right = false; }
+    });
+    $(".check", body).hidden = true; $(".picked", body).hidden = true;
+    finish(q, right, body, "<b>Not quite.</b>");
   }
   function answer(o, node){
     if(answered) return;
-    answered = true;
-    var q = qs[qi], body = $(".qbody", root); q.got = o.ok;
+    var q = qs[qi], body = $(".qbody", root);
     $$(".opt", body).forEach(function(b, i){ b.disabled = true; if(q.opts[i].ok) b.classList.add("correct"); });
-    if(o.ok){ score++; $(".feedback", body).innerHTML = "<b>Correct.</b> " + q.explain; }
-    else { node.classList.add("wrong"); missed.push(q); $(".feedback", body).innerHTML = "<b>Not this one.</b> " + q.explain; }
-    dots();
-    var nb = $(".next", body); nb.hidden = false; nb.textContent = (qi === qs.length-1) ? "See results" : "Next"; nb.focus();
+    if(!o.ok) node.classList.add("wrong");
+    finish(q, o.ok, body, "<b>Not this one.</b>");
   }
   function results(){
     var body = $(".qbody", root);
@@ -2046,8 +2257,11 @@ function makeQuiz(root, gen, opts){
     reset:function(){ started = false; qs = []; root.innerHTML = ""; },
     keys:function(e){
       var body = $(".qbody", root); if(!body) return false;
-      if(/^[1-4]$/.test(e.key)){ var b = $$(".opt", body)[parseInt(e.key,10)-1]; if(b && !b.disabled){ b.click(); return true; } }
-      else if(e.key === "Enter"){ var nb = $(".next", body); if(nb && !nb.hidden){ nb.click(); return true; } }
+      if(/^[1-9]$/.test(e.key)){ var b = $$(".opt", body)[parseInt(e.key,10)-1]; if(b && !b.disabled){ b.click(); return true; } }
+      else if(e.key === "Enter"){
+        var ck = $(".check", body); if(ck && !ck.hidden && !answered){ ck.click(); return true; }
+        var nb = $(".next", body); if(nb && !nb.hidden){ nb.click(); return true; }
+      }
       return false;
     }
   };
@@ -2077,6 +2291,8 @@ function renderGuide(){
       '<div class="box"><h4>How grades work</h4><ul>'+COURSE.grading.map(li).join("")+'</ul></div>'+
       '<div class="box"><h4>Discussion posts and sources</h4><ul>'+COURSE.discussion.concat(COURSE.sources).map(li).join("")+'</ul></div>'+
       '<div class="box"><h4>AI policy</h4><ul>'+COURSE.ai.map(li).join("")+'</ul></div>'+
+      '<div class="box next"><h4>Coming up</h4><p>'+COURSE.next+'</p></div>'+
+      '<div class="box"><h4>How the exam asks</h4><p>'+COURSE.examStyle+'</p></div>'+
     '</div>'+
     '<div class="gsec"><h2>Your Canvas quizzes</h2>'+divider()+
       '<div class="tblwrap"><table class="tbl n0 record"><thead><tr><th>Quiz</th><th>Score</th><th>Missed</th><th></th></tr></thead><tbody>'+
@@ -2099,6 +2315,12 @@ function renderGuide(){
     });
     html += '</div>';
   });
+  html += '<div class="gsec" id="nameThem"><h2>Name them</h2>'+divider()+
+    '<p class="ask" style="margin:0 0 12px">The exam asks “what are the five?” Say the list out loud, then open it to check. <b>Drill the lists</b> turns all of them into questions.</p>'+
+    LISTS.map(function(l, i){
+      return '<details class="namelist" data-l="'+i+'"><summary>What are '+l.q+'? <span class="nb">'+TOPIC_NAMES[l.tp]+' &middot; '+l.n+'</span></summary><ol>'+l.items.map(li).join("")+'</ol></details>';
+    }).join("")+
+    '<div class="toolbar"><button class="btn primary" type="button" id="gLists">Drill the lists</button></div></div>';
   html += '<div class="gsec"><div class="toolbar">'+
       '<button class="btn primary" type="button" data-go="exam/mock">Practice exam</button>'+
       '<button class="btn" type="button" data-go="faith/paper">The paper</button>'+
@@ -2123,6 +2345,10 @@ function renderGuide(){
     b.addEventListener("click", function(){ replayReal(b.getAttribute("data-real"), !!b.getAttribute("data-missed")); });
   });
   $("#gPrint").addEventListener("click", function(){ window.print(); });
+  $("#gLists").addEventListener("click", function(){
+    mockCfg.types = "lists"; mockCfg.topic = "all"; mockCfg.n = 25; store.set("mockcfg", JSON.stringify(mockCfg));
+    goTo("exam/mock"); startMock(null);
+  });
   progress();
 }
 function goTo(path, anchor){
@@ -2211,10 +2437,10 @@ function renderMockSetup(){
     '<div class="qnum">Practice exam</div><p class="qtext">Set it up, then answer across the chapters. Each run is drawn fresh.</p>'+
     '<div class="setup">'+
       '<div class="row"><span class="label">Length</span><br>'+seg("mxN","data-n",mockCfg.n,[[15,"15"],[25,"25"],[40,"40"],[50,"50"]])+'</div>'+
-      '<div class="row"><span class="label">Question types</span><br>'+seg("mxT","data-t",mockCfg.types,[["all","Everything"],["mc","Multiple choice"],["tf","True / false"],["ap","Application"],["real","Canvas quizzes only"]])+'</div>'+
+      '<div class="row"><span class="label">Question types</span><br>'+seg("mxT","data-t",mockCfg.types,[["all","Everything"],["mc","Multiple choice"],["tf","True / false"],["lists","Name them"],["ap","Application"],["real","Canvas quizzes only"]])+'</div>'+
       '<div class="row"><span class="label">Chapters</span><br>'+seg("mxP","data-p",mockCfg.topic,[["all","All five"]].concat(CHAPTERS.map(function(tp){ return [tp, "Ch. "+CH[tp].n]; })))+'</div>'+
       '<div class="row" style="margin-top:22px"><button class="btn primary" type="button" id="mxStart">Start</button></div>'+
-      '<p class="hint" style="margin-top:12px">To replay a real Canvas quiz in its own order, use the buttons on the Guide tab.</p>'+
+      '<p class="hint" style="margin-top:12px">“Name them” questions: pick every item that belongs, then press Check — keys <kbd>1</kbd>–<kbd>9</kbd> toggle, <kbd>Enter</kbd> checks. To replay a real Canvas quiz in its own order, use the buttons on the Guide tab.</p>'+
     '</div></div></div>';
   segWire("#mxN","data-n",function(v){ mockCfg.n = parseInt(v,10); store.set("mockcfg", JSON.stringify(mockCfg)); });
   segWire("#mxT","data-t",function(v){ mockCfg.types = v; store.set("mockcfg", JSON.stringify(mockCfg)); });

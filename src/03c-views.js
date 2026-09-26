@@ -22,6 +22,8 @@ function renderGuide(){
       '<div class="box"><h4>How grades work</h4><ul>'+COURSE.grading.map(li).join("")+'</ul></div>'+
       '<div class="box"><h4>Discussion posts and sources</h4><ul>'+COURSE.discussion.concat(COURSE.sources).map(li).join("")+'</ul></div>'+
       '<div class="box"><h4>AI policy</h4><ul>'+COURSE.ai.map(li).join("")+'</ul></div>'+
+      '<div class="box next"><h4>Coming up</h4><p>'+COURSE.next+'</p></div>'+
+      '<div class="box"><h4>How the exam asks</h4><p>'+COURSE.examStyle+'</p></div>'+
     '</div>'+
     '<div class="gsec"><h2>Your Canvas quizzes</h2>'+divider()+
       '<div class="tblwrap"><table class="tbl n0 record"><thead><tr><th>Quiz</th><th>Score</th><th>Missed</th><th></th></tr></thead><tbody>'+
@@ -44,6 +46,12 @@ function renderGuide(){
     });
     html += '</div>';
   });
+  html += '<div class="gsec" id="nameThem"><h2>Name them</h2>'+divider()+
+    '<p class="ask" style="margin:0 0 12px">The exam asks “what are the five?” Say the list out loud, then open it to check. <b>Drill the lists</b> turns all of them into questions.</p>'+
+    LISTS.map(function(l, i){
+      return '<details class="namelist" data-l="'+i+'"><summary>What are '+l.q+'? <span class="nb">'+TOPIC_NAMES[l.tp]+' &middot; '+l.n+'</span></summary><ol>'+l.items.map(li).join("")+'</ol></details>';
+    }).join("")+
+    '<div class="toolbar"><button class="btn primary" type="button" id="gLists">Drill the lists</button></div></div>';
   html += '<div class="gsec"><div class="toolbar">'+
       '<button class="btn primary" type="button" data-go="exam/mock">Practice exam</button>'+
       '<button class="btn" type="button" data-go="faith/paper">The paper</button>'+
@@ -68,6 +76,10 @@ function renderGuide(){
     b.addEventListener("click", function(){ replayReal(b.getAttribute("data-real"), !!b.getAttribute("data-missed")); });
   });
   $("#gPrint").addEventListener("click", function(){ window.print(); });
+  $("#gLists").addEventListener("click", function(){
+    mockCfg.types = "lists"; mockCfg.topic = "all"; mockCfg.n = 25; store.set("mockcfg", JSON.stringify(mockCfg));
+    goTo("exam/mock"); startMock(null);
+  });
   progress();
 }
 function goTo(path, anchor){
@@ -156,10 +168,10 @@ function renderMockSetup(){
     '<div class="qnum">Practice exam</div><p class="qtext">Set it up, then answer across the chapters. Each run is drawn fresh.</p>'+
     '<div class="setup">'+
       '<div class="row"><span class="label">Length</span><br>'+seg("mxN","data-n",mockCfg.n,[[15,"15"],[25,"25"],[40,"40"],[50,"50"]])+'</div>'+
-      '<div class="row"><span class="label">Question types</span><br>'+seg("mxT","data-t",mockCfg.types,[["all","Everything"],["mc","Multiple choice"],["tf","True / false"],["ap","Application"],["real","Canvas quizzes only"]])+'</div>'+
+      '<div class="row"><span class="label">Question types</span><br>'+seg("mxT","data-t",mockCfg.types,[["all","Everything"],["mc","Multiple choice"],["tf","True / false"],["lists","Name them"],["ap","Application"],["real","Canvas quizzes only"]])+'</div>'+
       '<div class="row"><span class="label">Chapters</span><br>'+seg("mxP","data-p",mockCfg.topic,[["all","All five"]].concat(CHAPTERS.map(function(tp){ return [tp, "Ch. "+CH[tp].n]; })))+'</div>'+
       '<div class="row" style="margin-top:22px"><button class="btn primary" type="button" id="mxStart">Start</button></div>'+
-      '<p class="hint" style="margin-top:12px">To replay a real Canvas quiz in its own order, use the buttons on the Guide tab.</p>'+
+      '<p class="hint" style="margin-top:12px">“Name them” questions: pick every item that belongs, then press Check — keys <kbd>1</kbd>–<kbd>9</kbd> toggle, <kbd>Enter</kbd> checks. To replay a real Canvas quiz in its own order, use the buttons on the Guide tab.</p>'+
     '</div></div></div>';
   segWire("#mxN","data-n",function(v){ mockCfg.n = parseInt(v,10); store.set("mockcfg", JSON.stringify(mockCfg)); });
   segWire("#mxT","data-t",function(v){ mockCfg.types = v; store.set("mockcfg", JSON.stringify(mockCfg)); });

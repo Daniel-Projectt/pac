@@ -101,6 +101,22 @@
 .misslist > div{flex-direction:column;gap:4px}
 .misslist .t{font-style:normal}
 
+/* "name them" questions: pick several, then check */
+.opt.pick{cursor:pointer}
+.opt.pick.sel{border-color:var(--gold);box-shadow:inset 0 0 0 1px var(--gold);background:var(--surface)}
+.opt.pick.sel .k{color:var(--gold)}
+.opt.missedone{border-style:dashed;border-color:var(--ok);color:var(--ok);background:var(--surface)}
+.qfoot{gap:12px;align-items:center;flex-wrap:wrap}
+.qfoot .picked{font-family:var(--sans);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+details.namelist{background:var(--surface);border:1px solid var(--line);border-radius:3px;margin:0 0 8px;box-shadow:var(--shadow)}
+details.namelist summary{cursor:pointer;list-style:none;padding:13px 16px;font-family:var(--serif);font-size:17.5px;line-height:1.35;display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+details.namelist summary::-webkit-details-marker{display:none}
+details.namelist summary::before{content:"\25B8";font-size:11px;color:var(--gold);display:inline-block;transition:transform .2s}
+details.namelist[open] summary::before{transform:rotate(90deg)}
+details.namelist summary .nb{font-family:var(--sans);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line-strong);border-radius:2px;padding:1px 6px;margin-left:auto}
+details.namelist ol{margin:0;padding:0 18px 14px 44px;font-size:15px;line-height:1.55}
+.box.next{border-color:var(--gold-soft)}
+
 /* text tiles for Match */
 .tiles.text{grid-template-columns:1fr;gap:8px}
 .tiles.text .tile{aspect-ratio:auto;display:block;min-height:48px;padding:11px 14px;font-family:var(--serif);font-size:15px;line-height:1.4;text-align:left}
@@ -137,4 +153,17 @@
   .secnav,.gitem .btn,.gitem input,.gprog .bar,.record .rec-btns,.emblem{display:none!important}
   .gitem{grid-template-columns:1fr;box-shadow:none;break-inside:avoid;padding:8px 10px}
   .gitem.ok{background:none}
+}
+
+/* exam setup: six question types sit in a tidy 3×2 grid (2×3 on phones) instead of wrapping with a gap */
+#mxT{display:grid;grid-template-columns:repeat(3,1fr)}
+#mxT button{border-bottom:1px solid var(--line)}
+#mxT button:nth-child(3n){border-right:0}
+#mxT button:nth-last-child(-n+3){border-bottom:0}
+@media (max-width:640px){
+  #mxT{grid-template-columns:repeat(2,1fr)}
+  #mxT button:nth-child(3n){border-right:1px solid var(--line)}
+  #mxT button:nth-child(2n){border-right:0}
+  #mxT button:nth-last-child(-n+3){border-bottom:1px solid var(--line)}
+  #mxT button:nth-last-child(-n+2){border-bottom:0}
 }
