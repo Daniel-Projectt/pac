@@ -462,6 +462,27 @@ ol.toplist li{margin:0 0 9px;line-height:1.55}
 /* when an option bar wraps on a phone, every row fills the width */
 .seg{justify-content:center}
 .seg button{flex:1 1 auto;border-bottom:1px solid var(--line);margin-bottom:-1px}
+
+/* ============ a hint of red, white and blue — the parchment and gold stay the base ============ */
+:root{--navy:#34507a;--navy-soft:#9fb0c9;--crimson:#a2433f;--crimson-soft:#dcb1ab}
+header .emblem{color:var(--gold-soft)}                 /* gold wreath, navy star, a small red star on top */
+header::after{content:"";display:block;width:138px;height:7px;margin:16px auto 0;border-radius:1px;
+  background:linear-gradient(to bottom,var(--navy) 0 2px,#fffdf7 2px 5px,var(--crimson) 5px 7px);
+  box-shadow:0 0 0 1px rgba(52,80,122,.12);opacity:.9}
+.topic-btn[aria-selected="true"]{color:var(--navy);box-shadow:inset 0 -2px 0 var(--navy)}
+.topic-btn:hover{color:var(--navy)}
+.h2{color:var(--navy)}
+.divider span{color:var(--crimson)}
+.qnum{color:var(--navy)}
+.dots i.on{background:var(--crimson)}
+.progress i{background:var(--navy)}
+.rail .bead{color:var(--crimson);background:var(--crimson);opacity:.55}
+.box h4,.boxrow .box h4{color:var(--navy)}
+.box.next{border-color:var(--navy-soft);border-top:3px solid var(--navy)}
+.seg button[aria-pressed="true"]{color:var(--navy);box-shadow:inset 0 -2px 0 var(--navy)}
+.btn.primary{background:var(--navy);border-color:var(--navy)}
+.btn.primary:hover{background:var(--crimson);border-color:var(--crimson)}
+.tbl th{color:var(--navy)}
 </style>
 </head>
 <body>
@@ -524,8 +545,8 @@ ol.toplist li{margin:0 0 9px;line-height:1.55}
       </g>
     </g>
     <use href="#wreath" transform="matrix(-1 0 0 1 120 0)"/>
-    <use href="#st" transform="translate(60 60) scale(2.2)" fill="currentColor"/>
-    <use href="#st" transform="translate(60 17) scale(.42)" fill="currentColor"/>
+    <use href="#st" transform="translate(60 60) scale(2.2)" fill="#34507a"/>
+    <use href="#st" transform="translate(60 17) scale(.42)" fill="#a2433f"/>
   </symbol>
 </svg>
 
@@ -1992,12 +2013,12 @@ QB = QB.concat([
  {tp:"c6",t:"mc",q:"Rosa Parks’s arrest led to:",a:"the Montgomery bus boycott",w:["the Greensboro sit-in","the March on Washington","the Southern Manifesto"],e:"1955–56, led by Martin Luther King, Jr."},
  {tp:"c6",t:"mc",q:"Peacefully violating a law and allowing oneself to be arrested is:",a:"civil disobedience",w:["cloture","a filibuster","massive resistance"],e:"The philosophy of the early demonstrations."},
  {tp:"c6",t:"mc",q:"The Senate rule to end a filibuster is:",a:"cloture",w:["preclearance","a discharge petition","a veto override"],e:"Invoked 71–29 on June 10, 1964 for the Civil Rights Act."},
- {tp:"c6",t:"mc",q:"Which civil rights law was the most far-reaching, covering voting, employment, schools and public accommodations?",a:"The Civil Rights Act of 1964",w:["The Civil Rights Act of 1957","The Voting Rights Act of 1965","The Civil Rights Act of 1968"],e:"1964."},
- {tp:"c6",t:"mc",q:"The Civil Rights Act of 1968 was aimed chiefly at discrimination in:",a:"housing",w:["voting","schools","employment"],e:"Housing."},
- {tp:"c6",t:"mc",q:"Which law suspended literacy tests and sent federal voting examiners?",a:"The Voting Rights Act of 1965",w:["The Civil Rights Act of 1957","Title IX","The Civil Rights Act of 1991"],e:"1965."},
+ {tp:"c6",t:"mc",q:"Which civil rights law was the most far-reaching, covering voting, employment, schools and public accommodations?",a:"The Civil Rights Act of 1964",w:["The Civil Rights Act of 1957","The Voting Rights Act of 1965","The Civil Rights Act of 1968"],e:"1964 — voting, public accommodations, schools, employment and federal funds."},
+ {tp:"c6",t:"mc",q:"The Civil Rights Act of 1968 was aimed chiefly at discrimination in:",a:"housing",w:["voting","schools","employment"],e:"Housing — it banned, by stages, discrimination in most sales and rentals."},
+ {tp:"c6",t:"mc",q:"Which law suspended literacy tests and sent federal voting examiners?",a:"The Voting Rights Act of 1965",w:["The Civil Rights Act of 1957","Title IX","The Civil Rights Act of 1991"],e:"The Voting Rights Act of 1965."},
  {tp:"c6",t:"mc",q:"Shelby County v. Holder (2013) struck down:",a:"the Voting Rights Act’s preclearance formula",w:["the Civil Rights Act of 1964","same-sex marriage bans","affirmative action in Michigan"],e:"5–4; Roberts: “things have changed dramatically.”"},
- {tp:"c6",t:"mc",q:"The women’s rights movement probably began with:",a:"the Seneca Falls Convention (1848)",w:["the Nineteenth Amendment (1920)","The Feminine Mystique (1963)","the ERA (1972)"],e:"Seneca Falls, 1848."},
- {tp:"c6",t:"mc",q:"The Nineteenth Amendment (1920):",a:"barred denying the vote on account of sex",w:["created the Equal Rights Amendment","banned sex discrimination in education","gave women the right to serve on juries"],e:"1920."},
+ {tp:"c6",t:"mc",q:"The women’s rights movement probably began with:",a:"the Seneca Falls Convention (1848)",w:["the Nineteenth Amendment (1920)","The Feminine Mystique (1963)","the ERA (1972)"],e:"Seneca Falls, 1848 — its leaders first demanded the vote for women."},
+ {tp:"c6",t:"mc",q:"The Nineteenth Amendment (1920):",a:"barred denying the vote on account of sex",w:["created the Equal Rights Amendment","banned sex discrimination in education","gave women the right to serve on juries"],e:"1920 — no state may deny the vote on account of sex."},
  {tp:"c6",t:"mc",q:"Title IX (1972) bans sex discrimination in:",a:"education programs receiving federal aid",w:["private clubs","military combat roles","hiring by any employer"],e:"Title IX of the Education Amendments of 1972."},
  {tp:"c6",t:"mc",q:"The Equal Rights Amendment failed because:",a:"it fell short of the 38 states needed by the 1982 deadline",w:["Congress never passed it","the Supreme Court struck it down","the president vetoed it"],e:"35 states ratified in time."},
  {tp:"c6",t:"mc",q:"Unlike African Americans, women had to argue against a legal tradition that claimed to:",a:"protect them",w:["punish them","ignore them","enslave them"],e:"Protective paternalism."},
@@ -2011,8 +2032,8 @@ QB = QB.concat([
  {tp:"c6",t:"mc",q:"Bakke (1978) held that a medical school:",a:"could not use a fixed quota but could take race into account",w:["must use racial quotas","could never consider race","must admit by lottery"],e:"Justice Powell’s decisive opinion — diversity is legitimate."},
  {tp:"c6",t:"mc",q:"In 2003 the Court upheld the University of Michigan Law School’s use of race as:",a:"a “plus factor”",w:["a 20-point bonus","a fixed quota","the decisive factor"],e:"Grutter upheld; Gratz struck the 20-point bonus."},
  {tp:"c6",t:"mc",q:"Most Americans support helping the disadvantaged catch up through extra training. This is called:",a:"compensatory action",w:["preferential treatment","a quota","reverse discrimination"],e:"Supported; preferential treatment is opposed."},
- {tp:"c6",t:"mc",q:"Which case overruled Bowers v. Hardwick?",a:"Lawrence v. Texas (2003)",w:["Obergefell v. Hodges (2015)","Romer (1996)","United States v. Windsor (2013)"],e:"Lawrence, 5–4."},
- {tp:"c6",t:"mc",q:"Obergefell v. Hodges (2015) held that:",a:"same-sex couples have a constitutional right to marry",w:["DOMA was unconstitutional","private groups may set their membership","sodomy laws are constitutional"],e:"5–4."},
+ {tp:"c6",t:"mc",q:"Which case overruled Bowers v. Hardwick?",a:"Lawrence v. Texas (2003)",w:["Obergefell v. Hodges (2015)","Romer (1996)","United States v. Windsor (2013)"],e:"Lawrence v. Texas (2003), 5–4, struck Texas’s law and overruled Bowers."},
+ {tp:"c6",t:"mc",q:"Obergefell v. Hodges (2015) held that:",a:"same-sex couples have a constitutional right to marry",w:["DOMA was unconstitutional","private groups may set their membership","sodomy laws are constitutional"],e:"Decided 5–4 in 2015. DOMA fell in Windsor (2013); Dale (2000) let private groups set membership."},
  {tp:"c6",t:"mc",q:"United States v. Windsor (2013) struck down:",a:"the Defense of Marriage Act",w:["Proposition 8","the Hyde Amendment","Title IX"],e:"Equal federal benefits for married same-sex couples."},
  {tp:"c6",t:"mc",q:"Between 1882 and 1946, lynching was prosecuted as:",a:"a local, not a federal, crime",w:["a federal crime","treason","a violation of the Fifteenth Amendment"],e:"Which is why little was done."},
  {tp:"c6",t:"mc",q:"Black leaders shifted key civil rights decisions from Congress to:",a:"the federal courts",w:["the states","the president","the United Nations"],e:"Through a patient, carefully planned legal campaign."},
