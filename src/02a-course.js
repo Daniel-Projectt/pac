@@ -29,7 +29,7 @@ var COURSE = {
   "<b>Quizzes and discussion posts: no.</b> This page is for studying beforehand, not for use during a quiz.",
   "The paper cites a class discussion by date: “Something that was not in this room cannot write it.”"],
  virtues:"Humility · curiosity · respect · open-heartedness · confidence",
- next:"Quiz on <b>chapter 7</b> on Thursday, October 1 (Sep 24 notes). Chapters 6 and 7 are not on this page yet — send the slides or notes and they will be added.",
+ next:"<b>Chapter 6 (Civil Rights)</b> is now on this page, from the textbook, with the most testable lines <mark class=\"key\">highlighted</mark>. The Sep 24 notes list a quiz on <b>chapter 7</b> on Thursday, October 1 — chapter 7 is not here yet.",
  examStyle:"The exam asks lists and definitions in the professor’s words: “What are the five?” (Liberty, Equality, Democracy, Civic Duty, Individual Responsibility); “Which clause says…?”; “Define probable cause.” The <i>Name them</i> drill below and the quizzes now ask that way."
 };
 
@@ -209,5 +209,22 @@ var GUIDE = {sections:[
   {id:"g5-rel", t:"The religion clauses and the wall of separation", a:"c5-religion",
    short:"Establishment clause (no official religion) and free exercise clause. Jefferson’s “wall of separation” — whether the First Amendment really requires it is debated."},
   {id:"g5-crime", t:"Exclusionary rule and searches", a:"c5-crime",
-   short:"Evidence gathered unconstitutionally can’t be used at trial. A search is reasonable with a warrant or as part of a lawful arrest."}]}
+   short:"Evidence gathered unconstitutionally can’t be used at trial. A search is reasonable with a warrant or as part of a lawful arrest."}]},
+ {h:"Chapter 6 · Civil Rights", tp:"c6", items:[
+  {id:"g6-def", t:"★ What civil rights are; the three tests", a:"c6-def",
+   short:"A group denied what others get; the question is whether the difference is <b>reasonable</b>. Rational basis · intermediate scrutiny (sex) · strict scrutiny (race)."},
+  {id:"g6-brown", t:"★ Plessy (1896) to Brown (1954)", a:"c6-courts",
+   short:"“Separate but equal” upheld, then struck: separate schools are <b>inherently unequal</b> (Warren, unanimous). “All deliberate speed.”"},
+  {id:"g6-integ", t:"★ De jure vs. de facto; desegregation vs. integration", a:"c6-integ",
+   short:"By law vs. in fact. Free to attend vs. actually attending together. Swann (1971) approved busing."},
+  {id:"g6-congress", t:"★ Civil disobedience, the 1964 and 1965 Acts, cloture", a:"c6-congress",
+   short:"Montgomery bus boycott (Rosa Parks, King). Four developments broke the deadlock. 1964 Act the most far-reaching; cloture ended the filibuster. Shelby County (2013)."},
+  {id:"g6-women", t:"Women’s rights", a:"c6-women",
+   short:"Seneca Falls 1848; 19th Amendment 1920; Title IX 1972; the ERA fell short of 38 states. Reed, Craig, Rostker, U.S. v. Virginia."},
+  {id:"g6-privacy", t:"Privacy and abortion", a:"c6-privacy",
+   short:"Griswold (1965) privacy from the penumbras; Roe (1973); Hyde Amendment; Casey (1992) and the undue-burden test."},
+  {id:"g6-aa", t:"★ Affirmative action", a:"c6-aa",
+   short:"Equality of results vs. equality of opportunity. Bakke: no quotas, race may count. Grutter: a plus factor. Public backs compensatory action, not preferential treatment."},
+  {id:"g6-lgbt", t:"Sexual orientation", a:"c6-lgbt",
+   short:"Bowers (1986) → Lawrence (2003) → Windsor (2013) → Obergefell (2015). Private groups may set membership (Dale)."}]}
 ]};

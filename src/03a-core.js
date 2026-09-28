@@ -10,7 +10,7 @@ var store = {
   set:function(k,v){ try{ localStorage.setItem("pac."+k, v); }catch(e){} }
 };
 var CORNERS = ['tl','tr','bl','br'].map(function(c){ return '<svg class="c '+c+'" aria-hidden="true"><use href="#corner"/></svg>'; }).join('');
-var CHAPTERS = ["c1","c2","c3","c4","c5"];
+var CHAPTERS = ["c1","c2","c3","c4","c5","c6"];
 var TOPIC_NAMES = {};
 CHAPTERS.forEach(function(tp){ TOPIC_NAMES[tp] = "Ch. "+CH[tp].n+" · "+CH[tp].short; });
 

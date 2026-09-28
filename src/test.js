@@ -18,7 +18,7 @@ vm.createContext(sandbox);
 vm.runInContext(src, sandbox);
 const A = sandbox.module.exports;
 console.log('script parsed and loaded, exports: ' + Object.keys(A).length);
-const tps = ['c1', 'c2', 'c3', 'c4', 'c5'];
+const tps = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6'];
 
 // ---------- 1. the course, the record, the log ----------
 head('course, quiz record, class log');
@@ -26,7 +26,8 @@ ok(/Who governs/.test(A.COURSE.about) && A.COURSE.books.length === 3, 'course de
 ok(A.COURSE.grading.some(g => /November 19/.test(g)) && A.COURSE.grading.some(g => /three/.test(g)), 'paper date and PAC events in the grading rules');
 ok(A.COURSE.ai.some(a => /Undisclosed/.test(a)) && A.COURSE.ai.some(a => /Quizzes and discussion posts: no/.test(a)), 'AI policy carried over');
 ok(A.COURSE.sources.some(s => /Reuters/.test(s)) && A.COURSE.sources.some(s => /aggregators/.test(s)), 'what counts as a source');
-ok(JSON.stringify(A.QUIZ_RECORD.map(r => r.tp)) === JSON.stringify(tps), 'one record per chapter');
+const quizTps = tps.filter(tp => tp !== 'c6');   // chapter 6 has no Canvas quiz yet
+ok(JSON.stringify(A.QUIZ_RECORD.map(r => r.tp)) === JSON.stringify(quizTps), 'one record per chapter with a Canvas quiz');
 ok(JSON.stringify(A.QUIZ_RECORD[1].missed) === '[6,9,10]' && JSON.stringify(A.QUIZ_RECORD[2].missed) === '[1,7]', 'the missed questions from Canvas (ch. 2: 6, 9, 10; ch. 3: 1, 7)');
 ok(A.QUIZ_RECORD[0].missed.length === 0 && A.QUIZ_RECORD[3].missed.length === 0 && A.QUIZ_RECORD[4].missed.length === 0, 'chapters 1, 4 and 5 had no misses');
 A.QUIZ_RECORD.forEach(r => r.missed.forEach(n => ok(A.QB.some(q => q.tp === r.tp && q.real === n), 'missed question exists in the bank: ' + r.tp + ' Q' + n)));
@@ -39,7 +40,7 @@ ok(!/best year yet|love you more than ever|taught me a lot/i.test(html), 'the pe
 
 // ---------- 2. the review list ----------
 head('the review list');
-ok(A.GUIDE.sections.length === 5 && A.GUIDE.sections.every((s, i) => s.tp === tps[i]), 'five sections, one per chapter');
+ok(A.GUIDE.sections.length === 6 && A.GUIDE.sections.every((s, i) => s.tp === tps[i]), 'six sections, one per chapter');
 const items = A.GUIDE.sections.flatMap(s => s.items.map(i => Object.assign({ tp: s.tp }, i)));
 ok(new Set(items.map(i => i.id)).size === items.length, 'review item ids unique');
 ok(items.filter(i => i.know).length >= 4, 'the "know them" items are marked', items.filter(i => i.know).length);
@@ -99,7 +100,8 @@ tps.forEach(tp => {
   ok(mine.filter(q => q.t === 'tf').length >= 6, 'true/false on ' + tp);
   ok(mine.filter(q => q.ap).length >= 3, 'application questions on ' + tp);
   const real = mine.filter(q => q.real).map(q => q.real).sort((a, b) => a - b);
-  ok(JSON.stringify(real) === JSON.stringify([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]), 'the ten Canvas questions for ' + tp, real.join(','));
+  if (tp !== 'c6') ok(JSON.stringify(real) === JSON.stringify([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]), 'the ten Canvas questions for ' + tp, real.join(','));
+  else ok(real.length === 0, 'chapter 6 has no Canvas questions yet');
 });
 A.QB.forEach((q, i) => {
   ok(tps.includes(q.tp), 'known chapter #' + i);
@@ -118,6 +120,18 @@ ok(realQ('c2', 9).a === true && realQ('c2', 10).a === false, 'ch. 2 Q9 true, Q10
 ok(realQ('c3', 1).a === '27' && realQ('c3', 7).a === 'John Adams', 'ch. 3 Q1 and Q7 answers');
 ok(realQ('c4', 9).a === 'rapidly declined' && realQ('c4', 10).a === 'Japan', 'ch. 4 Q9 and Q10 answers');
 ok(realQ('c5', 10).a === false, 'ch. 5 Q10 false');
+// chapter 6, from the textbook (Wilson pp. 122-152)
+const c6 = body('c6');
+['denied access to facilities, opportunities, or services', 'Rational basis', 'Intermediate scrutiny', 'Strict scrutiny', 'least restrictive means', 'suspect',
+ 'Plessy v. Ferguson (1896)', 'inherently unequal', 'Earl Warren', 'all deliberate speed', 'De jure', 'De facto', 'Swann', 'Montgomery bus boycott', 'Rosa Parks',
+ 'Civil disobedience', 'cloture', '71–29', 'Voting Rights Act', 'Shelby County', 'Seneca Falls', 'Nineteenth Amendment', 'Title IX', 'Equal Rights Amendment', '38',
+ 'Griswold', 'penumbras', 'Roe v. Wade', 'Casey', 'undue burden', 'Hyde Amendment', 'Equality of results', 'Equality of opportunity', 'Bakke', 'plus factor',
+ 'compensatory action', 'preferential treatment', 'Bowers v. Hardwick', 'Lawrence v. Texas', 'Obergefell'].forEach(v => ok(c6.includes(v), 'ch. 6 covers: ' + v));
+const marks = (c6.match(/<mark class="key">/g) || []).length;
+ok(marks >= 30 && marks <= 90, 'ch. 6 highlights the most testable lines, not everything', marks);
+ok(A.CH.c6.notes[0].id === 'c6-top' && /Most likely/.test(A.CH.c6.notes[0].h), 'ch. 6 opens with the most-likely-asked list');
+ok(A.GUIDE.sections[5].items.filter(i => /★/.test(i.t)).length >= 4, 'the review list stars the key chapter 6 items');
+ok(/mark\.key\{/.test(html), 'the highlight style exists');
 // the Sep 24 exam notes, in the professor's phrasing
 ['Probable cause', 'Due process clause', 'Equal protection clause', 'some minority', 'The clear-and-present-danger test', 'governed', 'states’ rights', 'Democracy', 'Individual responsibility', 'patterned and sustained', 'competing rights and duties']
   .forEach(a => ok(A.QB.some(q => q.a === a), 'exam-notes question with the answer: ' + a));
@@ -194,7 +208,7 @@ for (let run = 0; run < 100; run++) {
   ok(real.length === 50 && real.every(q => q.real), 'Canvas-only exam has all fifty real questions', real.length);
   ok(A.mockQuestions({ n: 15, types: 'all', topics: ['c3'] }).every(q => q.tp === 'c3'), 'single-chapter exam');
 }
-tps.forEach(tp => ok(A.realKeys(tp, false).length === 10, 'replay keys for ' + tp));
+quizTps.forEach(tp => ok(A.realKeys(tp, false).length === 10, 'replay keys for ' + tp));
 const c2miss = A.questionsByKeys(A.realKeys('c2', true));
 ok(c2miss.map(q => q.real).join(',') === '6,9,10', 'ch. 2 "only the misses" replays Q6, Q9, Q10 in order', c2miss.map(q => q.real).join(','));
 ok(A.questionsByKeys(A.realKeys('c3', true)).map(q => q.real).join(',') === '1,7', 'ch. 3 "only the misses" replays Q1, Q7');
@@ -236,7 +250,7 @@ panels.forEach(pn => {
   ok(html.includes('data-modes="' + t + '"'), 'panel ' + pn + ' has a mode switch');
   ok(new RegExp('data-modes="' + t + '"[\\s\\S]*?data-mode="' + mo + '"').test(html), 'panel ' + pn + ' has its mode button');
 });
-['guide', 'c1', 'c2', 'c3', 'c4', 'c5', 'faith', 'exam'].forEach(t => {
+['guide', 'c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'faith', 'exam'].forEach(t => {
   ok(html.includes('data-topic="' + t + '"') && html.includes('id="topic-' + t + '"'), 'topic ' + t + ' has a tab and a section');
 });
 ok(/data-topic="guide"\s+aria-selected="true"/.test(html), 'Guide is the first, default tab');

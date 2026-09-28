@@ -169,7 +169,7 @@ function renderMockSetup(){
     '<div class="setup">'+
       '<div class="row"><span class="label">Length</span><br>'+seg("mxN","data-n",mockCfg.n,[[15,"15"],[25,"25"],[40,"40"],[50,"50"]])+'</div>'+
       '<div class="row"><span class="label">Question types</span><br>'+seg("mxT","data-t",mockCfg.types,[["all","Everything"],["mc","Multiple choice"],["tf","True / false"],["lists","Name them"],["ap","Application"],["real","Canvas quizzes only"]])+'</div>'+
-      '<div class="row"><span class="label">Chapters</span><br>'+seg("mxP","data-p",mockCfg.topic,[["all","All five"]].concat(CHAPTERS.map(function(tp){ return [tp, "Ch. "+CH[tp].n]; })))+'</div>'+
+      '<div class="row"><span class="label">Chapters</span><br>'+seg("mxP","data-p",mockCfg.topic,[["all","All six"]].concat(CHAPTERS.map(function(tp){ return [tp, "Ch. "+CH[tp].n]; })))+'</div>'+
       '<div class="row" style="margin-top:22px"><button class="btn primary" type="button" id="mxStart">Start</button></div>'+
       '<p class="hint" style="margin-top:12px">“Name them” questions: pick every item that belongs, then press Check — keys <kbd>1</kbd>–<kbd>9</kbd> toggle, <kbd>Enter</kbd> checks. To replay a real Canvas quiz in its own order, use the buttons on the Guide tab.</p>'+
     '</div></div></div>';
@@ -202,8 +202,8 @@ CHAPTERS.forEach(function(tp){
   KEYS[tp+"/cards"] = function(e){ return engines[tp+"Cards"].keys(e); };
   KEYS[tp+"/quiz"]  = function(e){ return engines[tp+"Quiz"].keys(e); };
 });
-var TOPICS = ["guide","c1","c2","c3","c4","c5","faith","exam"];
-var currentTopic = "guide", currentMode = {guide:"overview", c1:"notes", c2:"notes", c3:"notes", c4:"notes", c5:"notes", faith:"paper", exam:"mock"};
+var TOPICS = ["guide","c1","c2","c3","c4","c5","c6","faith","exam"];
+var currentTopic = "guide", currentMode = {guide:"overview", c1:"notes", c2:"notes", c3:"notes", c4:"notes", c5:"notes", c6:"notes", faith:"paper", exam:"mock"};
 function showMode(topic, mode){
   currentMode[topic] = mode;
   $$('.seg[data-modes="'+topic+'"] button').forEach(function(b){ b.setAttribute("aria-pressed", String(b.getAttribute("data-mode") === mode)); });

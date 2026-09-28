@@ -167,3 +167,12 @@ details.namelist ol{margin:0;padding:0 18px 14px 44px;font-size:15px;line-height
   #mxT button:nth-last-child(-n+3){border-bottom:1px solid var(--line)}
   #mxT button:nth-last-child(-n+2){border-bottom:0}
 }
+
+/* the most testable lines: a soft gold highlighter stroke, not a loud yellow */
+mark.key{background:linear-gradient(transparent 58%, rgba(198,164,105,.42) 58%, rgba(198,164,105,.42) 92%, transparent 92%);color:inherit;padding:0 .08em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.lead-in{font-style:italic;color:var(--muted);margin:0 0 10px}
+ol.toplist{margin:0;padding-left:22px}
+ol.toplist li{margin:0 0 9px;line-height:1.55}
+/* when an option bar wraps on a phone, every row fills the width */
+.seg{justify-content:center}
+.seg button{flex:1 1 auto;border-bottom:1px solid var(--line);margin-bottom:-1px}

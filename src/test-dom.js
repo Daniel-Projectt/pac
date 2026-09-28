@@ -58,15 +58,15 @@ head('landing');
 ok(errors.length === 0, 'no errors while loading', errors.join(' || '));
 ok(visible($('#topic-guide')) && !visible($('#topic-c1')), 'opens on the Guide');
 const items = $$('#guideRoot .gitem');
-ok(items.length === 34, 'guide shows all 34 review items', items.length);
-ok(/0 of 34/.test($('#gCount').textContent), 'progress starts at 0 of 34', $('#gCount').textContent);
+ok(items.length === 42, 'guide shows all 42 review items', items.length);
+ok(/0 of 42/.test($('#gCount').textContent), 'progress starts at 0 of 42', $('#gCount').textContent);
 ok($$('#guideRoot .record tbody tr').length === 5, 'quiz record has five rows');
 ok(/chapter 7/.test($('#guideRoot .box.next').textContent), 'the Guide shows the coming chapter 7 quiz');
 ok($$('#guideRoot [data-missed]').length === 2, 'two quizzes offer "only the misses"');
 
 head('guide checkboxes and jumps');
 const cb = $('#guideRoot input[data-g="g1-views"]'); cb.checked = true; cb.dispatchEvent(new w.Event('change', { bubbles: true }));
-ok(/1 of 34/.test($('#gCount').textContent), 'checking an item moves the progress', $('#gCount').textContent);
+ok(/1 of 42/.test($('#gCount').textContent), 'checking an item moves the progress', $('#gCount').textContent);
 ok(/g1-views":true/.test(w.localStorage.getItem('pac.guide') || ''), 'the check is saved on the device');
 click($('#gPrint')); ok(w.__printed === 1, 'print button prints');
 click($('#guideRoot .gitem[data-gi="g3-cases"] button[data-go]'));
@@ -159,11 +159,11 @@ key('Enter'); ok(/Question 2/.test($('#c1Quiz .qnum').textContent), 'Enter moves
 head('name them');
 topic('guide');
 const lists = $$('#guideRoot details.namelist');
-ok(lists.length === 18, 'eighteen lists on the Guide', lists.length);
+ok(lists.length === 24, 'twenty-four lists on the Guide', lists.length);
 ok(/five elements/.test(lists[0].querySelector('summary').textContent) && lists[0].querySelectorAll('ol li').length === 5, 'the first list is the five elements, five items');
 lists[0].open = true; ok(/Liberty/.test(lists[0].querySelector('ol').textContent) && /Individual responsibility/.test(lists[0].querySelector('ol').textContent), 'opening it shows the five');
 click($('#gLists'));
-ok(visible(panel('exam/mock')) && $$('#mockExam .dots i').length === 18, 'Drill the lists starts an 18-question name-them exam', $$('#mockExam .dots i').length);
+ok(visible(panel('exam/mock')) && $$('#mockExam .dots i').length === 24, 'Drill the lists starts a 24-question name-them exam', $$('#mockExam .dots i').length);
 ok(!!$('#mockExam .qbody .check') && /Name them/.test($('#mockExam .qtag').textContent), 'first question is a name-them with a Check button');
 const nOpts = $$('#mockExam .qbody .opt').length;
 key('2'); ok($$('#mockExam .qbody .opt.sel').length === 1, 'a number key toggles a pick');
@@ -173,7 +173,7 @@ ok($$('#mockExam .qbody .opt.missedone').length >= 2 && /Not quite/.test($('#moc
 ok($$('#mockExam .qbody .opt:disabled').length === nOpts, 'all choices lock after Check');
 key('Enter'); ok(/Question 2/.test($('#mockExam .qnum').textContent), 'Enter moves to the next list');
 const lres = answerQuiz($('#mockExam'), 'lists');
-ok(lres && /\/18/.test(lres.querySelector('.big').textContent), 'name-them exam scores out of 18', lres && lres.querySelector('.big').textContent);
+ok(lres && /\/24/.test(lres.querySelector('.big').textContent), 'name-them exam scores out of 24', lres && lres.querySelector('.big').textContent);
 ok(/"types":"lists"/.test(w.localStorage.getItem('pac.mockcfg') || ''), 'the drill sets the exam type to lists');
 click(lres.querySelector('.setupbtn')); ok(!!$('#mxStart') && $('#mxT button[data-t="lists"][aria-pressed="true"]'), 'back to setup with Name them selected');
 
