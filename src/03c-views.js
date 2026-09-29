@@ -51,7 +51,7 @@ function renderGuide(){
     LISTS.map(function(l, i){
       return '<details class="namelist" data-l="'+i+'"><summary>What are '+l.q+'? <span class="nb">'+TOPIC_NAMES[l.tp]+' &middot; '+l.n+'</span></summary><ol>'+l.items.map(li).join("")+'</ol></details>';
     }).join("")+
-    '<div class="toolbar"><button class="btn primary" type="button" id="gLists">Drill the lists</button></div></div>';
+    '<div class="toolbar"><button class="btn primary" type="button" id="gLists">Drill the lists</button><button class="btn primary" type="button" id="gExam50">Take the Exam 50</button></div></div>';
   html += '<div class="gsec"><div class="toolbar">'+
       '<button class="btn primary" type="button" data-go="exam/mock">Practice exam</button>'+
       '<button class="btn" type="button" data-go="faith/paper">The paper</button>'+
@@ -76,6 +76,7 @@ function renderGuide(){
     b.addEventListener("click", function(){ replayReal(b.getAttribute("data-real"), !!b.getAttribute("data-missed")); });
   });
   $("#gPrint").addEventListener("click", function(){ window.print(); });
+  $("#gExam50").addEventListener("click", function(){ goTo("exam/mock"); startExam50(null); });
   $("#gLists").addEventListener("click", function(){
     mockCfg.types = "lists"; mockCfg.topic = "all"; mockCfg.n = 25; store.set("mockcfg", JSON.stringify(mockCfg));
     goTo("exam/mock"); startMock(null);
@@ -155,6 +156,11 @@ function startMock(keys){
   engines.mock = makeQuiz($("#mockExam"), mockGen, {showTopic:true, againLabel:"New practice exam", onSetup:renderMockSetup});
   engines.mock.start(keys || null);
 }
+/* The Exam 50: her study guide, fixed, in guide order */
+function startExam50(keys){
+  engines.mock = makeQuiz($("#mockExam"), examFiftyQuestions, {showTopic:true, againLabel:"Take the Exam 50 again", onSetup:renderMockSetup});
+  engines.mock.start(keys || null);
+}
 function replayReal(tp, onlyMissed){
   var keys = realKeys(tp, onlyMissed); if(!keys.length) return;
   goTo("exam/mock"); startMock(keys);
@@ -166,6 +172,9 @@ function renderMockSetup(){
   }
   root.innerHTML = '<div class="quizWrap"><div class="qcard card-corners">'+CORNERS+
     '<div class="qnum">Practice exam</div><p class="qtext">Set it up, then answer across the chapters. Each run is drawn fresh.</p>'+
+    '<div class="fifty"><button class="btn primary" type="button" id="mxExam50">The Exam 50 &mdash; from your study guide</button>'+
+      '<p>Fifty questions, only from the exam study guide: chapters 1&ndash;4 line by line, chapter 5 terms, and a few chapter 6 ideas. No chapter 5 or 6 court cases. The same fifty every time, in the guide&rsquo;s order.</p></div>'+
+    '<p class="orline">or set one up yourself</p>'+
     '<div class="setup">'+
       '<div class="row"><span class="label">Length</span><br>'+seg("mxN","data-n",mockCfg.n,[[15,"15"],[25,"25"],[40,"40"],[50,"50"]])+'</div>'+
       '<div class="row"><span class="label">Question types</span><br>'+seg("mxT","data-t",mockCfg.types,[["all","Everything"],["mc","Multiple choice"],["tf","True / false"],["lists","Name them"],["ap","Application"],["real","Canvas quizzes only"]])+'</div>'+
@@ -177,6 +186,7 @@ function renderMockSetup(){
   segWire("#mxT","data-t",function(v){ mockCfg.types = v; store.set("mockcfg", JSON.stringify(mockCfg)); });
   segWire("#mxP","data-p",function(v){ mockCfg.topic = v; store.set("mockcfg", JSON.stringify(mockCfg)); });
   $("#mxStart").addEventListener("click", function(){ startMock(null); });
+  $("#mxExam50").addEventListener("click", function(){ startExam50(null); });
   engines.mock = null;
 }
 

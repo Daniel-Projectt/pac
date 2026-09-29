@@ -132,6 +132,23 @@ ok(marks >= 30 && marks <= 90, 'ch. 6 highlights the most testable lines, not ev
 ok(A.CH.c6.notes[0].id === 'c6-top' && /Most likely/.test(A.CH.c6.notes[0].h), 'ch. 6 opens with the most-likely-asked list');
 ok(A.GUIDE.sections[5].items.filter(i => /★/.test(i.t)).length >= 4, 'the review list stars the key chapter 6 items');
 ok(/mark\.key\{/.test(html), 'the highlight style exists');
+// the Exam 50 — her study guide, fixed
+head('the Exam 50');
+const X = A.examFiftyQuestions(null);
+ok(A.EXAM50.length === 50 && X.length === 50, 'exactly fifty questions', X.length);
+ok(new Set(X.map(q => q.key)).size === 50, 'fifty distinct keys');
+const byTp = {}; A.EXAM50.forEach(b => byTp[b.tp] = (byTp[b.tp] || 0) + 1);
+ok(byTp.c1 === 12 && byTp.c2 === 12 && byTp.c3 === 7 && byTp.c4 === 9 && byTp.c5 === 7 && byTp.c6 === 3, 'guide chapters 1-4 carry the weight; ch. 5 terms; a few ch. 6 ideas', JSON.stringify(byTp));
+ok(X.filter(q => q.kind === 'list').length === 3, 'the three know-them lists are asked as name-them questions');
+const CASES56 = /v\.|Gitlow|Palko|McDonald|Schenck|Near|Sullivan|Miller|Johnson|Tinker|Everson|Lemon|Mapp|Miranda|Plessy|Brown|Swann|Green|Shelby|Reed|Craig|Rostker|Virginia|Griswold|Roe|Casey|Webster|Bakke|Grutter|Gratz|Adarand|Croson|Bowers|Lawrence|Windsor|Obergefell|Bostock|Dale/;
+A.EXAM50.filter(b => b.tp === 'c5' || b.tp === 'c6').forEach(b => ok(!CASES56.test(b.q + ' ' + b.a + ' ' + (b.w || []).join(' ') + ' ' + b.e), 'no chapter 5 or 6 court case', b.q));
+X.forEach(q => {
+  const right = q.opts.filter(o => o.ok).length;
+  ok(q.kind === 'list' ? right === q.n : right === 1, 'answer key sound', q.text);
+  ok(new Set(q.opts.map(o => o.html)).size === q.opts.length && q.explain, 'options distinct, explained', q.text);
+});
+ok(A.examFiftyQuestions(['x:0', 'x:9']).length === 2, 'practising the misses rebuilds just those');
+ok(/id="mxExam50"/.test(src) && /id="gExam50"/.test(src), 'Exam 50 buttons on the Practice Exam tab and the Guide');
 // the Sep 24 exam notes, in the professor's phrasing
 ['Probable cause', 'Due process clause', 'Equal protection clause', 'some minority', 'The clear-and-present-danger test', 'governed', 'states’ rights', 'Democracy', 'Individual responsibility', 'patterned and sustained', 'competing rights and duties']
   .forEach(a => ok(A.QB.some(q => q.a === a), 'exam-notes question with the answer: ' + a));

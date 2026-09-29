@@ -191,6 +191,16 @@ ok($$('#mockExam .dots i').length === 50, 'Canvas-only exam has fifty questions'
 ok($$('#mockExam .qtag.real').length === 1, 'real questions carry the Canvas tag');
 ok(/"types":"real"/.test(w.localStorage.getItem('pac.mockcfg') || ''), 'exam settings remembered');
 
+head('the Exam 50');
+topic('guide'); click($('#gExam50'));
+ok(visible(panel('exam/mock')) && $$('#mockExam .dots i').length === 50, 'the Guide button starts the Exam 50', $$('#mockExam .dots i').length);
+const x50 = answerQuiz($('#mockExam'), 'exam 50');
+ok(x50 && /\/50/.test(x50.querySelector('.big').textContent), 'scored out of 50', x50 && x50.querySelector('.big').textContent);
+click(x50.querySelector('.setupbtn'));
+ok(!!$('#mxExam50'), 'Exam 50 button on the practice exam setup');
+click($('#mxExam50'));
+ok($$('#mockExam .dots i').length === 50, 'the setup button starts it too');
+
 head('replaying a Canvas quiz from the Guide');
 topic('guide');
 click($('#guideRoot [data-real="c2"][data-missed]'));

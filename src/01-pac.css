@@ -197,3 +197,8 @@ header::after{content:"";display:block;width:138px;height:7px;margin:16px auto 0
 .btn.primary{background:var(--navy);border-color:var(--navy)}
 .btn.primary:hover{background:var(--crimson);border-color:var(--crimson)}
 .tbl th{color:var(--navy)}
+
+/* the Exam 50 button above the practice-exam setup */
+.fifty{text-align:center;margin:18px 0 6px}
+.fifty p{font-size:14px;color:var(--muted);font-style:italic;max-width:520px;margin:10px auto 0;line-height:1.5}
+.orline{text-align:center;font-family:var(--sans);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin:22px 0 4px}
