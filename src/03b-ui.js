@@ -1,6 +1,6 @@
 /* ---- the pure parts can be tested outside a browser ---- */
 if(typeof window === "undefined"){
-  module.exports = {CH:CH, COURSE:COURSE, QUIZ_RECORD:QUIZ_RECORD, CLASS_LOG:CLASS_LOG, PAPER:PAPER, GUIDE:GUIDE, FAITH:FAITH, LISTS:LISTS, EXAM50:EXAM50, EXAM50_LISTS:EXAM50_LISTS, examFiftyQuestions:examFiftyQuestions,
+  module.exports = {CH:CH, COURSE:COURSE, QUIZ_RECORD:QUIZ_RECORD, CLASS_LOG:CLASS_LOG, PAPER:PAPER, GUIDE:GUIDE, FAITH:FAITH, LISTS:LISTS, EXAM50:EXAM50, EXAM_LEVELS:EXAM_LEVELS, examFiftyQuestions:examFiftyQuestions,
     QB:QB, PAIRSETS:PAIRSETS, VERDICTS:VERDICTS, CHAPTERS:CHAPTERS, TOPIC_NAMES:TOPIC_NAMES,
     fromBank:fromBank, fromPair:fromPair, fromList:fromList, listsFor:listsFor, topicQuestions:topicQuestions, mockQuestions:mockQuestions, questionsByKeys:questionsByKeys,
     realKeys:realKeys, deckFor:deckFor, matchRound:matchRound, verdictFor:verdictFor};

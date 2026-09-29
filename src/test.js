@@ -133,21 +133,51 @@ ok(A.CH.c6.notes[0].id === 'c6-top' && /Most likely/.test(A.CH.c6.notes[0].h), '
 ok(A.GUIDE.sections[5].items.filter(i => /★/.test(i.t)).length >= 4, 'the review list stars the key chapter 6 items');
 ok(/mark\.key\{/.test(html), 'the highlight style exists');
 // the Exam 50 — her study guide, fixed
-head('the Exam 50');
-const X = A.examFiftyQuestions(null);
-ok(A.EXAM50.length === 50 && X.length === 50, 'exactly fifty questions', X.length);
-ok(new Set(X.map(q => q.key)).size === 50, 'fifty distinct keys');
-const byTp = {}; A.EXAM50.forEach(b => byTp[b.tp] = (byTp[b.tp] || 0) + 1);
+head('the Exam 50 — ten graded exams');
+ok(A.EXAM50.length === 50, 'fifty topics', A.EXAM50.length);
+const byTp = {}; A.EXAM50.forEach(t => byTp[t.tp] = (byTp[t.tp] || 0) + 1);
 ok(byTp.c1 === 12 && byTp.c2 === 12 && byTp.c3 === 7 && byTp.c4 === 9 && byTp.c5 === 7 && byTp.c6 === 3, 'guide chapters 1-4 carry the weight; ch. 5 terms; a few ch. 6 ideas', JSON.stringify(byTp));
-ok(X.filter(q => q.kind === 'list').length === 3, 'the three know-them lists are asked as name-them questions');
-const CASES56 = /v\.|Gitlow|Palko|McDonald|Schenck|Near|Sullivan|Miller|Johnson|Tinker|Everson|Lemon|Mapp|Miranda|Plessy|Brown|Swann|Green|Shelby|Reed|Craig|Rostker|Virginia|Griswold|Roe|Casey|Webster|Bakke|Grutter|Gratz|Adarand|Croson|Bowers|Lawrence|Windsor|Obergefell|Bostock|Dale/;
-A.EXAM50.filter(b => b.tp === 'c5' || b.tp === 'c6').forEach(b => ok(!CASES56.test(b.q + ' ' + b.a + ' ' + (b.w || []).join(' ') + ' ' + b.e), 'no chapter 5 or 6 court case', b.q));
-X.forEach(q => {
-  const right = q.opts.filter(o => o.ok).length;
-  ok(q.kind === 'list' ? right === q.n : right === 1, 'answer key sound', q.text);
-  ok(new Set(q.opts.map(o => o.html)).size === q.opts.length && q.explain, 'options distinct, explained', q.text);
+ok(A.EXAM_LEVELS.length === 10 && A.EXAM_LEVELS.every((l, i) => l.n === i + 1 && l.name && l.d), 'ten named levels');
+A.EXAM50.forEach(t => {
+  ok(t.topic && t.v.length === 10, 'ten levels: ' + t.topic, t.v.length);
+  ok(new Set(t.v.map(v => v.q || v.list)).size === 10, 'ten different questions: ' + t.topic);
+  t.v.forEach((v, k) => {
+    if (v.t === 'list') { ok(A.LISTS.some(l => l.id === v.list), 'list exists: ' + v.list); return; }
+    ok(v.q && v.e, 'question and explanation: ' + t.topic + ' L' + (k + 1));
+    if (v.t === 'tf') ok(typeof v.a === 'boolean', 'true/false answer: ' + v.q);
+    else ok(v.w.length === 3 && !v.w.includes(v.a) && new Set(v.w).size === 3, 'one right of four: ' + v.q);
+  });
+  ok(t.v.slice(8).every(v => v.t === 'mc' && /^(Why|Which|If|When|A |An |Two|Critics|Given)/.test(v.q)), 'levels 9-10 ask why, judge or predict: ' + t.topic);
 });
-ok(A.examFiftyQuestions(['x:0', 'x:9']).length === 2, 'practising the misses rebuilds just those');
+// her rule: no court cases from chapters 5 and 6, anywhere in the exam
+const CASES56 = /Gitlow|Palko|McDonald|Schenck|Near v|Sullivan|Miller v|Texas v|Tinker|Everson|Lemon|Mapp|Miranda|Plessy|Brown v|Swann|Green v|Shelby|Reed v|Craig v|Rostker|Griswold|Roe v|Casey|Webster|Bakke|Grutter|Gratz|Adarand|Croson|Bowers|Lawrence v|Windsor|Obergefell|Bostock|Boy Scouts|Hodges|Hobby Lobby/;
+A.EXAM50.forEach(t => t.v.forEach(v => { if (v.t !== 'list') ok(!CASES56.test([v.q, v.a, (v.w || []).join(' '), v.e].join(' ')), 'no chapter 5 or 6 court case', v.q); }));
+A.EXAM50.filter(t => t.tp === 'c5' || t.tp === 'c6').forEach(t => t.v.forEach(v => { if (v.t !== 'list') ok(!/ v\. /.test([v.q, v.a, (v.w || []).join(' ')].join(' ')), 'chapter 5-6 topics name no case at all', v.q); }));
+for (let L = 1; L <= 10; L++) {
+  const X = A.examFiftyQuestions(null, L);
+  ok(X.length === 50 && X.every(q => q.level === L), 'Exam ' + L + ': fifty questions, all at level ' + L);
+  X.forEach(q => {
+    const right = q.opts.filter(o => o.ok).length;
+    ok(q.kind === 'list' ? right === q.n : right === 1, 'answer key sound', q.text);
+    ok(new Set(q.opts.map(o => o.html)).size === q.opts.length && q.explain, 'options distinct, explained', q.text);
+  });
+}
+const texts = L => new Set(A.examFiftyQuestions(null, L).map(q => q.text));
+ok([...texts(1)].every(t => !texts(10).has(t)), 'Exam 1 and Exam 10 share no question');
+let same = 0;
+for (let run = 0; run < 30; run++) { const X = A.examFiftyQuestions(null, 0), Y = A.examFiftyQuestions(null, 0); if (X.map(q => q.text).join('|') === Y.map(q => q.text).join('|')) same++; }
+ok(same === 0, 'mixed fifties differ run to run', same);
+ok(A.examFiftyQuestions(['x:0:4', 'x:9']).length === 2 && A.examFiftyQuestions(['x:0:4'])[0].level === 4, 'practising the misses rebuilds those topics, at their level when known');
+ok(/id="mxExam50"/.test(src) && /id="gExam50"/.test(src) && /id="x50L"/.test(src) || /x50L/.test(src), 'Exam 50 buttons and the level picker');
+// the right answer must not stand out by being much longer than every wrong one
+A.EXAM50.forEach(t => t.v.forEach(v => { if (v.t === 'mc' && v.a.length > 40) ok(v.a.length <= 1.3 * Math.max(...v.w.map(x => x.length)), 'the right answer is not the giveaway long one', v.q); }));
+// no question may give its answer away by repeating it
+const STOPW = new Set('which what their there about these those under would could should being other state states government national people between power'.split(' '));
+const wds = s => String(s).replace(/<[^>]+>/g, '').toLowerCase().replace(/[^a-z ]/g, ' ').split(/\s+/).filter(w => w.length >= 5 && !STOPW.has(w));
+const ovl = (q, x) => { const W = wds(x); if (W.length < 2) return 0; const Q = new Set(wds(q)); return W.filter(w => Q.has(w)).length / W.length; };
+const echoes = (q, a, w) => { const ra = ovl(q, a); return ra >= 0.6 && ra - Math.max(...w.map(x => ovl(q, x))) >= 0.4; };
+A.QB.forEach(b => { if (b.t === 'mc') ok(!echoes(b.q, b.a, b.w), 'the answer is not given away by the wording', b.q); });
+A.EXAM50.forEach(t => t.v.forEach(v => { if (v.t === 'mc') ok(!echoes(v.q, v.a, v.w), 'the answer is not given away by the wording', v.q); }));
 ok(/id="mxExam50"/.test(src) && /id="gExam50"/.test(src), 'Exam 50 buttons on the Practice Exam tab and the Guide');
 // the Sep 24 exam notes, in the professor's phrasing
 ['Probable cause', 'Due process clause', 'Equal protection clause', 'some minority', 'The clear-and-present-danger test', 'governed', 'states’ rights', 'Democracy', 'Individual responsibility', 'patterned and sustained', 'competing rights and duties']

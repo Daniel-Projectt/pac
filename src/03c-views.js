@@ -76,7 +76,7 @@ function renderGuide(){
     b.addEventListener("click", function(){ replayReal(b.getAttribute("data-real"), !!b.getAttribute("data-missed")); });
   });
   $("#gPrint").addEventListener("click", function(){ window.print(); });
-  $("#gExam50").addEventListener("click", function(){ goTo("exam/mock"); startExam50(null); });
+  $("#gExam50").addEventListener("click", function(){ goTo("exam/mock"); if(engines.mock) renderMockSetup(); var f = $("#mockExam .fifty"); if(f && f.scrollIntoView) f.scrollIntoView({block:"start"}); });
   $("#gLists").addEventListener("click", function(){
     mockCfg.types = "lists"; mockCfg.topic = "all"; mockCfg.n = 25; store.set("mockcfg", JSON.stringify(mockCfg));
     goTo("exam/mock"); startMock(null);
@@ -157,8 +157,11 @@ function startMock(keys){
   engines.mock.start(keys || null);
 }
 /* The Exam 50: her study guide, fixed, in guide order */
+var exam50Level = parseInt(store.get("exam50.level") || "1", 10) || 0;   /* 0 = mixed, 1–10 = graded */
 function startExam50(keys){
-  engines.mock = makeQuiz($("#mockExam"), examFiftyQuestions, {showTopic:true, againLabel:"Take the Exam 50 again", onSetup:renderMockSetup});
+  var lv = exam50Level;
+  engines.mock = makeQuiz($("#mockExam"), function(k){ return examFiftyQuestions(k, lv); },
+    {showTopic:true, againLabel:lv ? "Exam "+lv+" again" : "Another mixed fifty", onSetup:renderMockSetup});
   engines.mock.start(keys || null);
 }
 function replayReal(tp, onlyMissed){
@@ -172,8 +175,11 @@ function renderMockSetup(){
   }
   root.innerHTML = '<div class="quizWrap"><div class="qcard card-corners">'+CORNERS+
     '<div class="qnum">Practice exam</div><p class="qtext">Set it up, then answer across the chapters. Each run is drawn fresh.</p>'+
-    '<div class="fifty"><button class="btn primary" type="button" id="mxExam50">The Exam 50 &mdash; from your study guide</button>'+
-      '<p>Fifty questions, only from the exam study guide: chapters 1&ndash;4 line by line, chapter 5 terms, and a few chapter 6 ideas. No chapter 5 or 6 court cases. The same fifty every time, in the guide&rsquo;s order.</p></div>'+
+    '<div class="fifty"><h3 class="x50h">The Exam 50 &mdash; from your study guide</h3>'+
+      '<p>Fifty topics from the exam study guide (chapters 1&ndash;4, chapter 5 terms, a few chapter 6 ideas; no chapter 5 or 6 court cases), in ten exams that get harder: Exam 1 asks for definitions, Exam 10 asks you to judge, compare and predict. <b>Mixed</b> draws a random level for every topic.</p>'+
+      seg("x50L","data-lv",exam50Level,[[0,"Mixed"]].concat(EXAM_LEVELS.map(function(l){ return [l.n, String(l.n)]; })))+
+      '<p class="x50d" id="x50d"></p>'+
+      '<button class="btn primary" type="button" id="mxExam50">Start the Exam 50</button></div>'+
     '<p class="orline">or set one up yourself</p>'+
     '<div class="setup">'+
       '<div class="row"><span class="label">Length</span><br>'+seg("mxN","data-n",mockCfg.n,[[15,"15"],[25,"25"],[40,"40"],[50,"50"]])+'</div>'+
@@ -186,6 +192,13 @@ function renderMockSetup(){
   segWire("#mxT","data-t",function(v){ mockCfg.types = v; store.set("mockcfg", JSON.stringify(mockCfg)); });
   segWire("#mxP","data-p",function(v){ mockCfg.topic = v; store.set("mockcfg", JSON.stringify(mockCfg)); });
   $("#mxStart").addEventListener("click", function(){ startMock(null); });
+  function showLevel(){
+    var l = EXAM_LEVELS[exam50Level-1];
+    $("#x50d").innerHTML = l ? '<b>Exam '+l.n+' · '+l.name+'</b> — '+l.d : '<b>Mixed</b> — every topic at a random level, different each time.';
+    $("#mxExam50").textContent = l ? "Start Exam "+l.n : "Start a mixed fifty";
+  }
+  segWire("#x50L","data-lv",function(v){ exam50Level = parseInt(v,10); store.set("exam50.level", String(exam50Level)); showLevel(); });
+  showLevel();
   $("#mxExam50").addEventListener("click", function(){ startExam50(null); });
   engines.mock = null;
 }

@@ -191,15 +191,24 @@ ok($$('#mockExam .dots i').length === 50, 'Canvas-only exam has fifty questions'
 ok($$('#mockExam .qtag.real').length === 1, 'real questions carry the Canvas tag');
 ok(/"types":"real"/.test(w.localStorage.getItem('pac.mockcfg') || ''), 'exam settings remembered');
 
-head('the Exam 50');
+head('the Exam 50 — ten levels');
 topic('guide'); click($('#gExam50'));
-ok(visible(panel('exam/mock')) && $$('#mockExam .dots i').length === 50, 'the Guide button starts the Exam 50', $$('#mockExam .dots i').length);
-const x50 = answerQuiz($('#mockExam'), 'exam 50');
-ok(x50 && /\/50/.test(x50.querySelector('.big').textContent), 'scored out of 50', x50 && x50.querySelector('.big').textContent);
-click(x50.querySelector('.setupbtn'));
-ok(!!$('#mxExam50'), 'Exam 50 button on the practice exam setup');
+ok(visible(panel('exam/mock')) && !!$('#mxExam50') && $$('#x50L button').length === 11, 'the Guide button opens the level picker: Mixed and 1-10', $$('#x50L button').length);
+click($('#x50L button[data-lv="10"]'));
+ok($('#x50L button[data-lv="10"]').getAttribute('aria-pressed') === 'true' && $$('#x50L button[aria-pressed="true"]').length === 1, 'only the chosen level is highlighted');
+ok(/Exam 10/.test($('#x50d').textContent) && /Critical thinking/.test($('#x50d').textContent) && /Start Exam 10/.test($('#mxExam50').textContent), 'level 10 described', $('#x50d').textContent);
 click($('#mxExam50'));
-ok($$('#mockExam .dots i').length === 50, 'the setup button starts it too');
+ok($$('#mockExam .dots i').length === 50, 'Exam 10 has fifty questions', $$('#mockExam .dots i').length);
+const x10 = answerQuiz($('#mockExam'), 'exam 10');
+ok(x10 && /\/50/.test(x10.querySelector('.big').textContent), 'scored out of 50');
+ok(w.localStorage.getItem('pac.exam50.level') === '10', 'the chosen level is remembered');
+click(x10.querySelector('.setupbtn'));
+click($('#x50L button[data-lv="0"]'));
+ok(/Mixed/.test($('#x50d').textContent), 'mixed described');
+click($('#mxExam50'));
+ok($$('#mockExam .dots i').length === 50, 'a mixed fifty starts');
+const xm = answerQuiz($('#mockExam'), 'mixed');
+ok(xm && /\/50/.test(xm.querySelector('.big').textContent), 'mixed scored out of 50');
 
 head('replaying a Canvas quiz from the Guide');
 topic('guide');

@@ -202,3 +202,9 @@ header::after{content:"";display:block;width:138px;height:7px;margin:16px auto 0
 .fifty{text-align:center;margin:18px 0 6px}
 .fifty p{font-size:14px;color:var(--muted);font-style:italic;max-width:520px;margin:10px auto 0;line-height:1.5}
 .orline{text-align:center;font-family:var(--sans);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin:22px 0 4px}
+
+.fifty .x50h{font-family:var(--serif);font-weight:400;font-size:21px;color:var(--navy);margin:0 0 6px}
+#x50L{margin:14px auto 0}
+#x50L button{min-width:38px}
+.fifty .x50d{font-style:normal;font-size:14.5px;color:var(--ink-soft);min-height:22px}
+.fifty .x50d b{font-family:var(--sans);font-weight:400;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--navy)}

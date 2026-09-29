@@ -488,6 +488,12 @@ header::after{content:"";display:block;width:138px;height:7px;margin:16px auto 0
 .fifty{text-align:center;margin:18px 0 6px}
 .fifty p{font-size:14px;color:var(--muted);font-style:italic;max-width:520px;margin:10px auto 0;line-height:1.5}
 .orline{text-align:center;font-family:var(--sans);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin:22px 0 4px}
+
+.fifty .x50h{font-family:var(--serif);font-weight:400;font-size:21px;color:var(--navy);margin:0 0 6px}
+#x50L{margin:14px auto 0}
+#x50L button{min-width:38px}
+.fifty .x50d{font-style:normal;font-size:14.5px;color:var(--ink-soft);min-height:22px}
+.fifty .x50d b{font-family:var(--sans);font-weight:400;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--navy)}
 </style>
 </head>
 <body>
@@ -2217,97 +2223,674 @@ QB = QB.concat([
  /* chapter 5 */
  {tp:"c5",t:"mc",q:"Reasonable cause for issuing a search warrant or making an arrest; more than mere suspicion. Which term?",a:"Probable cause",w:["Reasonable doubt","Due process","The exclusionary rule"],e:"Probable cause — the Fourth Amendment standard. (Your notes wrote “probable clause”; the term is probable cause.)"},
  {tp:"c5",t:"tf",q:"Probable cause means nothing more than an officer’s suspicion.",a:false,e:"False — it is more than mere suspicion: reasonable cause for a warrant or an arrest."},
- {tp:"c5",t:"mc",q:"“No state shall deprive any person of life, liberty, or property without due process of law.” Which clause is this?",a:"Due process clause",w:["Equal protection clause","Establishment clause","Supremacy clause"],e:"The due process clause of the Fourteenth Amendment (p. 100)."},
- {tp:"c5",t:"mc",q:"“…nor deny to any person within its jurisdiction the equal protection of the laws.” Which clause is this?",a:"Equal protection clause",w:["Due process clause","Free exercise clause","Commerce clause"],e:"The equal protection clause of the Fourteenth Amendment (p. 100)."},
+ {tp:"c5",t:"mc",q:"Which part of the Fourteenth Amendment forbids a state to take a person’s life, liberty or property without fair legal procedures?",a:"Due process clause",w:["Equal protection clause","Establishment clause","Supremacy clause"],e:"The due process clause of the Fourteenth Amendment (p. 100)."},
+ {tp:"c5",t:"mc",q:"Which part of the Fourteenth Amendment requires a state to treat every person within its borders alike under its laws?",a:"Equal protection clause",w:["Due process clause","Free exercise clause","Commerce clause"],e:"The equal protection clause of the Fourteenth Amendment (p. 100)."},
  {tp:"c5",t:"mc",q:"The due process clause and the equal protection clause are both found in which amendment?",a:"The Fourteenth",w:["The First","The Tenth","The Fifth"],e:"The Fourteenth Amendment (1868)."},
  {tp:"c5",t:"mc",q:"According to your exam notes, war has usually been the crisis that restricted the liberty of:",a:"some minority",w:["the majority","Congress","the courts"],e:"“War has usually been the crisis that has restricted the liberty of some minority.”"},
  {tp:"c5",t:"tf",q:"There were laws that made it illegal to advocate the overthrow of the U.S. government by force or violence.",a:true,e:"True — from the exam notes; the sedition and anti-subversion laws of wartime and the Cold War."},
- {tp:"c5",t:"mc",q:"“The question in every case is whether the words used are used in such circumstances and are of such a nature as to create a clear and present danger…” Which test begins this way?",a:"The clear-and-present-danger test",w:["The Lemon test","The Miller test","Selective incorporation"],e:"Justice Holmes in Schenck v. United States (1919)."},
+ {tp:"c5",t:"mc",q:"Holmes wrote that the question is whether words, in their circumstances, create a real and immediate threat of harms Congress may prevent. Which test is this?",a:"The clear-and-present-danger test",w:["The Lemon test","The Miller test","Selective incorporation"],e:"Justice Holmes in Schenck v. United States (1919)."},
  {tp:"c5",t:"mc",q:"Libel and obscenity are examples of:",a:"expression that is not automatically protected",w:["prior restraint","symbolic speech","protected political speech"],e:"Two of the four kinds of expression the First Amendment does not automatically protect."},
  {tp:"c5",t:"mc",q:"The free exercise clause and the establishment clause both belong to:",a:"freedom of religion",w:["freedom of expression","due process","equal protection"],e:"Both are the First Amendment’s religion language."},
  {tp:"c5",t:"mc",q:"Your notes say the Constitution and the Bill of Rights contain a list of:",a:"competing rights and duties",w:["ranked rights, highest first","absolute rights","rights that never conflict"],e:"Competing rights and duties (Wilson pp. 97–98) — which is why clashes end up in the courts."}
 ]);
 
 /* ================================================================ the Exam 50
-   Her exam study guide, question for question: every item comes from a line the
-   guide names (chapters 1–4), plus chapter 5 terms and a few chapter 6 ideas.
-   Her rule: no court cases from chapters 5 and 6. (The two chapter 3 cases are
-   named in the guide itself, so they stay.) Fixed order, guide order; the three
-   "know them" lists are asked as name-them questions.                           */
-var EXAM50_LISTS = {c1a:"five-views", c1b:"four-types", c4a:"five-elements"};
-var EXAM50 = [
- /* ---- chapter 1 (9 + two lists) ---- */
- {tp:"c1",t:"mc",q:"A conflict, real or apparent, between the interests, ideas, or beliefs of different citizens is called:",a:"an issue",w:["politics","power","legitimacy"],e:"An issue — politics is the activity by which an issue is agitated or settled."},
- {tp:"c1",t:"mc",q:"“The activity — negotiation, argument, discussion, application of force, persuasion, etc. — by which an issue is agitated or settled” defines:",a:"politics",w:["an issue","authority","democracy"],e:"Politics."},
- {tp:"c1",t:"mc",q:"The ability of one person to get another person to act in accordance with the first person’s intentions is:",a:"power",w:["authority","legitimacy","a benefit"],e:"Power. Authority is the right to use power."},
- {tp:"c1",t:"mc",q:"Authority means:",a:"the right to use power",w:["the ability to make others act","political authority conferred by a constitution","rule by the many"],e:"Authority is the right to use power; legitimacy is authority conferred by law or a constitution."},
- {tp:"c1",t:"mc",q:"Political authority conferred by law or by a state or national constitution is:",a:"legitimacy",w:["power","an issue","a republic"],e:"Legitimacy."},
- {tp:"c1",t:"mc",q:"Aristotle’s definition of democracy is:",a:"the “rule of the many”",w:["the “rule of the few”","the “rule of the best”","the “rule of law”"],e:"Democracy describes regimes that come as close as possible to the rule of the many."},
- {tp:"c1",t:"mc",q:"A government in which leaders make decisions by winning a competitive struggle for the popular vote is:",a:"representative democracy",w:["direct or participatory democracy","a confederation","a unitary system"],e:"Direct democracy is where all or most citizens participate directly."},
- {tp:"c1",t:"mc",q:"Why did many of the Framers distrust direct democracy?",a:"People often decide large issues on the basis of fleeting passions",w:["Too few citizens could vote","The states would lose all their power","It would require a king"],e:"They believed it would lead to bad decisions."},
- {tp:"c1",t:"tf",q:"The Constitution uses the word “democracy”; it calls the government a democracy directly.",a:false,e:"False — it speaks of a “republican form of government,” meaning what we call representative democracy."},
- {tp:"c1",t:"list",list:"c1a"},
- {tp:"c1",t:"mc",q:"According to Wilson, who are the preferred vehicles for the advocates of unpopular causes?",a:"The courts",w:["The political parties","Congress","State governors"],e:"The courts."},
- {tp:"c1",t:"list",list:"c1b"},
- /* ---- chapter 2 (12) ---- */
- {tp:"c2",t:"mc",q:"Where and when was the Constitutional Convention held?",a:"Philadelphia, 1787",w:["Boston, 1776","New York, 1789","Philadelphia, 1776"],e:"Philadelphia, 1787."},
- {tp:"c2",t:"mc",q:"Unalienable rights are based on:",a:"nature and Providence, not the whims or preferences of people",w:["the laws passed by Congress","the will of the majority","the king’s grant"],e:"Unalienable rights — from nature and Providence."},
- {tp:"c2",t:"mc",q:"The Articles of Confederation were:",a:"a weak constitution that governed America during the Revolutionary War",w:["the plan for a strong national government","the first ten amendments","the Massachusetts constitution of 1780"],e:"A weak constitution."},
- {tp:"c2",t:"mc",q:"Which state constitution was the most radically democratic, giving all power to a one-house (unicameral) legislature?",a:"Pennsylvania, 1776",w:["Massachusetts, 1780","Virginia, 1776","New Jersey, 1787"],e:"Pennsylvania’s constitution of 1776."},
- {tp:"c2",t:"mc",q:"The Massachusetts constitution of 1780 was less democratic. Which feature did it have?",a:"A governor who could veto the legislature, and judges who served for life",w:["All power in a one-house legislature","No governor at all","Judges elected every year"],e:"A clear separation of powers among the branches."},
- {tp:"c2",t:"mc",q:"Shays’s Rebellion (1787) was an attempt by ex-Revolutionary War soldiers to:",a:"prevent foreclosures of farms caused by high interest rates and taxes",w:["overthrow the Continental Congress","free enslaved people in Virginia","stop the Constitutional Convention"],e:"It occurred in Massachusetts."},
- {tp:"c2",t:"mc",q:"The Framers’ defense of liberty as a natural right came from the writings of:",a:"John Locke",w:["Thomas Hobbes","Alexis de Tocqueville","Aristotle"],e:"The 17th-century English philosopher John Locke."},
- {tp:"c2",t:"mc",q:"The proposal to create a strong national government was the:",a:"Virginia Plan",w:["New Jersey Plan","Great Compromise","Articles of Confederation"],e:"The New Jersey Plan proposed a weak national government."},
- {tp:"c2",t:"mc",q:"The Great Compromise created:",a:"a House based on state population and a Senate with two members for each state",w:["one house with equal votes for every state","a Senate elected by population","a single executive council"],e:"A popularly elected House and a state-selected Senate."},
- {tp:"c2",t:"mc",q:"Government authority shared by national and state governments is:",a:"federalism",w:["separation of powers","enumerated powers","a unitary system"],e:"Federalism."},
- {tp:"c2",t:"mc",q:"Powers given to the national government alone are:",a:"enumerated powers",w:["reserved powers","conditions of aid","separation of powers"],e:"Enumerated powers."},
- {tp:"c2",t:"mc",q:"Those who favored a weaker national government were the:",a:"Antifederalists",w:["Federalists","Framers","Loyalists"],e:"The Antifederalists."},
- /* ---- chapter 3 (7) ---- */
- {tp:"c3",t:"mc",q:"The fight over the 2010 federal health reform law (Obamacare) was in large part a battle over:",a:"how the federal government should relate to the states",w:["the separation of church and state","the president’s war powers","the right to a jury trial"],e:"A federalism fight."},
- {tp:"c3",t:"mc",q:"Gibbons v. Ogden (1824) held that the commerce clause gives the national government exclusive power to regulate:",a:"interstate commerce",w:["immigration","elections","state taxes"],e:"Interstate commerce."},
- {tp:"c3",t:"tf",q:"Arizona v. United States (2012) held that only the federal government may regulate immigration laws and enforcement.",a:true,e:"True — only the federal government regulates immigration."},
- {tp:"c3",t:"mc",q:"A system where state governments are sovereign and the national government can do only what the states permit is:",a:"a confederation (confederal system)",w:["a unitary system","a federal system","a republic"],e:"Unitary: all sovereignty national. Federal: shared."},
- {tp:"c3",t:"mc",q:"The Tenth Amendment is best known as the amendment for:",a:"states’ rights",w:["freedom of speech","the right to bear arms","due process"],e:"States’ rights."},
- {tp:"c3",t:"mc",q:"Which clause has let Congress exercise powers not specifically enumerated in the Constitution?",a:"The “necessary and proper” clause",w:["The commerce clause","The supremacy clause","The establishment clause"],e:"Congress may pass all laws necessary and proper to its duties."},
- {tp:"c3",t:"mc",q:"Terms set by the national government that states must meet to receive certain federal funds are:",a:"conditions of aid",w:["grants-in-aid","devolution","enumerated powers"],e:"Grants-in-aid are the money; conditions of aid are the strings."},
- /* ---- chapter 4 (8 + one list) ---- */
- {tp:"c4",t:"mc",q:"A patterned and sustained way of thinking about how political and economic life ought to be carried out is:",a:"political culture",w:["civic duty","civil society","the culture war"],e:"Political culture."},
- {tp:"c4",t:"mc",q:"Who wrote Democracy in America, in two volumes, examining our government, lifestyle and people?",a:"Alexis de Tocqueville",w:["John Locke","James Madison","Max Weber"],e:"Tocqueville."},
- {tp:"c4",t:"list",list:"c4a"},
- {tp:"c4",t:"mc",q:"A majority of people in Germany, Italy and Poland think success in life is determined by:",a:"forces outside an individual’s control",w:["hard work alone","education alone","religious faith"],e:"Americans disagree."},
- {tp:"c4",t:"mc",q:"A belief that one has an obligation to participate in civic and political affairs is:",a:"civic duty",w:["civic competence","political culture","orthodoxy"],e:"Civic duty."},
- {tp:"c4",t:"mc",q:"Religious people donate about how much more money to charity than secular people?",a:"More than three times as much",w:["About the same","Twice as much","Half as much"],e:"More than three times as much."},
- {tp:"c4",t:"mc",q:"Why was religious diversity inevitable in America?",a:"There was no established or official religion for the nation",w:["The Constitution required several churches","Congress funded every denomination","Most colonists were Catholic"],e:"No established church — and early friction between Puritans and Catholics."},
- {tp:"c4",t:"mc",q:"The belief that morality and religion ought to be of decisive importance is:",a:"orthodox",w:["progressive","libertarian","secular"],e:"Progressive: personal freedom and solving social problems matter more than religion."},
- {tp:"c4",t:"mc",q:"Which two events are considered huge contributors to Americans’ distrust of government?",a:"The Vietnam War and the Watergate scandal",w:["World War II and the Great Depression","The Civil War and Reconstruction","The Cold War and the moon landing"],e:"Trust has declined more or less steadily since the late 1950s."},
- /* ---- chapter 5: terms and definitions, no court cases (7) ---- */
- {tp:"c5",t:"mc",q:"Protections from government — what government may not do to you, such as limit speech or religion — are:",a:"civil liberties",w:["civil rights","enumerated powers","conditions of aid"],e:"Civil rights are about equal treatment."},
- {tp:"c5",t:"mc",q:"“No state shall deprive any person of life, liberty, or property without due process of law” is the:",a:"due process clause",w:["equal protection clause","establishment clause","necessary and proper clause"],e:"From the Fourteenth Amendment."},
- {tp:"c5",t:"mc",q:"Censorship before publication, which freedom of the press forbids, is called:",a:"prior restraint",w:["libel","sedition","symbolic speech"],e:"Prior restraint."},
- {tp:"c5",t:"mc",q:"A written statement that defames the character of another person is:",a:"libel",w:["slander","obscenity","sedition"],e:"Libel is written; slander is spoken."},
- {tp:"c5",t:"mc",q:"The First Amendment’s ban on laws “respecting an establishment of religion” is the:",a:"establishment clause",w:["free exercise clause","supremacy clause","due process clause"],e:"Its partner is the free exercise clause."},
- {tp:"c5",t:"mc",q:"The rule that evidence gathered in violation of the Constitution cannot be used at trial is the:",a:"exclusionary rule",w:["probable cause rule","good-faith rule","prior restraint"],e:"The exclusionary rule."},
- {tp:"c5",t:"mc",q:"Reasonable cause for issuing a search warrant or making an arrest — more than mere suspicion — is:",a:"probable cause",w:["due process","reasonable doubt","civil forfeiture"],e:"Probable cause."},
- /* ---- chapter 6: a few ideas, no court cases (3) ---- */
- {tp:"c6",t:"mc",q:"Civil rights refer to cases in which some group is:",a:"denied access to facilities, opportunities, or services available to other groups",w:["protected from government limits on speech","given more power than the states","tried without due process"],e:"The real question is whether a difference in treatment is reasonable."},
- {tp:"c6",t:"mc",q:"Which test do courts apply to laws that draw distinctions by race?",a:"Strict scrutiny",w:["Rational basis","Intermediate scrutiny","Clear and present danger"],e:"Rational basis for most laws, intermediate scrutiny for sex, strict scrutiny for race."},
- {tp:"c6",t:"mc",q:"Segregation by law is called de jure segregation. Segregation that results from where people live is called:",a:"de facto segregation",w:["desegregation","affirmative action","integration"],e:"De jure = by law; de facto = in fact."}
-];
-function examFiftyQuestions(keys){
+   Her exam study guide as 50 topics (chapters 1–4 line by line, chapter 5 terms,
+   a few chapter 6 ideas; no chapter 5 or 6 court cases — her rule; the two
+   chapter 3 cases are named in the guide itself, so they stay).
+   Every topic is asked at ten levels, so there are ten different exams, each
+   harder than the last:
+     1 the definition → the term          6 a scenario where the near-miss is tempting
+     2 the term → the definition           7 a specific detail from the guide
+     3 true or false                       8 which statement is NOT true
+     4 tell it apart from its neighbor     9 why — causes and reasons
+     5 a plain scenario                   10 judge, compare, predict — critical thought
+   Exam N asks every topic at level N. "Mixed" draws a random level per topic.
+   The topics themselves live in 02j1–02j6, one file per chapter.              */
+var EXAM50 = [];
+function EX(tp, topic, levels){ EXAM50.push({tp:tp, topic:topic, v:levels}); }
+function XM(q, a, w, e){ return {t:"mc", q:q, a:a, w:w, e:e}; }      /* multiple choice */
+function XT(q, a, e){ return {t:"tf", q:q, a:a, e:e}; }             /* true / false    */
+function XL(id){ return {t:"list", list:id}; }                       /* name them       */
+var EXAM_LEVELS = [
+ {n:1,  name:"Definitions",        d:"The guide’s definition, name the term."},
+ {n:2,  name:"Meanings",           d:"The term, pick what it means."},
+ {n:3,  name:"True or false",      d:"Is the statement right as written?"},
+ {n:4,  name:"Close neighbors",    d:"Tell each idea apart from the one most like it."},
+ {n:5,  name:"Scenarios",          d:"A plain real-life case: which idea is it?"},
+ {n:6,  name:"Tricky scenarios",   d:"Cases where the near-miss answer is tempting."},
+ {n:7,  name:"Specifics",          d:"The dates, names, numbers and exact wording."},
+ {n:8,  name:"Exceptions",         d:"Which statement is NOT true?"},
+ {n:9,  name:"Why",                d:"Causes and reasons behind each idea."},
+ {n:10, name:"Critical thinking",  d:"Judge, compare and predict."}];
+/* level: 1–10 for a graded exam, 0 (or none) for a mixed draw.
+   keys: "x:<topic>" (practice the misses) or "x:<topic>:<level>".            */
+function examFiftyQuestions(keys, level){
   var out = [];
-  EXAM50.forEach(function(b, i){
-    var key = "x:"+i;
-    if(keys && keys.indexOf(key) < 0) return;
-    var q;
-    if(b.t === "list"){
-      var li = -1; LISTS.forEach(function(l, k){ if(l.id === EXAM50_LISTS[b.list]) li = k; });
-      q = fromList(li);
-    } else q = fromBank(b, 0);
-    q.key = key;
+  EXAM50.forEach(function(slot, s){
+    var li;
+    if(keys){
+      var hit = null;
+      keys.forEach(function(k){ var m = /^x:(\d+)(?::(\d+))?$/.exec(k); if(m && parseInt(m[1],10) === s) hit = m; });
+      if(!hit) return;
+      li = hit[2] ? parseInt(hit[2],10) - 1 : Math.floor(Math.random() * slot.v.length);
+    } else li = level ? level - 1 : Math.floor(Math.random() * slot.v.length);
+    var v = slot.v[li], q;
+    if(v.t === "list"){
+      var ix = -1; LISTS.forEach(function(l, k){ if(l.id === v.list) ix = k; });
+      q = fromList(ix);
+    } else q = fromBank({tp:slot.tp, t:v.t, q:v.q, a:v.a, w:v.w, e:v.e, ap:li >= 4}, 0);
+    q.key = "x:"+s+":"+(li+1); q.level = li+1; q.topicName = slot.topic;
+    q.miss = '<b>'+slot.topic+'</b> · level '+(li+1)+' — ' + q.miss;
     out.push(q);
   });
-  return out;
+  return shuffle(out);
 }
+
+/* ---- Exam 50 · chapter 1 · twelve topics, ten levels each ---- */
+EX("c1","Issue",[
+ XM("A conflict, real or apparent, between the interests, ideas, or beliefs of different citizens is:","an issue",["politics","power","legitimacy"],"That is Wilson’s definition of an issue."),
+ XM("In Wilson’s terms, an issue is:","a conflict, real or apparent, between the interests, ideas, or beliefs of different citizens",["the activity, such as negotiation or force, by which a conflict is settled","the right to use power, as conferred by law or a constitution","a burden that people believe they must bear if a policy is adopted"],"The conflict itself is the issue."),
+ XT("An issue can exist even when the conflict between citizens is only apparent, not real.",true,"True — “real or apparent.”"),
+ XM("What is the difference between an issue and politics?","An issue is the conflict; politics is the activity that agitates or settles it",["An issue is the activity that settles things; politics is the conflict itself","They mean the same thing, since every conflict is already political","An issue is always economic in nature; politics is always about morals"],"Issue = the conflict. Politics = what people do about it."),
+ XM("Neighbors disagree over whether their town should allow a new gas station. Before any meeting or vote, the disagreement is:","an issue",["politics","authority","a benefit"],"The conflict of interests is the issue."),
+ XM("Residents only think a new park will hurt property values — it actually won’t — but they fight it anyway. Is this still an issue?","Yes — an issue can be real or merely apparent",["No — only conflicts that are real, not imagined, count as issues","No — a fight like this is politics, not an issue at all","Only if a court agrees that the harm to property is real"],"Wilson says real or apparent."),
+ XM("Which three things can clash to create an issue, in Wilson’s definition?","Interests, ideas, or beliefs",["Laws, courts, and police","Parties, votes, and elections","Money, land, and labor"],"Interests, ideas, or beliefs of different citizens."),
+ XM("Which statement about issues is NOT true?","An issue exists only after the government acts",["An issue can be real or apparent","An issue involves different citizens","Politics is how an issue is agitated or settled"],"The conflict comes first; government action is one way to settle it."),
+ XM("Why does Wilson define an issue before he defines politics?","Politics is the activity by which an issue is agitated or settled, so it depends on there being an issue",["Issues matter more than politics, so the more important idea comes first in the chapter","Politics cannot involve force, so it needs a narrower term to be defined before it","Every issue is settled by the courts, so politics can only be defined after it"],"No conflict, nothing for politics to do."),
+ XM("A city quietly bans skateboarding; no one objects or even notices. By Wilson’s definition, what is missing?","An issue — there is no conflict between citizens",["Power — the city could not enforce it","Authority — cities cannot pass bans","Legitimacy — the ban was not written down"],"Without a conflict of interests, ideas or beliefs, there is no issue.")]);
+
+EX("c1","Politics",[
+ XM("“The activity — negotiation, argument, discussion, application of force, persuasion, etc. — by which an issue is agitated or settled” defines:","politics",["an issue","authority","democracy"],"Politics."),
+ XM("Politics, in Wilson’s definition, is:","the activity by which an issue is agitated or settled",["a conflict, real or apparent, between the interests of citizens","the right to use power, as conferred by law or a constitution","rule by the many, as Aristotle defined it"],"The activity — negotiation, argument, force, persuasion."),
+ XT("In Wilson’s definition, the application of force can be part of politics.",true,"True — force is on his list, with negotiation and persuasion."),
+ XM("Which pairing is correct?","Politics settles or agitates an issue; power is the ability to make others act",["Politics is the right to use power; power is a conflict between citizens","Politics and power mean the same thing: getting others to act as you intend","Politics is a burden people must bear; power is a benefit they expect to enjoy"],"Different ideas: the activity vs. the ability."),
+ XM("Two council members trade favors and give speeches until they settle a zoning fight. What are they doing?","Politics",["Creating an issue","Exercising legitimacy","Practicing direct democracy"],"Negotiation and persuasion to settle an issue."),
+ XM("Activists stage loud protests to make a quiet problem a public fight, without settling anything. Is that politics?","Yes — politics can agitate an issue, not only settle it",["No — in Wilson’s sense, politics only ever settles issues","No — protests are themselves issues, not the politics of them","Only if they win, since a losing protest is not politics"],"“Agitated or settled.”"),
+ XM("Which list matches Wilson’s definition of politics?","Negotiation, argument, discussion, application of force, persuasion",["Voting, taxing, spending, appointing, judging, vetoing","Legislation, execution, adjudication, review, oversight","Liberty, equality, democracy, civic duty, responsibility"],"His exact list, “etc.” included."),
+ XM("Which is NOT part of Wilson’s definition of politics?","It happens only inside government buildings",["It can involve persuasion and argument","It can involve the application of force","It agitates an issue or settles an issue"],"Politics is an activity, wherever it happens."),
+ XM("Why does Wilson include force in a definition of politics?","Because issues are sometimes settled by coercion, not only by talk",["Because all politics is at bottom violent, whatever form it takes","Because force and authority are the same thing in Wilson’s terms","Because the Constitution says force is a lawful political tool"],"The definition describes how issues actually get settled."),
+ XM("A student council settles a dress-code fight by a vote after weeks of debate. A dictator settles a similar fight by decree. By Wilson’s definition:","both are politics — the methods differ",["only the vote is politics","only the decree is politics","neither, since no one used persuasion"],"Negotiation and force both settle issues.")]);
+
+EX("c1","Power",[
+ XM("The ability of one person to get another person to act in accordance with the first person’s intentions is:","power",["authority","legitimacy","an issue"],"Power."),
+ XM("Power means:","the ability to get another person to act in accordance with your intentions",["the right to use authority that the law has conferred on an office","political authority conferred by a state or national constitution","a conflict, real or apparent, between the beliefs of citizens"],"The ability — not the right."),
+ XT("Power and authority mean the same thing.",false,"False — power is the ability; authority is the right to use it."),
+ XM("What separates power from authority?","Power is the ability; authority is the right to use it",["Power is legal and authority is illegal, whoever holds them","Authority is always stronger than power, in every case","Power belongs only to governments; authority to individuals"],"Ability vs. right."),
+ XM("A teacher gets students to finish homework by promising extra credit. What is she using?","Power — she gets them to act as she intends",["An issue — a conflict between her and her students","Legitimacy — authority conferred by the school’s rules","Direct democracy — the class decides for itself"],"Getting others to act as you intend is power."),
+ XM("A bully gets classmates to hand over lunch money, though he has no right to it. He has:","power, but not authority",["authority, but not power","legitimacy","both power and authority"],"No right to use it — so no authority."),
+ XM("In Wilson’s definition, whose intentions does power serve?","The first person’s — the one exercising it",["The majority’s — whoever has the most votes","The Constitution’s — the law behind the act","The courts’ — whoever settles the dispute"],"Getting another person to act in accordance with the first person’s intentions."),
+ XM("Which statement about power is NOT true?","Power exists only when it is written into law",["Power can exist without authority","Power is the ability to make others act","A bully can have power"],"Legal grant makes it authority or legitimacy, not power."),
+ XM("Why do the notes separate power from authority at all?","Because people can make others act without having any right to do so",["Because power and authority are opposites that never overlap","Because power is always illegal unless the law grants authority","Because the Framers banned power and allowed only authority"],"The ability and the right can come apart."),
+ XM("A popular celebrity persuades millions to donate to a cause; a mayor orders a street closed. Which is the best judgment?","Both use power; only the mayor also has authority",["Only the celebrity uses power; the mayor has authority only","Only the mayor uses power; the celebrity has only influence","Neither uses power; both are simply exercising authority"],"Both get others to act; only one has the right conferred by office.")]);
+
+EX("c1","Authority",[
+ XM("The right to use power is:","authority",["power","an issue","a benefit"],"Authority."),
+ XM("Authority means:","the right to use power",["the ability to make others act","a conflict between citizens","rule by the many"],"The right, not the ability."),
+ XT("Authority is the right to use power.",true,"True."),
+ XM("Which pairing is correct?","Power is the ability; authority is the right",["Power is the right; authority is the ability","Both mean the ability","Both mean a conflict"],"Ability vs. right."),
+ XM("Drivers stop because a traffic officer, entitled to direct traffic, raises her hand. This is:","authority",["an issue","client politics","a confederation"],"She has the right to use power."),
+ XM("A newly elected mayor has the legal right to set the budget, but the council ignores her and she cannot make them act. She has:","authority, but little power",["power, but no authority","neither","legitimacy only, without authority"],"The right without the ability."),
+ XM("Which comes closest to Wilson’s idea that authority must be accepted as rightful?","People obey because they believe the officeholder is entitled to command",["People obey because they fear the force the officeholder can use","People obey because they are paid or rewarded for going along","People obey because the officeholder has raised an issue with them"],"Authority is the right to use power."),
+ XM("Which statement about authority is NOT true?","Authority and power always go together",["Authority is the right to use power","Someone can have authority but little power","Legitimacy is authority conferred by law"],"They can come apart in either direction."),
+ XM("Why does government need authority, not just power?","People obey more willingly when they believe the power is used by right",["Authority lets a government set the law aside whenever it chooses","Power by itself is illegal unless a court approves each use of it","The Constitution forbids power and permits only authority"],"Rightful power is steadier than raw force."),
+ XM("A usurper takes power by force and keeps it for years. Critics say he still lacks something no army can give him. What?","Authority — a recognized right to rule",["Power — the ability to make people act as he wishes","An issue — a conflict between him and the citizens","Enumerated powers — duties listed in a constitution"],"He can make people act, but not make it rightful.")]);
+
+EX("c1","Legitimacy",[
+ XM("Political authority conferred by law or by a state or national constitution is:","legitimacy",["power","an issue","civic duty"],"Legitimacy."),
+ XM("Legitimacy means:","political authority conferred by law or by a state or national constitution",["the ability of one person to make another act as the first intends","a conflict, real or apparent, between the interests of different citizens","a patterned and sustained way of thinking about how politics ought to work"],"Authority conferred by law or a constitution."),
+ XT("For the Framers, a legitimate government required the consent of the governed.",true,"True — from the guide."),
+ XM("How does legitimacy relate to authority?","Legitimacy is authority conferred by law or a constitution",["Legitimacy is power held without any authority behind it","Legitimacy and authority are opposites that never go together","Legitimacy is an issue that arises when authority is disputed"],"A particular source of authority."),
+ XM("A president takes office after winning an election held under the constitution. His authority is:","legitimate",["illegitimate","only power","an issue"],"Conferred by law and the constitution."),
+ XM("A general seizes the capital and most citizens refuse to accept his rule as lawful. What does his government lack?","Legitimacy",["Power","An issue","Force"],"He has power; he lacks authority conferred by law and consent."),
+ XM("Where, in the notes, does legitimacy come from?","Law, or a state or national constitution",["The army, or the power to enforce the ruler’s will","Tradition alone, whatever the law or constitution says","Wealth, or the resources to reward those who obey"],"Conferred by law or a constitution."),
+ XM("Which statement about legitimacy is NOT true?","A government is legitimate as long as it has enough force",["It is authority conferred by law or a constitution","The Framers tied it to consent of the governed","A usurper can have power without it"],"Force is power, not legitimacy."),
+ XM("Why did the Framers insist on the consent of the governed?","Without consent, a government has power but no legitimate authority",["Consent made taxes unnecessary, since people would give freely","The king required consent before any colony could form a government","Consent guaranteed a direct democracy in which citizens voted on every law"],"Legitimacy rests on consent."),
+ XM("A government follows its constitution to the letter, but most citizens no longer accept that constitution. Which is the best judgment by the notes?","Its legitimacy is weakening, because consent of the governed is slipping",["It is fully legitimate forever, because it follows its constitution","It has lost all its power, because power depends on popularity","It has become a direct democracy, because citizens now decide"],"Legal form plus consent — both matter.")]);
+
+EX("c1","Democracy — Aristotle",[
+ XM("Aristotle’s definition of democracy is:","the “rule of the many”",["the “rule of the few”","the “rule of the best”","the “rule of one”"],"Rule of the many."),
+ XM("Wilson uses “democracy” to describe regimes that:","come as close as possible to Aristotle’s “rule of the many”",["are run by elected kings who answer to a council of nobles","have no written constitution and rely on custom instead","are run by trained experts chosen for their knowledge"],"As close as possible to rule of the many."),
+ XT("Wilson uses “democracy” for regimes that come as close as possible to Aristotle’s “rule of the few.”",false,"False — the rule of the many."),
+ XM("Which pairing is correct?","Democracy = rule of the many; aristocracy or oligarchy = rule of the few",["Democracy = rule of the few; aristocracy or oligarchy = rule of the many","Democracy = rule of one; aristocracy or oligarchy = rule of law","Democracy = rule of law; aristocracy or oligarchy = rule of the rich"],"The many vs. the few."),
+ XM("A country where every adult citizen helps decide who governs comes closest to:","Aristotle’s “rule of the many”",["the power elite view","a unitary system","client politics"],"Many rule."),
+ XM("A country holds elections, but only property owners — five percent of adults — may vote. It is closer to:","rule of the few",["rule of the many","direct democracy","pure democracy"],"Five percent is the few."),
+ XM("Whose definition does Wilson borrow for democracy?","Aristotle’s",["Locke’s","Tocqueville’s","Madison’s"],"Aristotle: the rule of the many."),
+ XM("Which statement is NOT true?","Wilson says no regime can be called a democracy unless it matches Aristotle exactly",["Democracy, in Wilson’s use, means Aristotle’s rule of the many","Wilson applies the word to regimes that come as close as possible","Representative democracy is one of the forms Wilson describes"],"“As close as possible,” not exactly."),
+ XM("Why does Wilson say regimes that come “as close as possible” to the rule of the many?","Because in large nations the many cannot all rule directly",["Because Aristotle’s definition was wrong and needs softening","Because the Constitution forbids calling any regime a democracy","Because in every nation only a few people are allowed to vote"],"Representation brings a large nation close."),
+ XM("Which judgment best fits the notes: is the United States a democracy?","Yes, in the sense of a representative democracy that comes close to rule of the many",["No — the word democracy can never apply to the United States","Yes — in the sense of a pure direct democracy where citizens vote on laws","No — by design it is rule of the few, not rule of the many"],"A republic — representative democracy.")]);
+
+EX("c1","Direct vs. representative democracy",[
+ XM("A government in which leaders make decisions by winning a competitive struggle for the popular vote is:","representative democracy",["direct or participatory democracy","a confederation","a unitary system"],"Representative democracy."),
+ XM("Direct or participatory democracy is:","a government in which all or most citizens participate directly",["a government in which leaders win a competitive struggle for votes","a government in which the states hold sovereignty over the nation","a government in which judges make most important decisions"],"All or most citizens participate directly."),
+ XT("In a representative democracy, leaders win a competitive struggle for the popular vote.",true,"True."),
+ XM("What separates direct from representative democracy?","Who decides: the citizens themselves, or leaders they elect",["Whether the government has a written constitution or not","Whether there are states under the national government","Whether courts exist to settle disputes between citizens"],"Citizens decide vs. elected leaders decide."),
+ XM("Every adult in a small New England town gathers and votes on the town budget. This is:","direct or participatory democracy",["representative democracy","a republic","the power elite view"],"Citizens participate directly."),
+ XM("Voters in a state approve a tax by a ballot measure, while their legislature handles everything else. The ballot measure is:","a direct element inside a representative system",["pure representative democracy with no direct element","a confederation in which the states are sovereign","an enumerated power given to the national government"],"Citizens deciding directly on one question."),
+ XM("In representative democracy, how do leaders earn the right to decide?","By winning a competitive struggle for the popular vote",["By inheriting office from a parent or relative","By appointment from the courts after a hearing","By passing an examination set by civil servants"],"Wilson’s wording."),
+ XM("Which statement is NOT true?","The Framers designed a direct democracy",["Direct democracy means citizens participate directly","Representative democracy uses elections","The Framers feared fleeting passions"],"They designed a republic — representative."),
+ XM("Why is representative democracy more practical for a large nation?","Millions of citizens cannot meet to decide every question themselves",["It needs no elections, which saves time and money","It removes all issues, since leaders agree on everything","It gives every important power to the states alone"],"Scale."),
+ XM("A reformer wants every federal law decided by national online vote. Based on the Framers’ reasoning, what is the strongest objection?","Large issues might be decided by fleeting passions",["It would end federalism by removing the states","It would give the federal courts all the power","It would turn the nation into a confederation"],"Exactly the Framers’ worry about direct democracy.")]);
+
+EX("c1","Why the Framers feared direct democracy",[
+ XM("Many Framers believed direct democracy would lead to bad decisions because:","people often decide large issues on the basis of fleeting passions",["too few citizens could vote to make the results fair","the states would lose all their powers to the national majority","it would require a king to carry out the people’s decisions"],"Fleeting passions."),
+ XM("“Fleeting passions,” in the Framers’ worry, means:","emotions of the moment that pass quickly",["long-held religious beliefs","written laws","the views of judges"],"Momentary feelings."),
+ XT("Many Framers thought direct democracy would produce wise decisions because the people are always well informed.",false,"False — they feared fleeting passions."),
+ XM("Which best contrasts the Framers’ view of the two democracies?","Direct risks passion-driven choices; representation filters them",["Direct is slower to act; representation is faster to act","Both are equally dangerous, so neither was preferred","Representation removes all issues; direct creates them"],"Representatives buy time to deliberate."),
+ XM("After a frightening news story, a crowd votes that same day to ban something it later regrets. This illustrates:","the Framers’ fear of fleeting passions",["the power elite view of who governs","the enumerated powers of Congress","the devolution of power to the states"],"Passion deciding a large issue."),
+ XM("A nation’s voters approve a sweeping war in a rush of anger, then turn against it months later. Which Framers’ concern does this best fit?","Large issues decided on fleeting passions",["Legislatures ignoring the people","Courts favoring the powerful","States overpowering the nation"],"Momentary anger, lasting consequences."),
+ XM("On which kind of issues did the Framers most fear passion?","Large issues",["Local traffic rules","Private family matters","Court scheduling"],"“Decide large issues on the basis of fleeting passions.”"),
+ XM("Which statement is NOT true of the Framers?","They wanted citizens to vote directly on every law",["They feared fleeting passions","They preferred representation","They wrote of a republican form of government"],"The opposite of their design."),
+ XM("Why would a system of representation answer the Framers’ fear?","Representatives can deliberate and let passions cool before deciding",["Representatives never make mistakes, unlike ordinary citizens","Representation removes the need for any elections at all","Representation gives the states every power over the nation"],"Filtering passion through deliberation."),
+ XM("Which modern feature would the Framers most likely approve, given their fear?","A waiting period and debate before a major law takes effect",["Instant national votes on every law by text message","Abolishing the Senate so the House acts alone and faster","Letting crowds at public meetings decide court cases"],"Cooling-off time answers fleeting passions.")]);
+
+EX("c1","“Republican form of government”",[
+ XM("Instead of “democracy,” the Constitution guarantees the states:","a republican form of government",["a direct form of democracy","a confederal form of union","a unitary form of government"],"By which the Framers meant representative democracy."),
+ XM("By a “republic,” the Framers meant:","a government in which a system of representation operates",["a government with no constitution","rule by a king limited by law","a government where citizens vote on every law"],"Representation."),
+ XT("The Constitution uses the word “democracy.”",false,"False — it does not; it speaks of a republican form of government."),
+ XM("How does a republic, in the Framers’ sense, relate to democracy?","It is what we now call representative democracy",["It is the opposite of democracy, meaning rule by a few","It is what we now call direct or participatory democracy","It is a limited monarchy with an elected assembly"],"Republic = representative democracy."),
+ XM("A country elects a legislature that makes laws for everyone. In the Framers’ language, this is:","a republic",["a direct democracy","a confederation","an aristocracy"],"A system of representation."),
+ XM("A student says the U.S. “isn’t a democracy, it’s a republic.” By the notes, what is the best response?","It is both: a republic is what we call representative democracy",["She is right; a republic and a democracy are opposites","She is wrong; the U.S. is a direct democracy, not a republic","She is right; a republic is a kind of limited monarchy"],"The Framers’ “republic” = representative democracy."),
+ XM("Which phrase does the Constitution use instead of “democracy”?","“Republican form of government”",["“Rule of the many”","“Democratic union”","“Popular sovereignty”"],"Its exact phrase."),
+ XM("Which statement is NOT true?","The Framers’ republic meant citizens deciding every law directly",["The Constitution avoids using the word democracy","A republic, to the Framers, uses a system of representation","We would call the Framers’ republic a representative democracy"],"That would be direct democracy."),
+ XM("Why might the Framers have avoided the word “democracy”?","To them it suggested direct rule by passionate majorities",["The word democracy was illegal to use in official documents in 1787","To them democracy meant monarchy with an elected council","Aristotle had forbidden the word, and the Framers followed him"],"Their fear of direct democracy."),
+ XM("Which best captures the Framers’ design?","The people rule, but through representatives who filter passions",["The people rule nothing; elected officials decide everything","The people vote directly on every law, without representatives","The states rule the nation, and the people have no voice"],"A republic.")]);
+
+EX("c1","The five views of who governs",[
+ XL("five-views"),
+ XM("The view that the wealthy — capitalists and other economic elites — determine most policies is the:","class (Marxist) view",["power elite view","pluralist view","creedal passion view"],"Wealth rules."),
+ XT("The pluralist view holds that a single group of the wealthy controls most policy.",false,"False — pluralists see many competing groups; that description is the class view."),
+ XM("What separates the class view from the power elite view?","The class view points to the wealthy; the power elite view to a group of business, military, labor and elected leaders",["They are the same view under two names, both pointing only to the richest families","The class view points to career bureaucrats; the power elite view to the wealthy alone","The power elite view points to morally impassioned elites; the class view to ordinary voters"],"Wealth vs. a broader leadership group."),
+ XM("A writer argues that farmers, unions, businesses and churches all compete, and each wins sometimes. Which view?","Pluralist",["Power elite","Class","Bureaucratic"],"Many competing groups."),
+ XM("A writer argues that career officials in federal agencies make policy whoever is elected. Which view?","Bureaucratic",["Pluralist","Creedal passion","Power elite"],"Appointed officials run things."),
+ XM("The view that morally impassioned elites drive political change is the:","creedal passion view",["class view","bureaucratic view","pluralist view"],"Morals — e.g., reform movements."),
+ XM("Which is NOT one of the five views?","The judicial view",["The pluralist view","The creedal passion view","The bureaucratic view"],"Class, power elite, bureaucratic, pluralist, creedal passion."),
+ XM("Why do these five views disagree so much?","They disagree about who actually holds political power in America",["They disagree about what the text of the Constitution says","They disagree about how Aristotle defined democracy","They agree completely and differ only in their names"],"Five answers to “who governs?”"),
+ XM("A new law passes after a moral crusade by a few passionate leaders, over the objection of big business. Which view does this case support, and which does it weaken?","Supports creedal passion; weakens the class view",["Supports class; weakens pluralist","Supports bureaucratic; weakens creedal passion","Supports power elite; weakens nothing"],"Morals beat money here.")]);
+
+EX("c1","Courts and unpopular causes",[
+ XM("According to Wilson, the preferred vehicles for the advocates of unpopular causes are:","the courts",["the political parties","Congress","state governors"],"The courts."),
+ XM("The courts, Wilson says, are preferred by:","advocates of unpopular causes",["the majority party","large corporations only","state governors"],"Those who cannot win at the ballot box."),
+ XT("National policy is increasingly being made by the actions of state governments.",true,"True — a line from the guide."),
+ XM("Why might an unpopular cause choose a court over a legislature?","A judge rules on law and rights, not on popularity",["Courts count votes, so a small group can win there","Courts are elected every year and listen to minorities","Legislatures cannot pass laws on unpopular subjects"],"Majorities decide legislatures."),
+ XM("A small group cannot win a vote in Congress for its cause. Where does Wilson say such advocates usually turn?","The courts",["The Electoral College","A constitutional convention","The Senate filibuster"],"Courts are the preferred vehicle."),
+ XM("A cause loses in Congress but a few states adopt it and others copy them. Which line from the guide does this fit?","National policy is increasingly being made by the actions of state governments",["The courts are the preferred vehicles of the majority party, not of minorities","Only Congress makes national policy; the states merely carry it out","States have no role at all in making policy that others later copy"],"Policy spreading from the states."),
+ XM("Which two venues does the guide name for policy outside Congress?","The courts, and the state governments",["The cabinet and the military","The churches and the schools","The parties and the press"],"Courts for unpopular causes; states increasingly for national policy."),
+ XM("Which statement is NOT from the guide?","Congress is the preferred vehicle for unpopular causes",["Courts are preferred for unpopular causes","State governments increasingly make national policy","Issues can be settled outside Congress"],"The courts are."),
+ XM("Why do courts suit unpopular causes in a representative democracy?","Representatives answer to majorities; judges answer to law",["Judges are chosen by the minority, so they favor it","Courts can raise taxes to fund unpopular causes","Courts act faster than elections, so causes win sooner"],"Majority rule vs. rule of law."),
+ XM("A group loses every election but wins a string of court rulings. What is the best judgment about the notes’ claim?","It fits: courts are the preferred vehicle for unpopular causes",["It contradicts the claim, since courts follow elections","It shows courts are majoritarian, like Congress","It proves Congress is too weak to pass any laws"],"Exactly the pattern Wilson describes.")]);
+
+EX("c1","The four types of politics",[
+ XL("four-types"),
+ XM("In Wilson’s terms, a benefit is:","any satisfaction, monetary or nonmonetary, that people believe they will enjoy if a policy is adopted",["a burden that people believe they must bear if a policy is adopted by government","money given by the national government to the states, with or without conditions","a conflict, real or apparent, between the interests, ideas, or beliefs of citizens"],"Benefit."),
+ XT("A cost is a burden people believe they must bear if a policy is adopted.",true,"True."),
+ XM("What separates client politics from entrepreneurial politics?","Client: concentrated benefits, distributed costs. Entrepreneurial: distributed benefits, concentrated costs",["They are the same type of politics, simply described from two different sides","Client: everyone benefits and everyone pays. Entrepreneurial: a few benefit, a few pay","Entrepreneurial: small groups benefit and small groups pay. Client: the exact reverse"],"Mirror images."),
+ XM("A program nearly everyone pays for and nearly everyone benefits from is:","majoritarian politics",["client politics","interest group politics","entrepreneurial politics"],"Distributed and distributed."),
+ XM("A subsidy for a small industry, paid by every taxpayer a little each, is:","client politics",["entrepreneurial politics","majoritarian politics","interest group politics"],"Concentrated benefits, distributed costs."),
+ XM("A labor union and an industry fight over a rule that helps one and costs the other. This is:","interest group politics",["majoritarian politics","client politics","entrepreneurial politics"],"Concentrated and concentrated."),
+ XM("Which is NOT one of the four types of politics?","Judicial politics",["Majoritarian","Client","Entrepreneurial"],"Majoritarian, interest group, client, entrepreneurial."),
+ XM("Why does entrepreneurial politics need a “policy entrepreneur”?","The few who pay are organized and fight hard, while the many who benefit barely notice",["Because everyone benefits equally, so no one has any reason to act on it","Because the courts require a named entrepreneur for every new policy","Because the costs are spread so thin across the public that nobody notices"],"Someone must rally the diffuse majority."),
+ XM("A clean-air rule helps the whole public but costs one industry heavily. Predict the politics.","Entrepreneurial: the industry fights hard; the diffuse public needs a champion to win",["Majoritarian: little conflict, since nearly everyone gains and pays","Client: the industry wins quietly, since the public pays little","Interest group: two organized sides bargain until one gives way"],"Distributed benefits, concentrated costs.")]);
+
+/* ---- Exam 50 · chapter 2 · twelve topics, ten levels each ---- */
+EX("c2","The Constitutional Convention",[
+ XM("Where and when was the Constitutional Convention held?","Philadelphia, 1787",["Boston, 1776","New York, 1789","Philadelphia, 1776"],"Philadelphia, 1787."),
+ XM("The meeting in Philadelphia in 1787 that wrote the Constitution is the:","Constitutional Convention",["Continental Congress of 1776","Great Compromise","Articles of Confederation"],"The Constitutional Convention."),
+ XT("The Constitutional Convention met in 1776, the same year as the Declaration of Independence.",false,"False — 1787."),
+ XM("How do 1776 and 1787 differ in the story?","1776: independence declared; 1787: the Constitution written in Philadelphia",["1776: the Constitution written in Philadelphia; 1787: independence declared","1776: Shays’s Rebellion broke out; 1787: the Articles were adopted","1776: the Bill of Rights ratified; 1787: the Great Compromise rejected"],"Independence first, Constitution eleven years later."),
+ XM("Delegates meet to replace a failing weak national framework with a new plan of government. Which event is this?","The Constitutional Convention of 1787",["The Declaration of Independence","Shays’s Rebellion","The ratification of the Bill of Rights"],"Philadelphia, 1787."),
+ XM("A delegate complains the Convention is drafting a whole new government rather than just patching the old one. What is he contrasting?","The new Constitution with the Articles of Confederation",["The Declaration of Independence with the Bill of Rights","The Pennsylvania constitution with the Massachusetts one","The House of Representatives with the Senate"],"The Convention replaced the Articles."),
+ XM("In counting representation for the House, the Constitution added to “the whole number of free persons”:","three-fifths of all other persons (enslaved people)",["all persons equally, whether free or enslaved","only white male property owners over twenty-one","one-half of all women and all enslaved people"],"The three-fifths clause."),
+ XM("Which statement is NOT true?","The Convention met in Boston",["It met in Philadelphia","It met in 1787","It produced the Constitution"],"Philadelphia."),
+ XM("Why did the three-fifths clause matter so much to the states?","It decided how many House seats — and how much power — each state would get",["It set the dates of federal elections in each of the states","It created the Senate and decided how senators were chosen","It ended slavery in the states that ratified the Constitution"],"Representation by population was power."),
+ XM("Which is the best judgment of the three-fifths clause, as the guide presents it?","A compromise over representation that counted enslaved people as less than whole persons",["A guarantee of equal rights for every person the Constitution counted","A rule about how many senators each slave state would receive","A holdover from the Articles of Confederation that the Framers kept"],"It was about apportioning the House.")]);
+
+EX("c2","Unalienable rights and consent",[
+ XM("Unalienable rights are based on:","nature and Providence, not the whims or preferences of people",["the laws passed by Congress and the state legislatures","the will of the majority as expressed in elections","the king’s grant, recorded in each colony’s charter"],"Nature and Providence."),
+ XM("Rights based on nature and Providence, which no one can take away, are:","unalienable rights",["enumerated powers","conditions of aid","civil rights"],"Unalienable rights."),
+ XT("For the colonists, a legitimate government required the consent of the governed.",true,"True."),
+ XM("What separates an unalienable right from a legal privilege?","An unalienable right comes from nature; a privilege is granted by people and can be taken back",["They are the same: both are granted by people and both can be taken back by them","A privilege comes from nature; an unalienable right is granted by the law and can be lost","Unalienable rights come from Congress; privileges come from the state governments"],"Source: nature and Providence vs. human grant."),
+ XM("A new majority votes to take away a right. On the colonists’ view of unalienable rights, why may it not?","Those rights come from nature and Providence, not from people’s preferences",["Only the king may take rights away, and he has not done so","Rights can be changed only once every ten years by a convention","The courts granted those rights, so only the courts may remove them"],"No vote grants them."),
+ XM("A king says his subjects’ liberties are gifts he may withdraw. How would the colonists answer?","Their rights are unalienable — from nature and Providence, not from the king",["He is right; liberties come from rulers and can be withdrawn","Only Parliament, not the king, may withdraw their liberties","Their rights come from the colonial assemblies, not the king"],"That was the heart of their argument."),
+ XM("Many colonists believed men seek power because they are:","ambitious, greedy, and easily corrupted",["poor, frightened, and easily led","loyal, humble, and easily satisfied","naturally good and generous to others"],"Hence their distrust of power."),
+ XM("Which statement is NOT part of the colonists’ thinking?","Rights are whatever the majority decides",["Rights come from nature and Providence","Men seek power out of ambition and greed","Legitimate government needs consent"],"The opposite of unalienable rights."),
+ XM("Why did the belief that men are “ambitious, greedy, and easily corrupted” shape the Constitution?","It led the Framers to divide and check power so no one could abuse it",["It led the Framers to create a king who could restrain everyone","It made the Framers abolish the states to prevent local tyranny","It led the Framers to direct democracy so the people held all power"],"Distrust of power → separation of powers."),
+ XM("If rights came from the government instead of nature, what would follow on the colonists’ logic?","Government could lawfully take them away",["Rights would become stronger","Consent would be unnecessary","Power would disappear"],"That is why they grounded rights in nature.")]);
+
+EX("c2","Articles of Confederation",[
+ XM("The Articles of Confederation were:","a weak constitution that governed America during the Revolutionary War",["the plan, offered in 1787, for a strong national government","the first ten amendments, adopted to protect individual rights","the Massachusetts constitution, with its governor’s veto"],"A weak constitution."),
+ XM("The weak constitution that governed America during the Revolutionary War was the:","Articles of Confederation",["Virginia Plan of 1787","Bill of Rights of 1791","Great Compromise of 1787"],"The Articles."),
+ XT("The Articles of Confederation created a strong national government the states had to obey.",false,"False — it was weak."),
+ XM("How did the Articles differ from the Constitution?","The Articles made a weak national government; the Constitution a stronger one",["They were identical, except that the Constitution added a Senate","The Articles made a strong national government; the Constitution a weaker one","The Articles created the Senate; the Constitution created the House"],"The Convention replaced the weak Articles."),
+ XM("A national government cannot tax or enforce its laws and must ask the states for help. Which framework is this?","The Articles of Confederation",["The Great Compromise","The Virginia Plan","The Bill of Rights"],"A confederation."),
+ XM("During a crisis, the national government asks the states for money and most simply refuse. Which system’s weakness does this show?","The Articles’ confederal system",["Federalism under the Constitution","A unitary system","Separation of powers"],"States sovereign; the nation begs."),
+ XM("During which war did the Articles govern America?","The Revolutionary War",["The Civil War","The War of 1812","World War I"],"From the guide."),
+ XM("Which statement about the Articles is NOT true?","They created a strong executive and national courts",["They were a weak constitution for the nation","They governed America during the Revolution","They were later replaced by the Constitution"],"No strong national government."),
+ XM("Why did the Articles make the national government so weak?","Having fought a king, Americans feared concentrated power",["Americans wanted a king of their own to lead them through the war","The states had no power, so the nation could not be stronger than they were","Locke opposed all government, and Americans followed his teaching"],"Distrust of power."),
+ XM("Which event best exposed the Articles’ weakness and pushed toward the Convention?","Shays’s Rebellion, which the national government could not handle",["The Declaration of Independence, which the states could not agree on","The Great Compromise, which the national government could not enforce","The Bill of Rights, which the national government could not pass"],"1787, Massachusetts.")]);
+
+EX("c2","Pennsylvania’s constitution (1776)",[
+ XM("Which state constitution was the most radically democratic, giving all power to a one-house legislature?","Pennsylvania, 1776",["Massachusetts, 1780","Virginia, 1776","New Jersey, 1787"],"Pennsylvania."),
+ XM("A unicameral legislature has:","one house",["two houses","three branches","no elected members"],"One house."),
+ XT("Pennsylvania’s 1776 constitution gave all power to a one-house legislature.",true,"True."),
+ XM("How did Pennsylvania 1776 differ from Massachusetts 1780?","Pennsylvania put all power in one house; Massachusetts separated powers",["Pennsylvania gave its governor a veto; Massachusetts had one house","Massachusetts put all power in one house; Pennsylvania separated powers","They were the same: both gave all power to a single house"],"Radical democracy vs. separation of powers."),
+ XM("A state puts all power in a single elected house, with no governor’s veto and no upper chamber. Which early constitution does it resemble?","Pennsylvania’s (1776)",["Massachusetts’s (1780)","The U.S. Constitution","The Articles"],"Most radically democratic."),
+ XM("A historian calls a state constitution “too democratic” because nothing checked the legislature. Which one is she most likely describing?","Pennsylvania, 1776",["Massachusetts, 1780","The Great Compromise","The New Jersey Plan"],"All power in one house."),
+ XM("In what year was Pennsylvania’s radically democratic constitution adopted?","1776",["1780","1787","1791"],"1776."),
+ XM("Which statement about Pennsylvania’s 1776 constitution is NOT true?","It gave its governor a strong veto",["It was the most radically democratic","It had a unicameral legislature","All power went to one house"],"That was Massachusetts."),
+ XM("Why would the Framers worry about a system like Pennsylvania’s?","With no checks, a passionate majority in one house could do anything",["It had too many branches, so nothing could ever be decided","It gave judges too much power over the elected legislature","It had no elections, so the people had no voice at all"],"Unchecked power in one body."),
+ XM("Given the Framers’ view of human nature, which design would they prefer to Pennsylvania’s?","Two houses, an executive veto and independent judges",["One elected house holding all power, with no veto","No legislature at all, with a council of judges instead","A hereditary king advised by an appointed council"],"Checks against ambition.")]);
+
+EX("c2","Massachusetts’s constitution (1780)",[
+ XM("The Massachusetts constitution of 1780 was a good deal less democratic. Which feature did it have?","A governor who could veto the legislature, and judges who served for life",["All power in a one-house legislature, with no veto at all","No governor at all, and judges chosen by the legislature","Judges elected every year, and a governor chosen by lot"],"A clear separation of powers."),
+ XM("A clear separation of powers, a veto-wielding elected governor and life-tenured judges describe:","the Massachusetts constitution of 1780",["the Pennsylvania constitution of 1776","the Articles of Confederation","the New Jersey Plan"],"Massachusetts."),
+ XT("The Massachusetts constitution of 1780 had a clear separation of powers among the branches.",true,"True."),
+ XM("Compared with Pennsylvania 1776, Massachusetts 1780 was:","less democratic, with power separated and checked",["more democratic, with all power in one house","identical in design, with the same one-house legislature","a confederation, with the towns holding sovereignty"],"Separation and checks."),
+ XM("A state lets its elected governor veto the legislature and gives judges life terms. Which early constitution does this resemble?","Massachusetts’s (1780)",["Pennsylvania’s (1776)","The Articles","A unitary system"],"Massachusetts."),
+ XM("Why might a Framer call Massachusetts’s constitution “less democratic” and still admire it?","Its checks slowed majorities down, guarding against passion and abuse",["It abolished elections, so passion could never reach the government","It gave all power to judges, who could overrule any law at will","It restored a king, so the people no longer had to decide anything"],"Less democratic, more balanced."),
+ XM("How long did judges serve under the Massachusetts constitution of 1780?","For life",["One year","Four years","Until the governor removed them"],"Life tenure."),
+ XM("Which statement about Massachusetts 1780 is NOT true?","It gave all power to a one-house legislature",["It separated powers among the branches","Its governor was elected directly by voters","Its governor could veto acts of the legislature"],"That was Pennsylvania."),
+ XM("Why do life terms for judges make a government less democratic?","Judges never face voters, so they can resist popular majorities",["Judges are elected more often, so they follow every shift in opinion","Judges then control taxes, so voters lose control of spending","Life terms end elections for every other office as well"],"Independence from the voters."),
+ XM("Which Constitution of 1787 feature most resembles Massachusetts 1780?","A president’s veto and federal judges serving during good behavior",["A one-house Congress holding all national power","No executive at all, with Congress running everything","Direct votes by citizens on every federal law"],"The model of separated, checked powers.")]);
+
+EX("c2","Shays’s Rebellion",[
+ XM("Shays’s Rebellion (1787) was an attempt by ex-Revolutionary War soldiers to:","prevent foreclosures of farms caused by high interest rates and taxes",["overthrow the Continental Congress and install a new government","free enslaved people held on farms across New England","stop the Constitutional Convention from meeting in Philadelphia"],"Foreclosures."),
+ XM("The 1787 uprising of ex-soldiers trying to stop farm foreclosures was:","Shays’s Rebellion",["the Whiskey Rebellion","the Boston Tea Party","the Great Compromise"],"Shays’s Rebellion."),
+ XT("Shays’s Rebellion occurred in Pennsylvania.",false,"False — Massachusetts."),
+ XM("What drove the Shays rebels, as opposed to later tax protests?","High interest rates and taxes causing farm foreclosures",["A new federal tax on whiskey distilled on farms","A state ban on slavery that ruined planters","A quarrel over how senators would be chosen"],"Debt and foreclosure."),
+ XM("Indebted farmers take up arms to stop courts from seizing their land in 1787 Massachusetts. This is:","Shays’s Rebellion",["the Great Compromise","the Constitutional Convention","the Bill of Rights"],"Shays’s Rebellion."),
+ XM("Leaders watching Shays’s Rebellion concluded something about their government. What?","The weak national government could not keep order",["The states were too weak to govern their own citizens","A king was needed to restore order across the nation","Farmers should rule directly through town meetings"],"It exposed the Articles."),
+ XM("Who were the Shays rebels?","Ex-Revolutionary War soldiers",["British loyalists who had fled to Canada","Enslaved people escaping the southern states","Members of Congress opposed to the Articles"],"From the guide."),
+ XM("Which statement about Shays’s Rebellion is NOT true?","It happened after the Constitution was ratified",["It took place in the year 1787","It took place in Massachusetts","It was about farm foreclosures and taxes"],"It came before and helped cause the Convention."),
+ XM("Why did Shays’s Rebellion help lead to the Constitution?","It showed the Articles’ national government was too weak to respond",["It proved that direct democracy worked well in the states","It created the Senate by showing the need for a second house","It ended the Revolution by forcing Britain to negotiate"],"Fear of disorder."),
+ XM("If the Articles’ government had possessed a strong army and tax power, what would most likely have changed about 1787?","Less urgency to replace the Articles",["More rebellions","The Declaration would be rewritten","The states would vanish"],"The weakness drove reform.")]);
+
+EX("c2","John Locke",[
+ XM("The Framers’ defense of liberty as a natural right came from the writings of:","John Locke",["Thomas Hobbes","Alexis de Tocqueville","Aristotle"],"Locke."),
+ XM("John Locke was:","a 17th-century English philosopher behind the idea of liberty as a natural right",["a Framer from Virginia who proposed the plan for a strong national government","a French visitor who wrote a two-volume study of American government and life","a Greek philosopher who first defined democracy as the rule of the many"],"17th-century English."),
+ XT("Locke believed an all-powerful government was necessary and that democracy was impossible.",false,"False — he believed neither."),
+ XM("How did Locke differ from those who thought an all-powerful government necessary?","He thought government should be limited and democracy possible",["He wanted a king with total power, as the only guard against disorder","He opposed all government and thought people needed no rulers","He agreed with them, believing democracy was impossible"],"Limited government."),
+ XM("A founder argues that people have a natural right to liberty that government exists to protect. Whose ideas is he drawing on?","John Locke’s",["Aristotle’s","Tocqueville’s","The Antifederalists’"],"Locke."),
+ XM("A pamphlet says, “Government is needed, but it need not be all-powerful, and the people can govern themselves.” Whose position is this?","Locke’s",["Hobbes’s","A monarchist’s","Tocqueville’s"],"Neither all-powerful government nor impossible democracy."),
+ XM("In which century did Locke write?","The 17th",["The 15th","The 18th","The 19th"],"17th-century English philosopher."),
+ XM("Which statement about Locke is NOT true?","He thought democracy was impossible",["He was English","He defended liberty as a natural right","He did not think all-powerful government necessary"],"He thought it possible."),
+ XM("Why did Locke’s ideas fit the colonists’ cause?","If rights are natural, a government that violates them loses its claim to obedience",["Locke favored kings, and the colonists wanted a king of their own","Locke opposed natural rights, which let the colonists invent new ones","Locke wrote the Articles, so the colonists already followed him"],"Natural rights justify resistance."),
+ XM("Which pair of ideas best combines Locke with the Framers’ distrust of power?","Natural rights plus limited, divided government",["Absolute monarchy plus natural rights","Direct democracy plus no rights","A confederation plus a king"],"Protect rights by limiting power.")]);
+
+EX("c2","Virginia Plan vs. New Jersey Plan",[
+ XM("The proposal to create a strong national government was the:","Virginia Plan",["New Jersey Plan","Great Compromise","Articles of Confederation"],"Virginia."),
+ XM("The New Jersey Plan proposed:","a weak national government",["a strong national government","representation by population in both houses","a king"],"Weak."),
+ XT("The New Jersey Plan proposed a strong national government.",false,"False — that was the Virginia Plan."),
+ XM("What separated the two plans at the Convention?","How strong the national government should be",["Whether to declare independence from Britain","Whether the nation should have any courts","Whether to abolish slavery in every state"],"Strong vs. weak."),
+ XM("A small state fears being outvoted and wants a weak national government. Which plan would it favor?","The New Jersey Plan",["The Virginia Plan","The three-fifths plan","The Pennsylvania constitution"],"Weak national government."),
+ XM("A large, populous state wants a strong national government that reflects its size. Which plan?","The Virginia Plan",["The New Jersey Plan","The Articles","A confederation"],"Strong national government."),
+ XM("Which plan was named for the state of the delegates who proposed a weak national government?","New Jersey",["Virginia","Pennsylvania","Massachusetts"],"The New Jersey Plan."),
+ XM("Which statement is NOT true?","The Virginia Plan kept the weak Articles",["The Virginia Plan wanted a strong national government","The New Jersey Plan wanted a weak one","The Great Compromise followed"],"It sought a strong national government."),
+ XM("Why did small states resist the Virginia Plan?","A strong national government by population would let large states outvote them",["They wanted a king who would protect the small states from the large","They opposed any constitution and wanted to keep the colonies separate","They had more people and feared being taxed by smaller states"],"Fear of being outnumbered."),
+ XM("Which outcome best shows the two plans were reconciled?","The Great Compromise: population in the House, equal Senate seats",["The Virginia Plan adopted whole: population in both houses","The New Jersey Plan adopted whole: equal votes in one house","The Articles kept unchanged, with each state holding one vote"],"Each side won one chamber.")]);
+
+EX("c2","The Great Compromise",[
+ XM("The Great Compromise created:","a House based on state population and a Senate with two members for each state",["one house in which every state had an equal vote","a Senate by population and a House with two members per state","an executive council chosen by the state legislatures"],"The Great Compromise."),
+ XM("A popularly elected House based on population and a state-selected Senate with two per state is the:","Great Compromise",["Virginia Plan","New Jersey Plan","three-fifths clause"],"The Great Compromise."),
+ XT("Under the Great Compromise, senators were originally selected by the states.",true,"True."),
+ XM("How do the two chambers differ under the Great Compromise?","The House reflects population; the Senate gives each state two",["Both houses reflect each state’s population","Both houses give each state two members","The Senate reflects population; the House gives each state two"],"Population vs. equality of states."),
+ XM("Large states wanted representation by population; small states wanted equality. How did the Great Compromise satisfy both?","Population in the House, two senators per state in the Senate",["Population in both the House and the Senate","Equal votes for each state in both houses","One house, with seats rotating among the states"],"Each got a chamber."),
+ XM("Wyoming and California have very different populations but the same number of senators. Which decision explains this?","The Great Compromise",["The three-fifths clause","The New Jersey Plan alone","The Tenth Amendment"],"Two per state."),
+ XM("How many senators does each state get under the Great Compromise?","Two",["One","Three","Depends on population"],"Two."),
+ XM("Which statement is NOT true?","The House gives each state two members",["The House is based on population","The Senate has two per state","Senators were first chosen by the states"],"That is the Senate."),
+ XM("Why was a compromise needed at all?","Large and small states each feared the other would dominate",["The Articles required a compromise before any change","The king of England insisted on a two-house Congress","Locke had demanded that every nation have a Senate"],"Big vs. small."),
+ XM("If representation in both houses were by population, which states would likely have objected most?","Small states, who would lose influence",["Large states, who would gain nothing new","No state, since all would be treated alike","Only Virginia, which proposed the plan"],"The New Jersey Plan’s supporters.")]);
+
+EX("c2","Federalism and separation of powers",[
+ XM("Government authority shared by national and state governments is:","federalism",["separation of powers","enumerated powers","a unitary system"],"Federalism."),
+ XM("Sharing of constitutional authority by multiple branches of government is:","separation of powers",["federalism","devolution","a confederation"],"Separation of powers."),
+ XT("Federalism divides authority among the three branches of the national government.",false,"False — that is separation of powers; federalism divides it between national and state governments."),
+ XM("Which pairing is correct?","Federalism: national vs. state; separation of powers: among branches",["Federalism: among branches; separation: national vs. state","They mean the same","Both mean the Senate"],"Levels vs. branches."),
+ XM("The national government runs the post office; your state issues your driver’s license. This shows:","federalism",["separation of powers","legitimacy","client politics"],"Shared between levels."),
+ XM("Congress passes a law, the president vetoes it, and Congress overrides. Which principle is at work?","Separation of powers",["Federalism","Devolution","A confederation"],"Branches checking each other."),
+ XM("The United States separates powers among how many equal branches of its national government?","Three",["Two","Four","Five"],"Three."),
+ XM("Which statement is NOT true?","Separation of powers means states share power with the nation",["Federalism shares power between the national and state levels","Separation of powers shares authority among the branches","Both principles limit how much power any one part holds"],"That is federalism."),
+ XM("Why did the Framers use both federalism and separation of powers?","Dividing power twice made it harder for any one group to abuse it",["To make government faster by giving each part its own job","To end the states gradually by moving power upward","To create a king by uniting the branches under one head"],"Double security against ambition."),
+ XM("If a governor ignored a national law, and a court ruled against the governor, which two principles are both in play?","Federalism (state vs. nation) and separation of powers (the court checking)",["Only federalism, because the case involves a governor and a national law","Only separation of powers, because a court is checking another official","Neither principle, because courts may never review what governors do"],"Both divisions working together.")]);
+
+EX("c2","Enumerated powers",[
+ XM("Powers given to the national government alone are:","enumerated powers",["reserved powers","conditions of aid","separation of powers"],"Enumerated."),
+ XM("Enumerated powers are:","powers given to the national government alone",["powers reserved to the states by the Tenth Amendment","powers shared among the three branches of government","conditions the nation sets on money given to states"],"Listed national powers."),
+ XT("Enumerated powers are the powers reserved to the states.",false,"False — national government alone."),
+ XM("How do enumerated powers differ from the states’ rights of the Tenth Amendment?","Enumerated powers are listed for the nation; the Tenth reserves the rest to the states",["They are the same thing, described in two places","Enumerated powers belong to the states; the Tenth lists the nation’s","The Tenth lists national powers; enumerated powers are the states’"],"Listed vs. reserved."),
+ XM("Congress coins money because the Constitution lists that power for it. This is:","an enumerated power",["devolution","a condition of aid","a reserved state power"],"Enumerated."),
+ XM("Congress wants to do something no clause lists. Which clause might it stretch?","The necessary and proper clause",["The three-fifths clause","The establishment clause","The Tenth Amendment"],"Beyond the enumerated powers."),
+ XM("Which is an example of an enumerated national power?","Coining money",["Issuing driver’s licenses","Running local schools","Setting marriage ages"],"Listed for Congress."),
+ XM("Which statement about enumerated powers is NOT true?","They let states coin their own money",["They are given to the national government","They are listed in the Constitution","The necessary and proper clause extends them"],"National alone."),
+ XM("Why did the Framers list the national government’s powers?","To limit it to specific tasks and leave the rest to states and people",["To make it unlimited by naming everything it might do","To abolish the states by moving their duties to Congress","To create a king by listing the powers of one ruler"],"A government of listed powers."),
+ XM("If Congress claimed a power that is neither listed nor necessary and proper to a listed one, which argument would a state most likely make?","The Tenth Amendment reserves that power to the states",["The three-fifths clause forbids that kind of power","The establishment clause forbids that kind of power","The Great Compromise forbids that kind of power"],"States’ rights.")]);
+
+EX("c2","Antifederalists and the Bill of Rights",[
+ XM("Those who favored a weaker national government were the:","Antifederalists",["Federalists","Framers","Loyalists"],"Antifederalists."),
+ XM("The Bill of Rights is:","the first ten amendments to the Constitution",["the first ten articles of the original Constitution","the Declaration of Independence and its list of grievances","the Articles of Confederation, adopted during the war"],"First ten amendments."),
+ XT("The Antifederalists favored a stronger national government.",false,"False — a weaker one."),
+ XM("How did Antifederalists differ from Federalists?","Antifederalists wanted a weaker national government; Federalists a stronger one",["They agreed on everything except the name of the Senate","Antifederalists wanted a king; Federalists wanted a republic","Federalists wanted the Articles; Antifederalists a strong nation"],"Weaker vs. stronger."),
+ XM("A delegate fears the new national government will crush the states and individual rights. He is likely:","an Antifederalist",["a Federalist","a monarchist","a pluralist"],"Weaker national government."),
+ XM("A group agrees to accept the Constitution if a list of protected rights is added. What did that demand produce?","The Bill of Rights",["The Great Compromise","The three-fifths clause","The New Jersey Plan"],"The first ten amendments."),
+ XM("How many amendments make up the Bill of Rights?","Ten",["Five","Twelve","Twenty-seven"],"Ten."),
+ XM("Which statement is NOT true?","The Bill of Rights is part of the original Articles",["It is the first ten amendments","Antifederalists wanted rights protected","Antifederalists favored a weaker national government"],"Amendments to the Constitution."),
+ XM("Why did the Antifederalists push for a bill of rights?","A strong national government might threaten individual liberty",["They wanted a king to guarantee their rights personally","They opposed all rights and wanted to test the Federalists","They wanted the Senate abolished and used rights as leverage"],"Protection against a strong center."),
+ XM("Which best describes the Antifederalists’ lasting influence?","Though they lost ratification, their demand gave us the Bill of Rights",["They won ratification and kept the Articles in force","They created the Senate as the price of their support","They wrote the Constitution after the Federalists left"],"A loss that shaped the result.")]);
+
+/* ---- Exam 50 · chapter 3 · seven topics, ten levels each ---- */
+EX("c3","Obamacare and federalism",[
+ XM("The fight over the 2010 federal health reform law (Obamacare) was in large part a battle over:","how the federal government should relate to the states",["the separation of church and state in health care","the president’s war powers during a national emergency","the right to a jury trial in cases over medical bills"],"Federalism."),
+ XM("The 2010 federal health reform law is commonly called:","Obamacare",["Medicare","Social Security","The New Deal"],"Obamacare."),
+ XT("The legal challenges to Obamacare were mainly about freedom of the press.",false,"False — how the federal government relates to the states."),
+ XM("Obamacare’s legal fights were about federalism rather than separation of powers because:","they pitted national power against state power",["they pitted Congress against the president","they were about the courts only","they concerned religion"],"Levels, not branches."),
+ XM("States sue, saying a national health law forces them to change their own programs. What kind of conflict is this?","A federalism conflict between national and state power",["A separation-of-powers conflict between Congress and the president","A civil liberties conflict over freedom of speech and the press","A dispute over reviving the Articles of Confederation"],"Federalism."),
+ XM("A state refuses to expand a program under a national law, and courts must decide whether it can. Which chapter 3 theme does this illustrate?","How the federal government should relate to the states",["The rule of the many, as Aristotle defined democracy","Unalienable rights, grounded in nature and Providence","Political culture, a patterned way of thinking"],"The federalism battle."),
+ XM("In what year was the federal health reform law passed?","2010",["2001","2016","1996"],"2010."),
+ XM("Which statement about the Obamacare fights is NOT true?","They were about the separation of church and state",["They concerned federalism","They involved legal challenges","They concerned national–state relations"],"Not church and state."),
+ XM("Why do national programs like Obamacare so often end in federalism fights?","They reach into areas the states have traditionally run",["The Constitution forbids any federal law about health","States have no powers of their own to protect","Courts ignore the states whenever Congress acts"],"Overlap breeds conflict."),
+ XM("Which best predicts what happens when Washington offers states money with strings attached for a health program?","Some states accept, others resist, and courts may decide how far the strings can reach",["Every state must accept, because federal money cannot legally be refused by any state","No state can refuse, because the Tenth Amendment no longer protects the states","The Senate alone decides which states must take part, and courts stay out of it"],"Conditions of aid meet federalism.")]);
+
+EX("c3","Gibbons v. Ogden",[
+ XM("Gibbons v. Ogden (1824) held that the commerce clause gives the national government exclusive power to regulate:","interstate commerce",["immigration","elections","intrastate taxes"],"Interstate commerce."),
+ XM("The 1824 case holding that the national government alone regulates interstate commerce is:","Gibbons v. Ogden",["Arizona v. United States","McCulloch v. Maryland","Marbury v. Madison"],"Gibbons."),
+ XT("Gibbons v. Ogden held that each state regulates commerce between states.",false,"False — the national government, exclusively."),
+ XM("How does Gibbons v. Ogden differ from Arizona v. United States?","Gibbons is about interstate commerce; Arizona about immigration",["They are the same case, decided twice","Gibbons is about immigration; Arizona about commerce","Both are about the power of states over trade"],"Commerce vs. immigration."),
+ XM("A state grants one company a monopoly on steamboats running between two states. After Gibbons, who controls that trade?","The national government, under the commerce clause",["The state that granted the monopoly, since it chartered the company","Both states, jointly, through a treaty between them","The steamboat company itself, under its private charter"],"Interstate commerce."),
+ XM("A state taxes trucks only when they cross into it from other states, to protect its own firms. Which ruling’s principle is at stake?","Gibbons v. Ogden — interstate commerce is the national government’s",["Arizona v. United States — immigration is the national government’s","The Tenth Amendment alone — each state controls its own borders","The Great Compromise — each state has two votes on trade"],"Commerce between states."),
+ XM("Which clause of the Constitution was at the heart of Gibbons v. Ogden?","The commerce clause",["The necessary and proper clause","The establishment clause","The supremacy of the states"],"The commerce clause."),
+ XM("Which statement about Gibbons v. Ogden is NOT true?","It gave states exclusive power over interstate trade",["It was decided by the Supreme Court in 1824","It concerned the Constitution’s commerce clause","It strengthened national power over trade"],"National, not state."),
+ XM("Why did Gibbons v. Ogden expand national power over time?","So much economic activity crosses state lines that the commerce power reaches widely",["It abolished the states’ power to pass any law touching business or trade at all","It created a role for the Senate in approving all trade between the states","It ended every tax on goods carried from one state into another state"],"Commerce is everywhere."),
+ XM("If Gibbons had gone the other way, what would most likely follow?","States could wall off trade with each other",["The national government would run all the schools","Immigration would be controlled by each state","The Senate would lose its role in lawmaking"],"A patchwork of state trade barriers.")]);
+
+EX("c3","Arizona v. United States",[
+ XT("Arizona v. United States (2012) held that only the federal government may regulate immigration laws and enforcement.",true,"True."),
+ XM("According to Arizona v. United States (2012), who may regulate immigration?","Only the federal government",["Only the states","The states and the nation equally","City governments"],"Only the federal government."),
+ XM("The 2012 case on state immigration enforcement is:","Arizona v. United States",["Gibbons v. Ogden","Marbury v. Madison","McCulloch v. Maryland"],"Arizona."),
+ XM("Which pairing is correct?","Arizona: immigration is federal; Gibbons: interstate commerce is federal",["Arizona: commerce is federal; Gibbons: immigration is federal","Both give the states power over their own borders","Both concern the separation of church and state"],"Two areas of exclusive national power."),
+ XM("A state passes its own immigration enforcement law. Which ruling says it may not?","Arizona v. United States (2012)",["Gibbons v. Ogden (1824)","The Great Compromise (1787)","The Tenth Amendment (1791)"],"Federal only."),
+ XM("A governor argues her state may set its own rules on who may enter the country, citing states’ rights. Which ruling cuts against her?","Arizona v. United States",["Gibbons v. Ogden","The Great Compromise","The Articles"],"Immigration is federal."),
+ XM("In what year was Arizona v. United States decided?","2012",["1824","1996","2020"],"2012."),
+ XM("Which statement is NOT true?","Arizona v. United States let each state set immigration policy",["Only the federal government regulates immigration","It was decided in 2012","It limited state power"],"The opposite."),
+ XM("Why is immigration treated as a national rather than a state matter?","Deciding who may enter the country affects the whole nation and its foreign relations",["States have no borders of their own, so there is nothing for them to control at all","The Constitution forbids states from existing as separate governments inside the nation","Courts simply prefer national rules because they are easier for judges to enforce"],"One nation, one border policy."),
+ XM("Which best describes the balance Arizona v. United States struck?","States may not set their own immigration rules; the federal government controls",["States control immigration; the federal government only advises","Cities control immigration; states and nation stay out","Nobody controls immigration; it is left to the market"],"National supremacy in this area.")]);
+
+EX("c3","Unitary, confederal and federal systems",[
+ XM("A system where state governments are sovereign and the national government can do only what the states permit is:","a confederation (confederal system)",["a unitary system (national rule)","a federal system (shared rule)","a republic (representative rule)"],"Confederal."),
+ XM("A unitary system is one where:","sovereignty is fully vested in the national government, not the states",["the states are sovereign and the nation acts only with their permission","sovereignty is shared between the national and state governments","there is no national government, only independent states"],"Unitary."),
+ XT("In a federal system, the national and state governments share sovereignty.",true,"True."),
+ XM("Which ordering runs from weakest to strongest national government?","Confederal, federal, unitary",["Unitary, federal, confederal","Federal, confederal, unitary","Confederal, unitary, federal"],"States sovereign → shared → national."),
+ XM("The national government can abolish any local government and redraw its powers at will. Which system?","Unitary",["Federal","Confederal","Pluralist"],"All sovereignty national."),
+ XM("A national government must get each state’s approval to act, and the states can ignore it. Which system — and which American example?","Confederal — the Articles of Confederation",["Federal — the Constitution of 1787","Unitary — the British system","Federal — the Articles of Confederation"],"States sovereign."),
+ XM("Which system does the United States have under the Constitution?","Federal",["Unitary","Confederal","None"],"Shared sovereignty."),
+ XM("Which statement is NOT true?","In a unitary system, the states are sovereign",["In a confederation, states are sovereign","In a federal system, sovereignty is shared","In a unitary system, the nation is sovereign"],"Unitary = national."),
+ XM("Why did the Framers choose a federal rather than a unitary system?","They feared concentrated national power but needed more than a weak confederation",["They wanted a king, and they saw a federal system as the surest path to one","They opposed any national government at all and wanted independent states","The Articles of Confederation required a federal system before any change"],"The middle path."),
+ XM("If the Tenth Amendment and the states’ own powers were erased, the U.S. would move toward which system?","Unitary",["Confederal","More federal","A direct democracy"],"All power national.")]);
+
+EX("c3","Tenth Amendment",[
+ XM("The Tenth Amendment is best known as the amendment for:","states’ rights",["free speech","bearing arms","due process"],"States’ rights."),
+ XM("The amendment that reserves powers not given to the national government to the states is the:","Tenth",["First","Fifth","Fourteenth"],"The Tenth."),
+ XT("The Tenth Amendment is about states’ rights.",true,"True."),
+ XM("How does the Tenth Amendment relate to enumerated powers?","The nation gets its listed powers; the Tenth reserves the rest to the states",["The Tenth lists the national government’s powers one by one","The Tenth abolishes the states’ powers and moves them to Congress","They are the same thing, stated once in the text and once in the Tenth"],"Listed vs. reserved."),
+ XM("A state argues that a power the Constitution never gives Washington belongs to it. Which amendment?","The Tenth",["The First","The Fourteenth","The Second"],"States’ rights."),
+ XM("A state resists a federal rule on local school curricula, saying education was never given to Washington. Which argument is it making?","A Tenth Amendment, states’-rights argument",["A commerce clause argument about trade","An establishment clause argument about religion","A three-fifths argument about representation"],"Reserved powers."),
+ XM("The guide’s short label for the Tenth Amendment is:","States’ rights",["Freedom of religion","Due process","Separation of powers"],"States’ rights."),
+ XM("Which statement is NOT true?","The Tenth Amendment gives Congress unlimited power",["The Tenth Amendment concerns states’ rights","The Tenth Amendment reserves powers to the states","The Tenth Amendment is part of the Bill of Rights"],"The opposite."),
+ XM("Why has the Tenth Amendment been weaker in practice than it sounds?","The necessary and proper and commerce clauses let Congress reach many areas",["The Tenth Amendment was quietly repealed after the Civil War ended","States never think to raise it in court when Congress acts against them","Courts cannot read what it reserves, so they refuse to enforce it at all"],"Implied powers grow."),
+ XM("When the necessary and proper clause collides with the Tenth Amendment, which best states what is really being argued?","How far national power reaches before it hits the states’ reserved powers",["Whether the states should exist at all under the Constitution","Whether Congress should exist at all under the Constitution","Whether courts should exist to decide such disputes at all"],"The boundary of federalism.")]);
+
+EX("c3","“Necessary and proper” clause",[
+ XM("Which clause has let Congress exercise powers not specifically enumerated in the Constitution?","The “necessary and proper” clause",["The commerce clause","The supremacy clause","The establishment clause"],"Necessary and proper."),
+ XM("The necessary and proper clause allows Congress to:","pass all laws necessary and proper to carry out its duties",["ignore the Constitution whenever a law seems useful","abolish the states when they refuse national laws","choose the president when no one wins a majority"],"Implied powers."),
+ XT("The necessary and proper clause strictly limits Congress to the powers listed in the Constitution.",false,"False — it has let Congress exercise unlisted powers."),
+ XM("How do implied powers differ from enumerated powers?","Enumerated are listed; implied come from the necessary and proper clause",["They are the same: both are listed in the Constitution","Implied powers are listed; enumerated powers are inferred","Enumerated powers come from the states; implied from Congress"],"Listed vs. implied."),
+ XM("Congress creates a national bank, never mentioned in the Constitution, to help collect taxes and borrow. Which clause?","Necessary and proper",["The Tenth Amendment","The establishment clause","The three-fifths clause"],"Implied powers."),
+ XM("Congress builds a national network of research labs to support its listed power to raise armies. Which clause justifies it?","Necessary and proper",["The commerce clause","The Tenth Amendment","The equal protection clause"],"Means to a listed end."),
+ XM("The necessary and proper clause is also sometimes called the:","elastic clause",["supremacy clause","commerce clause","reserved clause"],"It stretches."),
+ XM("Which statement is NOT true?","It was used to shrink national power",["It is in the Constitution","It permits unlisted powers","It connects to enumerated duties"],"It grew national power."),
+ XM("Why has the necessary and proper clause mattered so much for federalism?","It lets national power grow beyond the list, pressing on the states",["It abolished the states, leaving only the nation","It created the Senate to check the House","It ended implied powers, limiting Congress to its list"],"Elastic national power."),
+ XM("A critic says the clause makes the list of enumerated powers meaningless. What is the strongest reply?","The means must still connect to a listed duty",["The clause was repealed long ago","Congress has never actually used it","The states wrote it to limit Congress"],"Necessary and proper to its duties.")]);
+
+EX("c3","Grants-in-aid, conditions of aid, devolution",[
+ XM("Money given by the national government to the states is:","grants-in-aid",["conditions of aid","devolution","enumerated powers"],"Grants-in-aid."),
+ XM("Conditions of aid are:","terms the national government sets that states must meet to receive certain federal funds",["money the national government gives the states to spend on programs","the transfer of power from the national government to state and local governments","powers the Tenth Amendment reserves to the states and to the people"],"The strings."),
+ XT("Devolution is the transfer of power from the national government to state and local governments.",true,"True."),
+ XM("Which pairing is correct?","Grants-in-aid are the money; conditions of aid are the strings",["Conditions of aid are the money; grants-in-aid are the strings","They are the same thing, just named at different times","Devolution is the money; conditions of aid return power"],"Money vs. strings."),
+ XM("Washington offers states highway money only if they set the drinking age at 21. The requirement is:","a condition of aid",["a grant-in-aid","devolution","an enumerated power"],"The string."),
+ XM("Congress hands welfare programs back to the states to run their own way. This is:","devolution",["a condition of aid","a unitary system","an enumerated power"],"Power flowing down."),
+ XM("Which term names the money itself?","Grants-in-aid",["Conditions of aid","Devolution","Mandates"],"Grants-in-aid."),
+ XM("Which statement is NOT true?","Devolution moves power from the states to Washington",["Grants-in-aid are federal money to states","Conditions of aid are terms on that money","Devolution moves power to states and localities"],"The reverse."),
+ XM("Why can conditions of aid give Washington power it might not have directly?","States that want the money must accept the terms",["The Constitution requires states to obey","States have no choice about money","Courts set the terms"],"Money as leverage."),
+ XM("A state rejects federal money to avoid its conditions. What does this show about federalism?","States can trade money for independence — the conditions work only if the money is wanted",["States must always accept federal money once it is offered, whatever the conditions","Washington controls every state completely through its spending power alone","Devolution is illegal, so states cannot refuse any federal money at all"],"Leverage has limits.")]);
+
+/* ---- Exam 50 · chapter 4 · nine topics, ten levels each ---- */
+EX("c4","Political culture",[
+ XM("A patterned and sustained way of thinking about how political and economic life ought to be carried out is:","political culture",["civic duty","civil society","the culture war"],"Political culture."),
+ XM("Political culture means:","a patterned and sustained way of thinking about how political and economic life ought to be carried out",["the results of a single national election, taken as a sign of exactly what voters want that year","the text of the Constitution together with all of the laws that Congress has passed under it","a small group of wealthy and powerful elites who decide how political and economic life is run"],"Patterned and sustained."),
+ XT("The United States separates powers among three equal branches of its national government.",true,"True — from the guide’s chapter 4 list."),
+ XM("How does political culture differ from public opinion on one issue?","Culture is patterned and sustained; opinion on an issue can shift quickly",["They are the same: both are whatever people think this month","Culture changes every week; opinion on an issue lasts for generations","Opinion is written in the Constitution; culture is found in the courts"],"Lasting vs. momentary."),
+ XM("Americans, generation after generation, expect individuals rather than the state to be responsible for their own success. This lasting outlook is part of their:","political culture",["enumerated powers","conditions of aid","legitimacy"],"Political culture."),
+ XM("A poll shows voters angry about gas prices this month. A sociologist says this is not political culture. Why?","It is a passing reaction, not a patterned and sustained way of thinking",["Gas prices are an economic matter, never a political one","Polls cannot measure what people think about anything","Only the courts can create or change political culture"],"“Patterned and sustained.”"),
+ XM("Which two words in the definition make political culture more than a mood?","Patterned and sustained",["Legal and written","Elected and appointed","Real and apparent"],"Patterned and sustained."),
+ XM("Which statement is NOT true?","Political culture is set by each new election",["It is patterned","It is sustained","It concerns how political and economic life ought to be carried out"],"It lasts beyond elections."),
+ XM("Why study political culture to understand American government?","Lasting shared beliefs shape which policies people accept",["Political culture replaces the Constitution when they conflict","Political culture decides court cases directly","Political culture chooses presidents without elections"],"Culture shapes what is politically possible."),
+ XM("Two countries adopt nearly identical constitutions but govern very differently. Which chapter 4 idea best explains the difference?","Political culture",["Enumerated powers","The Great Compromise","Conditions of aid"],"Same rules, different ways of thinking.")]);
+
+EX("c4","Tocqueville",[
+ XM("Who wrote Democracy in America, in two volumes, examining our government, lifestyle and people?","Alexis de Tocqueville",["John Locke","James Madison","Max Weber"],"Tocqueville."),
+ XM("Tocqueville’s Democracy in America examined Americans’:","government, lifestyle and people",["military campaigns only","court cases only","colonial charters only"],"Government, lifestyle and people."),
+ XT("Democracy in America was published in two volumes.",true,"True."),
+ XM("How does Tocqueville’s work differ from Locke’s?","Tocqueville observed American life; Locke wrote the theory of natural rights",["They wrote the same book, one in French and the other in English","Locke visited America in person; Tocqueville wrote on natural rights","Tocqueville helped write the Constitution; Locke later observed it"],"Observer vs. theorist."),
+ XM("A French visitor tours America and writes a two-volume study of how Americans govern and live. Who?","Alexis de Tocqueville",["John Locke","Aristotle","Thomas Hobbes"],"Tocqueville."),
+ XM("A student wants a foreign observer’s view of early American habits and institutions. Which work fits best?","Democracy in America",["The Articles of Confederation","The Second Treatise","The Federalist No. 10"],"Tocqueville’s study."),
+ XM("How many volumes is Democracy in America?","Two",["One","Three","Five"],"Two."),
+ XM("Which statement about Tocqueville is NOT true?","He wrote the Declaration of Independence",["He wrote Democracy in America","It had two volumes","He examined our government, lifestyle and people"],"That was Jefferson."),
+ XM("Why is an outsider like Tocqueville useful for studying political culture?","An outsider notices habits that natives take for granted",["An outsider has a vote and so studies the system closely","An outsider writes American law and so knows it best","An outsider was a Framer and so remembers the founding"],"Fresh eyes."),
+ XM("Which theme of chapter 4 would Tocqueville’s method of observing people best help explain?","Political culture",["Enumerated powers","The Tenth Amendment","The three-fifths clause"],"Ways of thinking seen in daily life.")]);
+
+EX("c4","The five elements",[
+ XL("five-elements"),
+ XM("The element that says government officials should be accountable to the people is:","democracy",["liberty","equality","civic duty"],"Democracy."),
+ XT("Individual responsibility means that, barring some disability, individuals are responsible for their own actions and well-being.",true,"True."),
+ XM("How does equality as an element differ from liberty?","Equality: equal vote and equal chance; liberty: preoccupied with rights",["They are the same: both mean an equal share of wealth","Liberty means equal results; equality means freedom from rules","Equality means no rules at all; liberty means equal votes"],"Rights vs. equal standing."),
+ XM("A citizen says, “Barring some disability, people should be responsible for their own actions.” Which element?","Individual responsibility",["Civic duty","Equality","Democracy"],"Individual responsibility."),
+ XM("A voter says her first question about any law is whether it protects her rights. Which element is she showing?","Liberty",["Equality","Civic duty","Democracy"],"Americans are preoccupied with their rights."),
+ XM("Which element means taking community affairs seriously and helping out when you can?","Civic duty",["Liberty","Equality","Individual responsibility"],"Civic duty."),
+ XM("Which is NOT one of the five elements?","Prosperity",["Liberty","Civic duty","Individual responsibility"],"Liberty, equality, democracy, civic duty, individual responsibility."),
+ XM("Why do these five elements matter for politics?","They set the shared expectations Americans use to judge government",["They are federal laws that every citizen must obey","They are court rulings that settled the culture war","They replace elections as the way to choose leaders"],"The core of political culture."),
+ XM("A policy gives everyone an equal chance to compete but guarantees no equal outcome. Which element does it fit best?","Equality — as Americans usually understand it, equal opportunity",["Civic duty — the obligation to take part in public life","Democracy — officials accountable to the people they serve","Liberty — Americans’ preoccupation with their own rights"],"Equal vote and equal chance.")]);
+
+EX("c4","Success and individual control",[
+ XM("A majority of people in Germany, Italy and Poland think success in life is determined by:","forces outside an individual’s control",["hard work and effort alone","education and training alone","religious faith and prayer"],"Americans disagree."),
+ XM("On whether success is in an individual’s control, Americans:","disagree with most Germans, Italians and Poles",["agree with most Europeans that outside forces decide","have no settled opinion on the question at all","say luck alone decides everything in life"],"Americans think it is largely in their control."),
+ XT("Most Americans agree that success is determined by forces outside a person’s control.",false,"False — Americans disagree."),
+ XM("How does the American view of success differ from the German, Italian and Polish majorities?","Americans see success as largely in their own control",["Americans credit outside forces more than Europeans do","They are the same: both credit forces beyond one’s control","Americans credit the government for most success"],"Control vs. outside forces."),
+ XM("A survey asks whether effort or outside forces decide success. Compared with those Europeans, Americans are more likely to say:","effort — success is within a person’s control",["outside forces — success is beyond a person’s control","luck alone — success is a matter of chance","the government — success depends on its programs"],"Individual control."),
+ XM("An American politician promises that anyone who works hard can get ahead. Why does this message land with American voters?","It matches their belief that success is within an individual’s control",["American voters distrust hard work as a path to success","American voters believe outside forces decide who gets ahead","The message is required by law in American campaigns"],"Cultural fit."),
+ XM("Which three countries does the guide name as holding the opposite view?","Germany, Italy and Poland",["France, Spain and Britain","Canada, Mexico and Japan","Russia, China and India"],"Germany, Italy, Poland."),
+ XM("Which statement is NOT true?","Americans mostly believe outside forces determine success",["Majorities in Germany, Italy and Poland credit outside forces","Americans disagree that outside forces decide success","This belief reflects America’s political culture"],"Americans disagree."),
+ XM("Why would this belief make Americans wary of large welfare programs?","If success is in your control, government help seems less needed",["Americans oppose all government, whatever it does or provides","The Constitution forbids any national welfare program","Europeans pay for American welfare programs through trade"],"Culture shapes policy."),
+ XM("Which element of the American system does this belief most reinforce?","Individual responsibility",["Civic duty","Democracy","A unitary system"],"Responsible for one’s own well-being.")]);
+
+EX("c4","Civic duty",[
+ XM("A belief that one has an obligation to participate in civic and political affairs is:","civic duty",["civic competence","political culture","orthodoxy"],"Civic duty."),
+ XM("Civic duty means:","a belief that one has an obligation to participate in civic and political affairs",["a legal requirement to vote in every national and state election","a tax paid to the states in exchange for public services","the right to use power that comes with holding an office"],"An obligation felt."),
+ XT("Civic duty is the belief that one may ignore politics as long as one obeys the law.",false,"False — it is an obligation to participate."),
+ XM("How does civic duty differ from individual responsibility?","Civic duty is about serving the community; individual responsibility is about looking after yourself",["They are the same: both mean obeying the law and paying taxes","Civic duty is about looking after yourself; individual responsibility is about the community","Individual responsibility means voting; civic duty means working a steady job"],"Community vs. self."),
+ XM("A woman votes and serves on a school board because she feels she ought to. Which element?","Civic duty",["Liberty","Equality","Individual responsibility"],"Civic duty."),
+ XM("A man serves on jury duty only because the law makes him. Is that civic duty in the guide’s sense?","Not fully — civic duty is a felt obligation, not only legal compulsion",["Yes — any legal requirement at all counts as civic duty","No — serving on a jury is not a civic or political affair","Yes — it is really an example of individual responsibility"],"A belief one ought to participate."),
+ XM("Civic duty concerns participation in which affairs?","Civic and political affairs",["Only family affairs","Only business affairs","Only religious affairs"],"Civic and political."),
+ XM("Which statement is NOT true?","Civic duty means avoiding public life",["It is a felt obligation","It concerns civic and political affairs","It is one of the five elements"],"The opposite."),
+ XM("Why does a democracy depend on civic duty?","Self-government works only if citizens take part",["Civic duty replaces elections in a working democracy","Judges require civic duty before hearing any case","States forbid participation beyond voting"],"Participation sustains democracy."),
+ XM("If civic duty weakened across a generation, which would you most expect?","Lower voting and less community participation",["Higher voting and more community participation","Stronger churches and more charitable giving","More legitimacy and greater trust in government"],"Less felt obligation, less participation.")]);
+
+EX("c4","Religion in American life",[
+ XM("Religious people donate about how much more money to charity than secular people?","More than three times as much",["About the same amount","Twice as much","Half as much"],"More than three times."),
+ XM("Compared with the average European, the average American is more likely to:","believe in God, pray daily, and acknowledge clear standards of right and wrong",["belong to an established state church and pay a church tax each year","attend church less often and hold fewer clear standards of right and wrong","reject any fixed moral standards and pray far less often than Europeans"],"From the guide."),
+ XT("The average American is less likely than the average European to pray daily.",false,"False — more likely."),
+ XM("How do American and European religious habits differ, by the guide?","Americans are more likely to believe in God, pray daily and hold clear moral standards",["Europeans are more likely to believe in God, pray daily and hold moral standards","They are the same in belief in God, daily prayer and clear moral standards","Americans, unlike Europeans, have an established state church and a church tax"],"More religious."),
+ XM("Two neighbors earn the same income; one is religious, one secular. Who likely gives more to charity, and by how much?","The religious one — more than three times as much",["The secular one — about twice as much","About the same — income decides giving","The religious one — only slightly more"],"More than three times."),
+ XM("A charity wants the most donors per dollar spent on outreach. By the guide, which group should it reach first?","Religious Americans",["Secular Americans","Europeans","Government agencies"],"They give more than three times as much."),
+ XM("Which three traits does the guide list for the average American compared with Europeans?","Belief in God, daily prayer, clear standards of right and wrong",["Greater wealth, more years of education, more travel abroad","More voting, more jury service, and more taxes paid","More patriotism, more military service, and more sports"],"From the guide."),
+ XM("Which statement is NOT true?","Secular people give more to charity than religious people",["Religious people give more than three times as much","Americans pray daily more than Europeans","Americans more often believe in God"],"The reverse."),
+ XM("Why does religion matter to American political culture, by these notes?","It shapes moral standards and civic habits like giving and participation",["It sets tax law for churches, charities and their donors","It chooses judges through councils of church leaders","It replaces civic duty as the main public value"],"Beliefs shape public life."),
+ XM("Which finding would most challenge the guide’s picture of American religion?","Americans praying and giving far less than Europeans",["Americans giving more to charity than secular Europeans","Most Americans saying they believe in God","Churches teaching members to run meetings and organize"],"It would contradict the notes.")]);
+
+EX("c4","No established church",[
+ XM("Why was religious diversity inevitable in America?","There was no established or official religion for the nation",["The Constitution required each state to support several churches","Congress funded every denomination equally from the start","Most colonists were Catholic, so other faiths had to compete"],"No established church."),
+ XM("Which two groups are named for early religious friction in America?","Puritans and Catholics",["Quakers and Methodists","Baptists and Lutherans","Anglicans and Jews"],"Puritans and Catholics."),
+ XT("Churches in America offered ready opportunities for developing and practicing civic and political skills.",true,"True."),
+ XM("How did having no national church affect American religion, compared with nations that had one?","It made religious diversity inevitable",["It ended religion","It made one church dominant","It made religion illegal"],"Many churches."),
+ XM("Why do the notes say churches mattered for democracy?","They offered opportunities to develop and practice civic and political skills",["They chose the candidates for Congress in each of the local districts","They collected taxes on behalf of the town and county governments","They wrote the new state constitutions and sent them to the voters"],"Civic training ground."),
+ XM("A young woman learns to run meetings and organize volunteers at her church, then runs for city council. Which point from the guide does this illustrate?","Churches build civic and political skills",["An established religion shapes public life","Rule of the few governs local affairs","Devolution moves power to churches"],"Skills carry into politics."),
+ XM("The absence of what, at the national level, made religious diversity inevitable?","An established or official religion",["A written national constitution","A Senate with two members per state","Regular national elections"],"No established church."),
+ XM("Which statement is NOT true?","The nation had one official religion from the start",["Religious diversity was inevitable","Puritans and Catholics had early friction","Churches built civic skills"],"No established religion."),
+ XM("Why would the absence of an established church lead to friction, as with Puritans and Catholics?","Rival faiths had to share public life with none in charge",["The law forced every faith into one national church","The king chose sides between rival churches","Churches were banned from taking part in public life"],"Diversity without a referee."),
+ XM("Which judgment best links religion and democracy in the notes?","Diverse churches both caused friction and trained citizens for public life",["Religion weakened democracy entirely by dividing citizens","Only one church mattered, so diversity had no effect","Churches had no public role once there was no state church"],"Both sides of the story.")]);
+
+EX("c4","Orthodox vs. progressive",[
+ XM("The belief that morality and religion ought to be of decisive importance is:","orthodox",["progressive","libertarian","secular"],"Orthodox."),
+ XM("Progressive, in the culture war, means:","a belief that personal freedom and solving social problems are more important than religion",["a belief that morality and religion ought to be of decisive importance","a belief that states’ rights come before any national policy","a belief that a few wise leaders should rule for the many"],"Progressive."),
+ XT("Progressives believe morality and religion ought to be of decisive importance.",false,"False — that is the orthodox view."),
+ XM("What separates the orthodox from the progressive?","Whether religion and morality, or personal freedom and social problems, come first",["Which party they vote for in national elections, and nothing deeper","Their income, since the wealthy tend to be orthodox and the poor progressive","Which region of the country they live in, north or south"],"Priorities."),
+ XM("A voter says personal freedom and solving social problems matter more than religion. She is:","progressive",["orthodox","an Antifederalist","a pluralist"],"Progressive."),
+ XM("A voter judges every law first by whether it is morally right by his faith. He is:","orthodox",["progressive","a confederalist","bureaucratic"],"Orthodox."),
+ XM("In the orthodox view, what ought to be of decisive importance?","Morality and religion",["Personal freedom","Economic growth","States’ rights"],"Morality and religion."),
+ XM("Which statement is NOT true?","Orthodox and progressive mean the same thing",["Orthodox puts morality and religion first","Progressive puts freedom and social problems first","They are two sides of the culture war"],"They are opposites."),
+ XM("Why is the orthodox–progressive split called a culture war rather than an ordinary policy fight?","It is about basic values — what should matter most — not just money",["It involves armies and actual fighting between regions","It is only about taxes and who should pay them","It happens only in the courts, never among voters"],"Values, not dollars."),
+ XM("A debate over a school’s moral teaching splits a town. Which prediction best fits the notes?","Orthodox residents stress moral and religious standards; progressives stress freedom and social problems",["Both sides agree on the teaching, since the question is purely a practical one","Only progressives care about it, since morality is a private matter for families","It is a federalism fight only, between the town’s school board and the state"],"The culture war lens.")]);
+
+EX("c4","Trust in government",[
+ XM("Which two events are considered huge contributors to Americans’ distrust of government?","The Vietnam War and the Watergate scandal",["World War II and the Depression","The Civil War and Reconstruction","The Cold War and the moon landing"],"Vietnam and Watergate."),
+ XM("Since about when has the proportion of Americans who trust the government declined more or less steadily?","The late 1950s",["The 1920s","The late 1990s","2008"],"The late 1950s."),
+ XT("Trust in the national government has risen steadily since the late 1950s.",false,"False — declined."),
+ XM("How did Vietnam and Watergate damage trust in different ways?","Vietnam through a divisive war; Watergate through a presidential scandal",["Both were economic crashes that cost many people their jobs","Both were Supreme Court cases that angered many voters","Neither affected trust; both were forgotten within a year"],"War and scandal."),
+ XM("A pollster finds trust in government far lower today than in 1958. Which trend from the guide does this fit?","The steady decline since the late 1950s",["A steady rise in trust since the late 1950s","No change in trust over the past sixty years","A sharp rise in trust right after Watergate"],"Declining trust."),
+ XM("A historian points to a war many believed the government misled them about, and a president’s scandal. Which two events?","Vietnam and Watergate",["World War II and the Depression","The Revolution and Shays’s Rebellion","The Civil War and Reconstruction"],"Vietnam and Watergate."),
+ XM("The decline in trust has been described as:","more or less steady since the late 1950s",["sudden, beginning only in 2020","limited to the 1800s and since recovered","rising every year since the 1950s"],"From the guide."),
+ XM("Which statement is NOT true?","Watergate increased trust in government",["Trust has declined since the late 1950s","Vietnam contributed to distrust","Watergate contributed to distrust"],"It hurt trust."),
+ XM("Why would a scandal like Watergate reduce trust in government, not just in one man?","It showed officials could abuse power and hide it",["It raised taxes on every family in the country","It ended national elections for several years","It was a fight about states’ rights and the Tenth"],"Abuse of power in office."),
+ XM("If trust keeps falling, which link to earlier chapters is most at risk?","Legitimacy — authority accepted as rightful",["Enumerated powers — duties listed for Congress","The Great Compromise — the two-house Congress","The three-fifths clause — representation in the House"],"Consent and acceptance erode.")]);
+
+/* ---- Exam 50 · chapter 5 terms (seven topics) and chapter 6 ideas (three) — no court cases ---- */
+EX("c5","Civil liberties vs. civil rights",[
+ XM("Protections from government — what government may not do to you, such as limit speech or religion — are:","civil liberties",["civil rights","enumerated powers","conditions of aid"],"Civil liberties."),
+ XM("Civil rights, as opposed to civil liberties, concern:","equal treatment — protection against discrimination",["freedom from government censorship of speech","the powers of Congress over the states","the rights of states against the nation"],"Equal treatment."),
+ XT("Clashes over civil liberties usually end up in the courts.",true,"True."),
+ XM("Which pairing is correct?","Liberties: freedom from government; rights: equal treatment",["Liberties: equal treatment; rights: freedom from government","They mean the same","Both are powers of Congress"],"Two different protections."),
+ XM("A city bans a newspaper from criticizing the mayor. Which kind of protection is at stake?","A civil liberty",["A civil right","A condition of aid","An enumerated power"],"Freedom from government."),
+ XM("A city lets one group use the public pool and bars another group because of race. Which kind of protection is at stake?","A civil right",["A civil liberty","An enumerated power","Devolution"],"Equal treatment."),
+ XM("Where, in the Constitution, are most civil liberties found?","The Bill of Rights",["Article I only","The Great Compromise","The three-fifths clause"],"The first ten amendments."),
+ XM("Which statement is NOT true?","Civil liberties and civil rights never overlap or conflict",["Civil liberties protect you from government","Civil rights concern equal treatment","Rights and duties can compete with each other"],"They can conflict — which is why courts weigh them."),
+ XM("Why do clashes over liberties end up in the courts?","The Constitution lists competing rights and duties, and judges must weigh them",["Congress cannot pass laws about rights, so the courts must write them","States have no courts of their own, so federal courts decide everything","The president decides all such cases on appeal after the courts rule"],"Competing rights and duties."),
+ XM("A free press wants to publish every detail of a crime; the accused wants a fair trial. What is the best judgment?","Two rights compete, and a court must balance them",["Only the press has a right, so the details must be printed","Only the accused has a right, so the press must stay silent","Neither is a civil liberty, so no court need weigh them"],"Competing rights and duties.")]);
+
+EX("c5","Due process and equal protection",[
+ XM("“No state shall deprive any person of life, liberty, or property without due process of law” is the:","due process clause",["equal protection clause","establishment clause","necessary and proper clause"],"Due process."),
+ XM("The clause that requires a state to treat every person within its borders alike under its laws is the:","equal protection clause",["due process clause","free exercise clause","commerce clause"],"Equal protection."),
+ XT("The due process clause and the equal protection clause are both in the Fourteenth Amendment.",true,"True."),
+ XM("How do the two clauses differ?","Due process: fair legal procedure; equal protection: equal treatment under the law",["They are the same: both guarantee fair legal procedures before punishment","Due process: equal treatment under the law; equal protection: fair procedure","Due process: freedom of speech; equal protection: freedom of religion"],"Procedure vs. equality."),
+ XM("A state takes a man’s land without any hearing. Which clause is violated?","The due process clause",["The equal protection clause","The establishment clause","The Tenth Amendment"],"No deprivation without due process."),
+ XM("A state gives a license to every applicant except those of one ethnic group, after a fair hearing for all. Which clause is violated?","The equal protection clause",["The due process clause","The establishment clause","The necessary and proper clause"],"The procedure was fair; the treatment was not equal."),
+ XM("Which amendment contains both clauses?","The Fourteenth",["The First","The Tenth","The Fifth"],"The Fourteenth."),
+ XM("Which statement is NOT true?","The equal protection clause applies only to the national government",["Both clauses are found in the Fourteenth Amendment","Both clauses limit what the state governments may do","Due process protects life, liberty and property"],"“No state shall.”"),
+ XM("Why was the Fourteenth Amendment so important for liberties?","It limited the states, not just the national government",["It created Congress’s power to regulate the states","It ended the Bill of Rights and replaced it","It gave the states more power over their citizens"],"The Bill of Rights once limited only Washington."),
+ XM("Which judgment best explains why civil rights cases so often cite the equal protection clause?","Civil rights concern equal treatment, which is exactly what that clause guarantees",["Civil rights concern religion, which is exactly what that clause protects","Civil rights concern speech, which is exactly what that clause protects","Civil rights concern searches, which is exactly what that clause governs"],"Equal protection of the laws.")]);
+
+EX("c5","Prior restraint",[
+ XM("Censorship before publication, which freedom of the press forbids, is:","prior restraint",["libel","sedition","symbolic speech"],"Prior restraint."),
+ XM("Prior restraint means:","stopping something from being published in the first place",["punishing a lie after it has been printed","a written falsehood that damages a reputation","a search of a newspaper office without a warrant"],"Censorship in advance."),
+ XT("Punishing a newspaper after it prints a false, damaging story is prior restraint.",false,"False — prior restraint stops publication beforehand."),
+ XM("How does prior restraint differ from punishment for libel?","Prior restraint blocks publication in advance; libel is punished after publication",["They are the same: both punish after publication","Libel blocks publication in advance; prior restraint punishes after","Prior restraint punishes after publication; libel is never punished"],"Before vs. after."),
+ XM("A judge orders a magazine not to publish an article next week. This is:","prior restraint",["libel","probable cause","the exclusionary rule"],"Before publication."),
+ XM("A government reviews every book before release and approves only some. Which idea does freedom of the press forbid here?","Prior restraint",["Libel","Slander","Symbolic speech"],"Advance censorship."),
+ XM("Another name for prior restraint is freedom from:","censorship",["taxes","searches","religion"],"Censorship."),
+ XM("Which statement is NOT true?","Prior restraint is the main thing the First Amendment allows",["Prior restraint is censorship before publication","Freedom of the press forbids prior restraint","Prior restraint differs from punishing libel"],"It is what press freedom forbids."),
+ XM("Why is prior restraint considered worse than punishment afterward?","It keeps the public from ever hearing the speech",["It costs the government more to enforce","Courts cannot review it once it is issued","It only affects books, not newspapers"],"Silenced before anyone can judge it."),
+ XM("A newspaper plans to print a false story that will ruin a private person. What does the ban on prior restraint mean the victim must usually do?","Sue for libel after it is published",["Get the story blocked in advance","Nothing at all","Ask Congress"],"Remedy afterward, not censorship before.")]);
+
+EX("c5","Libel and slander",[
+ XM("A written statement that defames the character of another person is:","libel",["slander","obscenity","sedition"],"Libel."),
+ XM("Slander is:","a spoken statement that defames another person",["a written statement that defames another person","censorship of a statement before it is published","symbolic speech that carries a political message"],"Spoken."),
+ XT("Slander is written defamation and libel is spoken.",false,"False — the reverse."),
+ XM("What separates libel from slander?","Libel is written; slander is spoken",["Libel is spoken; slander is written","Libel is true; slander is false","They are the same"],"Written vs. spoken."),
+ XM("A man falsely tells a crowd his neighbor is a thief. This spoken defamation is:","slander",["libel","prior restraint","sedition"],"Spoken."),
+ XM("A blogger posts a false, damaging article about a private citizen. This is:","libel",["slander","obscenity","prior restraint"],"Written — a post counts as written."),
+ XM("Libel and obscenity are examples of expression that is:","not automatically protected",["always protected by the First Amendment","a form of prior restraint","a form of symbolic speech"],"Not automatically protected."),
+ XM("Which statement is NOT true?","Libel is fully protected speech",["Libel is written","Slander is spoken","Libel is not automatically protected"],"Not automatically protected."),
+ XM("Why isn’t libel automatically protected, when speech generally is?","False statements that damage reputations harm real people",["All criticism of a person is illegal once it is published","Writing is never protected speech under the First Amendment","Congress forbids unfavorable reviews of any public figure"],"The harm of a damaging falsehood."),
+ XM("A true but unflattering article about a private person is published. Is it libel?","No — libel requires a false, defaming statement",["Yes — any unflattering article is libel","Yes — because it is written","Only if spoken aloud"],"Truth is not defamation.")]);
+
+EX("c5","The religion clauses",[
+ XM("The First Amendment’s ban on laws “respecting an establishment of religion” is the:","establishment clause",["free exercise clause","supremacy clause","due process clause"],"Establishment."),
+ XM("The free exercise clause protects:","the right to practice one’s religion",["the ban on an official church","freedom of the press","states’ rights"],"Practice of religion."),
+ XT("The free exercise clause and the establishment clause both belong to the First Amendment.",true,"True."),
+ XM("What separates the two religion clauses?","Establishment keeps government from sponsoring religion; free exercise keeps it from interfering with practice",["They are the same: both keep government out of religion entirely and equally","Free exercise sets up an official church; establishment protects the right to worship","Establishment protects the right to worship; free exercise bars an official church"],"Sponsor vs. interfere."),
+ XM("A state names one church as official and funds it with taxes. Which clause does this violate?","The establishment clause",["The free exercise clause","The commerce clause","The equal protection clause"],"Government sponsorship."),
+ XM("A town forbids a religious group from holding worship services. Which clause is at issue?","The free exercise clause",["The establishment clause","The necessary and proper clause","The Tenth Amendment"],"Interfering with practice."),
+ XM("Jefferson’s phrase for the establishment clause is a:","“wall of separation” between church and state",["“republican form of government” in each state","“rule of the many” over the church and state","“necessary and proper” clause for the church"],"The wall of separation."),
+ XM("Which statement is NOT true?","The establishment clause protects the right to worship",["The establishment clause bars an official church","Free exercise protects practicing religion","Both are in the First Amendment"],"That is free exercise."),
+ XM("Why can the two religion clauses pull against each other?","Helping people practice religion can look like government sponsoring it",["They are in different documents, so they rarely ever meet in practice","One of them protects speech, not religion at all, so they cannot conflict","Courts ignore both of them, so they never really conflict with each other"],"Accommodation vs. establishment."),
+ XM("A public school lets students form a voluntary prayer club like any other club, but no teacher leads prayer. Which judgment best fits both clauses?","It protects free exercise without the school establishing religion",["It violates free exercise, since clubs limit worship","It establishes an official church inside the school","Neither clause applies, since students are minors"],"Balancing both clauses.")]);
+
+EX("c5","Exclusionary rule",[
+ XM("The rule that evidence gathered in violation of the Constitution cannot be used at trial is the:","exclusionary rule",["probable cause rule","prior restraint","due process clause"],"Exclusionary rule."),
+ XM("The exclusionary rule means:","illegally gathered evidence is kept out of the trial",["all true evidence is allowed, however it was found","suspects must confess before evidence is shown","trials are closed to the public and the press"],"Kept out."),
+ XT("Under the exclusionary rule, any evidence may be used as long as it is true.",false,"False — evidence gathered unconstitutionally is excluded."),
+ XM("How does the exclusionary rule relate to probable cause?","A search without probable cause or a warrant can produce evidence the rule then excludes",["They are the same thing, simply known under two different names","Probable cause excludes evidence; the exclusionary rule allows any search","The exclusionary rule creates warrants; probable cause voids them later"],"Cause for search; exclusion as remedy."),
+ XM("Police break into a home without a warrant and find stolen goods; the judge refuses to let the jury see them. Which rule?","The exclusionary rule",["Prior restraint","Probable cause","The establishment clause"],"Excluded."),
+ XM("Officers search a car with no warrant and no lawful arrest, and find drugs. What will the defense ask the judge to do?","Exclude the evidence under the exclusionary rule",["Admit the drugs, because the evidence is true","Close the trial to the public and the press","Ask Congress to rule on the search"],"Unconstitutional search."),
+ XM("A search is reasonable if made with a warrant or:","incident to a lawful arrest",["whenever police are suspicious","at night","if a neighbor asks"],"The two ways."),
+ XM("Which statement is NOT true?","The exclusionary rule lets illegally seized evidence in",["The exclusionary rule keeps such evidence out","The exclusionary rule enforces limits on searches","The exclusionary rule protects the accused"],"It keeps it out."),
+ XM("Why does the exclusionary rule exist, even though it can free guilty people?","It removes the incentive for police to ignore the Constitution",["Judges dislike physical evidence and prefer testimony","It speeds up trials by removing exhibits the jury would see","It punishes victims who waited too long to report crimes"],"Deterrence."),
+ XM("Critics say the exclusionary rule lets the guilty go free. Which best states the other side?","Without it, constitutional limits on searches would have no teeth",["It never frees anyone, so critics are simply wrong","It only applies to libel cases, not to searches","It was repealed, so the debate no longer matters"],"A right needs a remedy.")]);
+
+EX("c5","Probable cause",[
+ XM("Reasonable cause for issuing a search warrant or making an arrest — more than mere suspicion — is:","probable cause",["due process","reasonable doubt","civil forfeiture"],"Probable cause."),
+ XM("Probable cause means:","reasonable cause for a warrant or an arrest — more than mere suspicion",["an officer’s hunch that something is wrong, however vague","proof of guilt beyond a reasonable doubt, as at trial","a signed confession from the suspect before any search"],"More than suspicion."),
+ XT("Probable cause means nothing more than an officer’s hunch.",false,"False — more than mere suspicion."),
+ XM("How does probable cause differ from mere suspicion?","Probable cause rests on reasonable grounds; suspicion is only a feeling",["They are the same: both are simply an officer’s feeling","Suspicion is stronger than probable cause and needs more proof","Probable cause needs a signed confession; suspicion does not"],"Grounds vs. feeling."),
+ XM("An officer wants a warrant only because a man “looks nervous.” Why will a judge likely refuse?","That is mere suspicion, not probable cause",["Judges never issue search warrants at all","Only the FBI may search a private home","Nervousness counts as protected speech"],"More than suspicion needed."),
+ XM("Witnesses saw a man carry stolen TVs into his garage, and one was photographed there. Is there probable cause to search?","Yes — there are reasonable grounds, not just suspicion",["No — only a signed confession would ever count","No — photographs never count as grounds for a search","Only if the man also looked nervous when questioned"],"Reasonable cause."),
+ XM("Probable cause is needed to issue a search warrant or to:","make an arrest",["pass a law","run for office","publish a story"],"Warrant or arrest."),
+ XM("Which statement is NOT true?","Probable cause is the same as proof of guilt",["Probable cause justifies a search warrant","Probable cause justifies an arrest","Probable cause is more than mere suspicion"],"It is a lower bar than proof."),
+ XM("Why require probable cause before a search?","To protect people from searches based on whim or prejudice",["To slow down trials so that juries have time to deliberate","To help the press report accurately on police work","To limit Congress’s power over the federal courts"],"Reasonable grounds protect liberty."),
+ XM("If police needed no probable cause, which chapter 5 idea would be most weakened?","Protection from unreasonable searches, and with it the exclusionary rule’s purpose",["The establishment clause and its wall of separation between church and state","Libel law and its protection of private reputations against falsehoods","The ban on prior restraint, which protects the press before publication"],"Search limits would vanish.")]);
+
+EX("c6","What civil rights are",[
+ XM("Civil rights refer to cases in which some group is:","denied access to facilities, opportunities, or services available to other groups",["protected from government limits on their speech or their religion","given more power than the states in national political affairs","tried in court without due process of law or a fair hearing"],"Wilson’s definition."),
+ XM("By Wilson, the real civil rights question is:","whether differences in treatment are reasonable",["whether government may ever treat people differently","whether states exist","whether courts can decide"],"Reasonableness."),
+ XT("According to Wilson, government may never treat different people differently.",false,"False — it may; the question is whether the difference is reasonable."),
+ XM("How does a civil rights claim differ from a civil liberties claim?","Civil rights: unequal treatment; civil liberties: freedom from government",["They are the same: both concern equal treatment","Civil rights: freedom of speech; civil liberties: voting","Civil liberties: equal treatment; civil rights: freedom from government"],"Equality vs. freedom."),
+ XM("A group is barred from a public library that others may use. This is:","a civil rights question",["a civil liberties question","an enumerated power","a condition of aid"],"Denied access others have."),
+ XM("Tax rates rise with income, and no one calls it a civil rights violation. Why not?","The distinction is reasonable and serves a legitimate public need",["Taxes are never reviewed by any court in the country","Income is a suspect classification that courts ignore","Only race matters under the Constitution’s equality rules"],"Reasonable classification."),
+ XM("Civil rights cases usually involve groups defined along which lines?","Racial or ethnic lines",["Party lines","State lines","Income lines only"],"Usually race or ethnicity."),
+ XM("Which statement is NOT true?","Every law that treats groups differently is unconstitutional",["Civil rights concern unequal access to what others have","The civil rights question is whether a difference is reasonable","Tax brackets are an example of a reasonable distinction"],"Not necessarily."),
+ XM("Why do courts treat racial distinctions more harshly than income distinctions?","Race is rarely a reasonable basis for different treatment",["Income is never taxed differently by law","Race is not mentioned anywhere in the Constitution","Courts ignore income as a basis for laws"],"Unreasonable classification."),
+ XM("A law gives seniors a discount on bus fares. Using Wilson’s question, which judgment is best?","Likely reasonable — age relates to a legitimate public need",["Always a civil rights violation, since ages differ","Always unconstitutional, since fares must be equal","A civil liberties case, since riding is speech"],"Different treatment, reasonably based.")]);
+
+EX("c6","The three tests",[
+ XM("Which test do courts apply to laws that draw distinctions by race?","Strict scrutiny",["Rational basis","Intermediate scrutiny","Clear and present danger"],"Strict scrutiny."),
+ XM("The rational basis test asks whether a policy:","uses reasonable means to achieve a legitimate government goal",["serves a compelling interest by the narrowest means","serves an important interest and is substantially related","uses the least restrictive means to a compelling end"],"Rational basis."),
+ XT("Laws that treat men and women differently get intermediate scrutiny.",true,"True."),
+ XM("Which ordering runs from easiest to hardest for a law to pass?","Rational basis, intermediate scrutiny, strict scrutiny",["Strict scrutiny, intermediate scrutiny, rational basis","Intermediate scrutiny, rational basis, strict scrutiny","Rational basis, strict scrutiny, intermediate scrutiny"],"Lowest to highest bar."),
+ XM("A state sets the drinking age at 21. A court asks only whether it is a reasonable means to a legitimate goal. Which test?","Rational basis",["Strict scrutiny","Intermediate scrutiny","Probable cause"],"Most laws."),
+ XM("A law treats men and women differently. Which test applies?","Intermediate scrutiny",["Strict scrutiny","Rational basis","The exclusionary rule"],"Sex distinctions."),
+ XM("Strict scrutiny requires a compelling interest, narrow tailoring, and:","the least restrictive means",["a two-thirds vote","a unanimous Court","approval by the states"],"Least restrictive means."),
+ XM("Which statement is NOT true?","Racial distinctions get rational basis review",["Most laws get rational basis review","Sex distinctions get intermediate scrutiny","Racial distinctions get strict scrutiny"],"Race gets strict scrutiny."),
+ XM("Why do the tests differ in strictness?","Some distinctions, like race, are far more likely to be unfair than others",["Judges simply choose the test at random in each new case","The Constitution lists which test goes with each kind of law","The states pick the test that the courts will apply to them"],"The more suspect the line, the harder the test."),
+ XM("A city hires only applicants of one race to “improve efficiency.” Which prediction best fits the tests?","It faces strict scrutiny and will very likely fail",["Rational basis — and it passes easily","Intermediate scrutiny — and it likely passes","No test applies — hiring is a private matter"],"No compelling, narrowly tailored reason.")]);
+
+EX("c6","Segregation and integration",[
+ XM("Segregation by law is called:","de jure segregation",["de facto segregation","integration","desegregation"],"By law."),
+ XM("Segregation that results from housing patterns and informal forces is:","de facto segregation",["de jure segregation","integration","affirmative action"],"In fact."),
+ XT("A desegregated school is one where students of different races are free to attend.",true,"True — integration means they actually attend together."),
+ XM("What separates desegregation from integration?","Desegregation removes barriers; integration means students actually attend together",["They are the same: both mean students attend together","Integration removes barriers; desegregation means attending together","Desegregation requires busing; integration forbids it"],"Free to vs. actually."),
+ XM("No law separates the races, but because of housing patterns every school is nearly one race. This is:","de facto segregation",["de jure segregation","integration","a condition of aid"],"In fact."),
+ XM("Students of every race are free to attend any school, but schools remain one-race. The district is:","desegregated but not integrated",["integrated but not desegregated","de jure segregated","fully integrated"],"Free, but not mixed."),
+ XM("In which region was de jure segregation most common?","The South, where laws separated the races",["The North, where laws separated the races","The West, where treaties separated the races","Nowhere — it never existed in America"],"By law in the South; de facto in the North."),
+ XM("Which statement is NOT true?","De facto segregation is segregation required by law",["De jure segregation means segregation by law","De facto segregation means segregation in fact","Integration means students actually attend together"],"That is de jure."),
+ XM("Why is de facto segregation harder to end than de jure segregation?","There is no law to strike down — it comes from where people live",["It is protected by the Constitution as a right of neighborhoods","Courts cannot see it, since it leaves no written record at all","It is required by Congress in many districts across the country"],"No statute to repeal."),
+ XM("A district repeals every segregation law, yet its schools stay one-race. Which judgment best fits the notes?","It has ended de jure segregation, but not de facto segregation or integration",["It is fully integrated, since no law separates the races","It still has de jure segregation, since the schools are one-race","It has no segregation of any kind, de jure or de facto"],"Law gone, pattern remains.")]);
 
 /* ================================================================ helpers */
 function $(s,r){ return (r||document).querySelector(s); }
@@ -2487,7 +3070,7 @@ function matchRound(tp, n){
 
 /* ---- the pure parts can be tested outside a browser ---- */
 if(typeof window === "undefined"){
-  module.exports = {CH:CH, COURSE:COURSE, QUIZ_RECORD:QUIZ_RECORD, CLASS_LOG:CLASS_LOG, PAPER:PAPER, GUIDE:GUIDE, FAITH:FAITH, LISTS:LISTS, EXAM50:EXAM50, EXAM50_LISTS:EXAM50_LISTS, examFiftyQuestions:examFiftyQuestions,
+  module.exports = {CH:CH, COURSE:COURSE, QUIZ_RECORD:QUIZ_RECORD, CLASS_LOG:CLASS_LOG, PAPER:PAPER, GUIDE:GUIDE, FAITH:FAITH, LISTS:LISTS, EXAM50:EXAM50, EXAM_LEVELS:EXAM_LEVELS, examFiftyQuestions:examFiftyQuestions,
     QB:QB, PAIRSETS:PAIRSETS, VERDICTS:VERDICTS, CHAPTERS:CHAPTERS, TOPIC_NAMES:TOPIC_NAMES,
     fromBank:fromBank, fromPair:fromPair, fromList:fromList, listsFor:listsFor, topicQuestions:topicQuestions, mockQuestions:mockQuestions, questionsByKeys:questionsByKeys,
     realKeys:realKeys, deckFor:deckFor, matchRound:matchRound, verdictFor:verdictFor};
@@ -2774,7 +3357,7 @@ function renderGuide(){
     b.addEventListener("click", function(){ replayReal(b.getAttribute("data-real"), !!b.getAttribute("data-missed")); });
   });
   $("#gPrint").addEventListener("click", function(){ window.print(); });
-  $("#gExam50").addEventListener("click", function(){ goTo("exam/mock"); startExam50(null); });
+  $("#gExam50").addEventListener("click", function(){ goTo("exam/mock"); if(engines.mock) renderMockSetup(); var f = $("#mockExam .fifty"); if(f && f.scrollIntoView) f.scrollIntoView({block:"start"}); });
   $("#gLists").addEventListener("click", function(){
     mockCfg.types = "lists"; mockCfg.topic = "all"; mockCfg.n = 25; store.set("mockcfg", JSON.stringify(mockCfg));
     goTo("exam/mock"); startMock(null);
@@ -2855,8 +3438,11 @@ function startMock(keys){
   engines.mock.start(keys || null);
 }
 /* The Exam 50: her study guide, fixed, in guide order */
+var exam50Level = parseInt(store.get("exam50.level") || "1", 10) || 0;   /* 0 = mixed, 1–10 = graded */
 function startExam50(keys){
-  engines.mock = makeQuiz($("#mockExam"), examFiftyQuestions, {showTopic:true, againLabel:"Take the Exam 50 again", onSetup:renderMockSetup});
+  var lv = exam50Level;
+  engines.mock = makeQuiz($("#mockExam"), function(k){ return examFiftyQuestions(k, lv); },
+    {showTopic:true, againLabel:lv ? "Exam "+lv+" again" : "Another mixed fifty", onSetup:renderMockSetup});
   engines.mock.start(keys || null);
 }
 function replayReal(tp, onlyMissed){
@@ -2870,8 +3456,11 @@ function renderMockSetup(){
   }
   root.innerHTML = '<div class="quizWrap"><div class="qcard card-corners">'+CORNERS+
     '<div class="qnum">Practice exam</div><p class="qtext">Set it up, then answer across the chapters. Each run is drawn fresh.</p>'+
-    '<div class="fifty"><button class="btn primary" type="button" id="mxExam50">The Exam 50 &mdash; from your study guide</button>'+
-      '<p>Fifty questions, only from the exam study guide: chapters 1&ndash;4 line by line, chapter 5 terms, and a few chapter 6 ideas. No chapter 5 or 6 court cases. The same fifty every time, in the guide&rsquo;s order.</p></div>'+
+    '<div class="fifty"><h3 class="x50h">The Exam 50 &mdash; from your study guide</h3>'+
+      '<p>Fifty topics from the exam study guide (chapters 1&ndash;4, chapter 5 terms, a few chapter 6 ideas; no chapter 5 or 6 court cases), in ten exams that get harder: Exam 1 asks for definitions, Exam 10 asks you to judge, compare and predict. <b>Mixed</b> draws a random level for every topic.</p>'+
+      seg("x50L","data-lv",exam50Level,[[0,"Mixed"]].concat(EXAM_LEVELS.map(function(l){ return [l.n, String(l.n)]; })))+
+      '<p class="x50d" id="x50d"></p>'+
+      '<button class="btn primary" type="button" id="mxExam50">Start the Exam 50</button></div>'+
     '<p class="orline">or set one up yourself</p>'+
     '<div class="setup">'+
       '<div class="row"><span class="label">Length</span><br>'+seg("mxN","data-n",mockCfg.n,[[15,"15"],[25,"25"],[40,"40"],[50,"50"]])+'</div>'+
@@ -2884,6 +3473,13 @@ function renderMockSetup(){
   segWire("#mxT","data-t",function(v){ mockCfg.types = v; store.set("mockcfg", JSON.stringify(mockCfg)); });
   segWire("#mxP","data-p",function(v){ mockCfg.topic = v; store.set("mockcfg", JSON.stringify(mockCfg)); });
   $("#mxStart").addEventListener("click", function(){ startMock(null); });
+  function showLevel(){
+    var l = EXAM_LEVELS[exam50Level-1];
+    $("#x50d").innerHTML = l ? '<b>Exam '+l.n+' · '+l.name+'</b> — '+l.d : '<b>Mixed</b> — every topic at a random level, different each time.';
+    $("#mxExam50").textContent = l ? "Start Exam "+l.n : "Start a mixed fifty";
+  }
+  segWire("#x50L","data-lv",function(v){ exam50Level = parseInt(v,10); store.set("exam50.level", String(exam50Level)); showLevel(); });
+  showLevel();
   $("#mxExam50").addEventListener("click", function(){ startExam50(null); });
   engines.mock = null;
 }
