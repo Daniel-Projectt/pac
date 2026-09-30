@@ -333,6 +333,20 @@ head('chapter quiz options (length and kind)');
   const mc10 = A.chapterQuestions('c6', {n:10, type:'mc'});
   ok(mc10.length === 10 && mc10.every(q => q.kind !== 'tf' && q.kind !== 'list'), 'ten multiple choice');
   A.CHAPTERS.forEach(tp => ok(A.chapterQuestions(tp, {n:10, type:'all'}).length === 10, 'every chapter still gives a quiz of ten: ' + tp));
+  const style = A.QB.filter(b => b.tp === 'c6' && b.style);
+  ok(style.length >= 45 && style.filter(b => b.t === 'tf').length >= 6, 'chapter 6 has a bank written like the real quizzes', style.length);
+  ok(A.quizTypesFor('c6')[0][0] === 'style' && !A.quizTypesFor('c1').some(t => t[0] === 'style'), '“Like the real quiz” is offered for chapter 6 (first), not where there is no such bank');
+  for (let r = 0; r < 30; r++) {
+    const q = A.chapterQuestions('c6', {n:10, type:'style'});
+    ok(q.length === 10 && q.filter(x => x.kind === 'tf').length === 1 && q.filter(x => x.kind === 'mc' || x.kind === undefined || x.kind !== 'tf').length === 9, 'like the real quiz: 10 questions, 9 multiple choice + 1 true/false');
+  }
+  const s20 = A.chapterQuestions('c6', {n:20, type:'style'});
+  ok(s20.length === 20 && s20.filter(x => x.kind === 'tf').length === 2 && new Set(s20.map(x => x.key)).size === 20, 'twenty: 18 + 2, no repeats');
+  ok(A.chapterQuestions('c6', {n:0, type:'style'}).length === style.length, 'All: every real-quiz-style question');
+  const REAL = A.QB.filter(b => b.real);
+  ok(REAL.every(b => b.tp !== 'c6'), 'the real quizzes on record are chapters 1–5 (chapter 6 is next)');
+  const realTf = REAL.filter(b => b.t === 'tf').length / REAL.length;
+  ok(realTf > 0.05 && realTf < 0.2, 'the real quizzes run about 1 true/false in 10, which the style mirrors', (realTf * 100).toFixed(0) + '%');
 }
 
 console.log('\n' + (fails === 0 ? 'ALL ' + checks + ' CHECKS PASSED' : fails + ' FAILURES out of ' + checks + ' checks'));

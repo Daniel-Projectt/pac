@@ -93,9 +93,10 @@ function topicQuestions(tp, keys, n){
   return shuffle(pick(bank, n - nGen - lists.length).concat(pick(gen, nGen), lists));
 }
 /* A chapter quiz she sets up: n = 10, 20 or 0 (every question); type = all / mc / tf / ap / lists / real */
-var QUIZ_TYPES = [["all","Mixed"],["mc","Multiple choice"],["tf","True / false"],["ap","Apply it"],["lists","Name them"],["real","Canvas questions"]];
+var QUIZ_TYPES = [["style","Like the real quiz"],["all","Mixed"],["mc","Multiple choice"],["tf","True / false"],["ap","Apply it"],["lists","Name them"],["real","Canvas questions"]];
 function quizTypesFor(tp){
   return QUIZ_TYPES.filter(function(t){
+    if(t[0] === "style") return QB.some(function(b){ return b.tp === tp && b.style; });
     if(t[0] === "real") return QB.some(function(b){ return b.tp === tp && b.real; });
     if(t[0] === "lists") return listsFor(tp).length > 0;
     if(t[0] === "ap") return QB.some(function(b){ return b.tp === tp && b.ap; });
@@ -107,6 +108,14 @@ function chapterQuestions(tp, cfg){
   cfg = cfg || {};
   var n = cfg.n === 0 ? 0 : (cfg.n || 10), type = cfg.type || "all";
   if(type === "all" && n) return topicQuestions(tp, null, n);
+  if(type === "style"){
+    /* like her real Canvas quizzes: nine multiple choice to every one true/false, short term-and-date questions */
+    var mc = [], tf = [];
+    QB.forEach(function(b, i){ if(b.tp === tp && b.style) (b.t === "tf" ? tf : mc).push(fromBank(b, i)); });
+    if(!n) return shuffle(mc.concat(tf));
+    var nTf = Math.min(tf.length, Math.max(1, Math.round(n / 10)));
+    return shuffle(pick(mc, n - nTf).concat(pick(tf, nTf)));
+  }
   return mockQuestions({topics:[tp], n:n || 9999, types:type});
 }
 /* Rebuild exact questions from their keys ("tp:i" bank, "tp:pN" / "tp:pNr" pairs, "L:i" lists); anything malformed is dropped */

@@ -212,7 +212,7 @@ CHAPTERS.forEach(function(tp){
   segWire('.seg[data-decks="'+tp+'"]', "data-deck", function(v){ cur = v; engines[tp+"Cards"].load(deckFor(tp, v)); });
   $('[data-shuffle="'+tp+'"]').addEventListener("click", function(){ engines[tp+"Cards"].load(deckFor(tp, cur)); });
   engines[tp+"Match"] = makeMatch($("#"+tp+"Match"), function(){ return matchRound(tp, 6); });
-  var qcfg = {n:10, type:"all"};
+  var qcfg = {n:10, type:QB.some(function(b){ return b.tp === tp && b.style; }) ? "style" : "all"};
   try{ var sv = JSON.parse(store.get("quiz."+tp) || "null"); if(sv){ qcfg.n = sv.n; qcfg.type = sv.type; } }catch(e){}
   var kinds = quizTypesFor(tp); if(!kinds.some(function(k){ return k[0] === qcfg.type; })) qcfg.type = "all";
   var qroot = $("#"+tp+"Quiz");
