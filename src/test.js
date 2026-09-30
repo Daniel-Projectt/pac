@@ -313,5 +313,27 @@ ok(html.includes('og:image') && html.includes('/pac/preview.png'), 'link preview
 ok(!/�/.test(html), 'no broken characters');
 console.log('  file size: ' + (fs.statSync(path.join(ROOT, 'index.html')).size / 1024).toFixed(1) + ' KB');
 
+head('chapter quiz options (length and kind)');
+{
+  const c6 = A.QB.filter(b => b.tp === 'c6');
+  const types = A.quizTypesFor('c6').map(t => t[0]);
+  ok(['all','mc','tf','ap','lists'].every(t => types.includes(t)), 'chapter 6 offers mixed, multiple choice, true/false, apply it and name them', types.join());
+  ok(!types.includes('real') || c6.some(b => b.real), 'Canvas questions only where the chapter has them');
+  const ten = A.chapterQuestions('c6', {n:10, type:'all'}), twenty = A.chapterQuestions('c6', {n:20, type:'all'});
+  ok(ten.length === 10 && twenty.length === 20 && [...ten, ...twenty].every(q => q.tp === 'c6'), 'mixed 10 and 20, all from chapter 6', ten.length + ' / ' + twenty.length);
+  ok(new Set(twenty.map(q => q.key)).size === 20, 'no repeats in a quiz of 20');
+  const tf = A.chapterQuestions('c6', {n:0, type:'tf'});
+  ok(tf.length === c6.filter(b => b.t === 'tf').length && tf.every(q => q.kind === 'tf'), 'all true/false: every one, and only those', tf.length);
+  const ap = A.chapterQuestions('c6', {n:0, type:'ap'});
+  ok(ap.length === c6.filter(b => b.ap).length && ap.every(q => q.ap), 'all apply-it questions', ap.length);
+  const li = A.chapterQuestions('c6', {n:0, type:'lists'});
+  ok(li.length === A.listsFor('c6').length && li.every(q => q.kind === 'list'), 'all the name-them lists', li.length);
+  const all = A.chapterQuestions('c6', {n:0, type:'all'});
+  ok(all.length >= c6.length && new Set(all.map(q => q.key)).size === all.length, 'All mixed: every written question, no repeats', all.length);
+  const mc10 = A.chapterQuestions('c6', {n:10, type:'mc'});
+  ok(mc10.length === 10 && mc10.every(q => q.kind !== 'tf' && q.kind !== 'list'), 'ten multiple choice');
+  A.CHAPTERS.forEach(tp => ok(A.chapterQuestions(tp, {n:10, type:'all'}).length === 10, 'every chapter still gives a quiz of ten: ' + tp));
+}
+
 console.log('\n' + (fails === 0 ? 'ALL ' + checks + ' CHECKS PASSED' : fails + ' FAILURES out of ' + checks + ' checks'));
 process.exit(fails ? 1 : 0);

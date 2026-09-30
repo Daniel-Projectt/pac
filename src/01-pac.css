@@ -208,3 +208,7 @@ header::after{content:"";display:block;width:138px;height:7px;margin:16px auto 0
 #x50L button{min-width:38px}
 .fifty .x50d{font-style:normal;font-size:14.5px;color:var(--ink-soft);min-height:22px}
 .fifty .x50d b{font-family:var(--sans);font-weight:400;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--navy)}
+
+/* chapter quiz setup: length and kind */
+.qset{display:flex;flex-wrap:wrap;gap:10px 22px;justify-content:center;align-items:center;margin:0 auto 16px;max-width:760px}
+.qset .row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center}

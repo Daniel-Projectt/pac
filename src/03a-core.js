@@ -92,6 +92,23 @@ function topicQuestions(tp, keys, n){
   var nGen = Math.min(gen.length, Math.floor(n/3));
   return shuffle(pick(bank, n - nGen - lists.length).concat(pick(gen, nGen), lists));
 }
+/* A chapter quiz she sets up: n = 10, 20 or 0 (every question); type = all / mc / tf / ap / lists / real */
+var QUIZ_TYPES = [["all","Mixed"],["mc","Multiple choice"],["tf","True / false"],["ap","Apply it"],["lists","Name them"],["real","Canvas questions"]];
+function quizTypesFor(tp){
+  return QUIZ_TYPES.filter(function(t){
+    if(t[0] === "real") return QB.some(function(b){ return b.tp === tp && b.real; });
+    if(t[0] === "lists") return listsFor(tp).length > 0;
+    if(t[0] === "ap") return QB.some(function(b){ return b.tp === tp && b.ap; });
+    if(t[0] === "tf") return QB.some(function(b){ return b.tp === tp && b.t === "tf"; });
+    return true;
+  });
+}
+function chapterQuestions(tp, cfg){
+  cfg = cfg || {};
+  var n = cfg.n === 0 ? 0 : (cfg.n || 10), type = cfg.type || "all";
+  if(type === "all" && n) return topicQuestions(tp, null, n);
+  return mockQuestions({topics:[tp], n:n || 9999, types:type});
+}
 /* Rebuild exact questions from their keys ("tp:i" bank, "tp:pN" / "tp:pNr" pairs, "L:i" lists); anything malformed is dropped */
 function questionsByKeys(keys){
   return uniqBy(keys, function(k){ return k; }).map(function(k){

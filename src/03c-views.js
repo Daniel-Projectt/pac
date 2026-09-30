@@ -212,7 +212,19 @@ CHAPTERS.forEach(function(tp){
   segWire('.seg[data-decks="'+tp+'"]', "data-deck", function(v){ cur = v; engines[tp+"Cards"].load(deckFor(tp, v)); });
   $('[data-shuffle="'+tp+'"]').addEventListener("click", function(){ engines[tp+"Cards"].load(deckFor(tp, cur)); });
   engines[tp+"Match"] = makeMatch($("#"+tp+"Match"), function(){ return matchRound(tp, 6); });
-  engines[tp+"Quiz"]  = makeQuiz($("#"+tp+"Quiz"), function(){ return topicQuestions(tp, null, 10); });
+  var qcfg = {n:10, type:"all"};
+  try{ var sv = JSON.parse(store.get("quiz."+tp) || "null"); if(sv){ qcfg.n = sv.n; qcfg.type = sv.type; } }catch(e){}
+  var kinds = quizTypesFor(tp); if(!kinds.some(function(k){ return k[0] === qcfg.type; })) qcfg.type = "all";
+  var qroot = $("#"+tp+"Quiz");
+  qroot.insertAdjacentHTML("beforebegin",
+    '<div class="qset" data-qset="'+tp+'">'+
+      '<div class="row"><span class="label">Length</span><div class="seg" data-qn="'+tp+'">'+[[10,"10"],[20,"20"],[0,"All"]].map(function(o){ return '<button type="button" data-n="'+o[0]+'" aria-pressed="'+(o[0] === qcfg.n)+'">'+o[1]+'</button>'; }).join("")+'</div></div>'+
+      '<div class="row"><span class="label">Kind</span><div class="seg" data-qt="'+tp+'">'+kinds.map(function(o){ return '<button type="button" data-t="'+o[0]+'" aria-pressed="'+(o[0] === qcfg.type)+'">'+o[1]+'</button>'; }).join("")+'</div></div>'+
+    '</div>');
+  engines[tp+"Quiz"]  = makeQuiz(qroot, function(){ return chapterQuestions(tp, qcfg); });
+  var restart = function(){ store.set("quiz."+tp, JSON.stringify(qcfg)); engines[tp+"Quiz"].start(null); };
+  segWire('.seg[data-qn="'+tp+'"]', "data-n", function(v){ qcfg.n = parseInt(v, 10); restart(); });
+  segWire('.seg[data-qt="'+tp+'"]', "data-t", function(v){ qcfg.type = v; restart(); });
   renderNotes(tp);
 });
 renderGuide(); renderTimeline(); renderPaper(); renderLog(); renderFaith();

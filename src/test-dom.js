@@ -234,6 +234,27 @@ ok(w.localStorage.getItem('pac.topic') === 'faith' && w.localStorage.getItem('pa
 
 head('errors');
 ok(errors.length === 0, 'no runtime errors anywhere', errors.join(' || '));
+head('chapter 6 quiz options');
+topic('c6'); mode('c6', 'quiz');
+{
+  const set = $('.qset[data-qset="c6"]');
+  ok(set && $$('.qset[data-qset="c6"] [data-n]').length === 3, 'length choices: 10, 20, All');
+  const kinds = $$('.qset[data-qset="c6"] [data-t]').map(b => b.textContent);
+  ok(['Mixed', 'Multiple choice', 'True / false', 'Apply it', 'Name them'].every(k => kinds.includes(k)), 'kind choices', kinds.join(' | '));
+  ok(/of 10/.test($('#c6Quiz .qnum').textContent), 'starts as a quiz of ten', $('#c6Quiz .qnum').textContent);
+  click($('.qset[data-qset="c6"] [data-n="20"]'));
+  ok(/Question 1 of 20/.test($('#c6Quiz .qnum').textContent), 'choosing 20 starts a quiz of twenty', $('#c6Quiz .qnum').textContent);
+  click($('.qset[data-qset="c6"] [data-t="tf"]'));
+  ok($$('#c6Quiz .opt').length === 2 && /True or false/.test($('#c6Quiz .qbody').textContent), 'true / false: two options', $$('#c6Quiz .opt').length);
+  click($('.qset[data-qset="c6"] [data-n="0"]'));
+  click($('.qset[data-qset="c6"] [data-t="lists"]'));
+  ok(/Name them/.test($('#c6Quiz .qbody').textContent) && $('#c6Quiz .check'), 'name them: pick-all questions with a Check button');
+  ok(/of 6/.test($('#c6Quiz .qnum').textContent), 'All + Name them = all six chapter 6 lists', $('#c6Quiz .qnum').textContent);
+  ok(JSON.parse(w.localStorage.getItem('pac.quiz.c6')).type === 'lists', 'her choice is remembered', w.localStorage.getItem('pac.quiz.c6'));
+  click($('.qset[data-qset="c6"] [data-t="all"]')); click($('.qset[data-qset="c6"] [data-n="10"]'));
+  ok(/of 10/.test($('#c6Quiz .qnum').textContent), 'back to a mixed ten');
+}
+
 console.log('\n' + (fails === 0 ? 'ALL ' + checks + ' DOM CHECKS PASSED' : fails + ' FAILURES out of ' + checks + ' DOM checks'));
 w.close();
 process.exit(fails ? 1 : 0);

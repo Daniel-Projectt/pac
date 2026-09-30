@@ -494,6 +494,10 @@ header::after{content:"";display:block;width:138px;height:7px;margin:16px auto 0
 #x50L button{min-width:38px}
 .fifty .x50d{font-style:normal;font-size:14.5px;color:var(--ink-soft);min-height:22px}
 .fifty .x50d b{font-family:var(--sans);font-weight:400;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--navy)}
+
+/* chapter quiz setup: length and kind */
+.qset{display:flex;flex-wrap:wrap;gap:10px 22px;justify-content:center;align-items:center;margin:0 auto 16px;max-width:760px}
+.qset .row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center}
 </style>
 </head>
 <body>
@@ -2986,6 +2990,23 @@ function topicQuestions(tp, keys, n){
   var nGen = Math.min(gen.length, Math.floor(n/3));
   return shuffle(pick(bank, n - nGen - lists.length).concat(pick(gen, nGen), lists));
 }
+/* A chapter quiz she sets up: n = 10, 20 or 0 (every question); type = all / mc / tf / ap / lists / real */
+var QUIZ_TYPES = [["all","Mixed"],["mc","Multiple choice"],["tf","True / false"],["ap","Apply it"],["lists","Name them"],["real","Canvas questions"]];
+function quizTypesFor(tp){
+  return QUIZ_TYPES.filter(function(t){
+    if(t[0] === "real") return QB.some(function(b){ return b.tp === tp && b.real; });
+    if(t[0] === "lists") return listsFor(tp).length > 0;
+    if(t[0] === "ap") return QB.some(function(b){ return b.tp === tp && b.ap; });
+    if(t[0] === "tf") return QB.some(function(b){ return b.tp === tp && b.t === "tf"; });
+    return true;
+  });
+}
+function chapterQuestions(tp, cfg){
+  cfg = cfg || {};
+  var n = cfg.n === 0 ? 0 : (cfg.n || 10), type = cfg.type || "all";
+  if(type === "all" && n) return topicQuestions(tp, null, n);
+  return mockQuestions({topics:[tp], n:n || 9999, types:type});
+}
 /* Rebuild exact questions from their keys ("tp:i" bank, "tp:pN" / "tp:pNr" pairs, "L:i" lists); anything malformed is dropped */
 function questionsByKeys(keys){
   return uniqBy(keys, function(k){ return k; }).map(function(k){
@@ -3072,7 +3093,7 @@ function matchRound(tp, n){
 if(typeof window === "undefined"){
   module.exports = {CH:CH, COURSE:COURSE, QUIZ_RECORD:QUIZ_RECORD, CLASS_LOG:CLASS_LOG, PAPER:PAPER, GUIDE:GUIDE, FAITH:FAITH, LISTS:LISTS, EXAM50:EXAM50, EXAM_LEVELS:EXAM_LEVELS, examFiftyQuestions:examFiftyQuestions,
     QB:QB, PAIRSETS:PAIRSETS, VERDICTS:VERDICTS, CHAPTERS:CHAPTERS, TOPIC_NAMES:TOPIC_NAMES,
-    fromBank:fromBank, fromPair:fromPair, fromList:fromList, listsFor:listsFor, topicQuestions:topicQuestions, mockQuestions:mockQuestions, questionsByKeys:questionsByKeys,
+    fromBank:fromBank, fromPair:fromPair, fromList:fromList, listsFor:listsFor, topicQuestions:topicQuestions, chapterQuestions:chapterQuestions, quizTypesFor:quizTypesFor, mockQuestions:mockQuestions, questionsByKeys:questionsByKeys,
     realKeys:realKeys, deckFor:deckFor, matchRound:matchRound, verdictFor:verdictFor};
   return;
 }
@@ -3493,7 +3514,19 @@ CHAPTERS.forEach(function(tp){
   segWire('.seg[data-decks="'+tp+'"]', "data-deck", function(v){ cur = v; engines[tp+"Cards"].load(deckFor(tp, v)); });
   $('[data-shuffle="'+tp+'"]').addEventListener("click", function(){ engines[tp+"Cards"].load(deckFor(tp, cur)); });
   engines[tp+"Match"] = makeMatch($("#"+tp+"Match"), function(){ return matchRound(tp, 6); });
-  engines[tp+"Quiz"]  = makeQuiz($("#"+tp+"Quiz"), function(){ return topicQuestions(tp, null, 10); });
+  var qcfg = {n:10, type:"all"};
+  try{ var sv = JSON.parse(store.get("quiz."+tp) || "null"); if(sv){ qcfg.n = sv.n; qcfg.type = sv.type; } }catch(e){}
+  var kinds = quizTypesFor(tp); if(!kinds.some(function(k){ return k[0] === qcfg.type; })) qcfg.type = "all";
+  var qroot = $("#"+tp+"Quiz");
+  qroot.insertAdjacentHTML("beforebegin",
+    '<div class="qset" data-qset="'+tp+'">'+
+      '<div class="row"><span class="label">Length</span><div class="seg" data-qn="'+tp+'">'+[[10,"10"],[20,"20"],[0,"All"]].map(function(o){ return '<button type="button" data-n="'+o[0]+'" aria-pressed="'+(o[0] === qcfg.n)+'">'+o[1]+'</button>'; }).join("")+'</div></div>'+
+      '<div class="row"><span class="label">Kind</span><div class="seg" data-qt="'+tp+'">'+kinds.map(function(o){ return '<button type="button" data-t="'+o[0]+'" aria-pressed="'+(o[0] === qcfg.type)+'">'+o[1]+'</button>'; }).join("")+'</div></div>'+
+    '</div>');
+  engines[tp+"Quiz"]  = makeQuiz(qroot, function(){ return chapterQuestions(tp, qcfg); });
+  var restart = function(){ store.set("quiz."+tp, JSON.stringify(qcfg)); engines[tp+"Quiz"].start(null); };
+  segWire('.seg[data-qn="'+tp+'"]', "data-n", function(v){ qcfg.n = parseInt(v, 10); restart(); });
+  segWire('.seg[data-qt="'+tp+'"]', "data-t", function(v){ qcfg.type = v; restart(); });
   renderNotes(tp);
 });
 renderGuide(); renderTimeline(); renderPaper(); renderLog(); renderFaith();
