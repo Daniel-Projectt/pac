@@ -56,7 +56,9 @@ function answerQuiz(root, label) {
 
 head('landing');
 ok(errors.length === 0, 'no errors while loading', errors.join(' || '));
-ok(visible($('#topic-guide')) && !visible($('#topic-c1')), 'opens on the Guide');
+ok(visible($('#topic-e2')) && visible(panel('e2/start')) && !visible($('#topic-guide')), 'the first visit opens on the new Exam 2 tab, Start here');
+ok(w.localStorage.getItem('pac.seen.e2') === '1', 'only once: after that it remembers where she was');
+topic('guide');
 const items = $$('#guideRoot .gitem');
 ok(items.length === 42, 'guide shows all 42 review items', items.length);
 ok(/0 of 42/.test($('#gCount').textContent), 'progress starts at 0 of 42', $('#gCount').textContent);
@@ -255,6 +257,35 @@ topic('c6'); mode('c6', 'quiz');
   click($('.qset[data-qset="c6"] [data-t="all"]')); click($('.qset[data-qset="c6"] [data-n="10"]'));
   ok(/of 10/.test($('#c6Quiz .qnum').textContent), 'back to a mixed ten');
 }
+
+head('Exam 2 tab');
+topic('e2'); mode('e2', 'start');
+{
+  ok(/pairs to keep apart/.test($('#e2Start').textContent) && $$('#e2Start tr').length >= 15, 'Start here: the pairs and the worked examples');
+  mode('e2', 'guide');
+  ok($$('#e2Ch button').length === 7, 'chapter picker: 7 to 12 and Across chapters');
+  click($('#e2Ch [data-ch="8"]'));
+  ok(/Chapter 8/.test($('#e2Guide h2').textContent) && $$('#e2Guide .e2c').length === 6, 'chapter 8: one chapter at a time, six core concepts', $('#e2Guide h2').textContent);
+  ok($$('#e2Guide details.e2r').length >= 11, 'chapter 8: review answers and practice check to open');
+  click($('#e2Guide [data-e2ch="9"]'));
+  ok(/Chapter 9/.test($('#e2Guide h2').textContent), 'Next goes to chapter 9');
+  click($('#e2Ch [data-ch="x"]'));
+  ok(/Cross-chapter/.test($('#e2Guide h2').textContent) && /45-question/.test($('#e2Guide').textContent), 'Across chapters: the review and the 45-question key');
+  click($('#e2Ch [data-ch="7"]'));
+  click($('#e2Guide [data-e2go]'));
+  ok(visible(panel('e2/quiz')) && /Ch\. 7/.test($('#e2Quiz .qnum').textContent), 'Practice chapter 7 opens a chapter 7 quiz', $('#e2Quiz .qnum').textContent);
+  click($('.qset[data-qset="e2"] [data-e2="kind"] [data-v="pc"]'));
+  click($('.qset[data-qset="e2"] [data-e2="ch"] [data-v="all"]'));
+  click($('.qset[data-qset="e2"] [data-e2="n"] [data-v="0"]'));
+  ok(/of 18/.test($('#e2Quiz .qnum').textContent) && /Study guide/.test($('#e2Quiz .qbody').textContent), 'his practice check: all 18, tagged', $('#e2Quiz .qnum').textContent);
+  click($('.qset[data-qset="e2"] [data-e2="kind"] [data-v="all"]'));
+  click($('.qset[data-qset="e2"] [data-e2="n"] [data-v="15"]'));
+  ok(/of 15/.test($('#e2Quiz .qnum').textContent), 'a mixed fifteen');
+  const e2res = answerQuiz($('#e2Quiz'), 'Exam 2 quiz');
+  ok(!!e2res, 'the Exam 2 quiz reaches its results');
+  ok(JSON.parse(w.localStorage.getItem('pac.e2.quiz')).n === 15, 'her choice is remembered');
+}
+ok(errors.length === 0, 'no errors in the Exam 2 tab', errors.join(' || '));
 
 console.log('\n' + (fails === 0 ? 'ALL ' + checks + ' DOM CHECKS PASSED' : fails + ' FAILURES out of ' + checks + ' DOM checks'));
 w.close();

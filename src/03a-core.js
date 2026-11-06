@@ -121,6 +121,8 @@ function chapterQuestions(tp, cfg){
 /* Rebuild exact questions from their keys ("tp:i" bank, "tp:pN" / "tp:pNr" pairs, "L:i" lists); anything malformed is dropped */
 function questionsByKeys(keys){
   return uniqBy(keys, function(k){ return k; }).map(function(k){
+    var E = /^e2:(pc:)?(\d+)$/.exec(k);
+    if(E) return E[1] ? fromE2Check(parseInt(E[2],10)) : fromE2(parseInt(E[2],10));
     var L = /^L:(\d+)$/.exec(k);
     if(L){ var li = parseInt(L[1],10); return li < LISTS.length ? fromList(li) : null; }
     var m = /^([a-z0-9]+):p(\d+)(r?)$/.exec(k);

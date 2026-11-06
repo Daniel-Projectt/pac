@@ -3,7 +3,8 @@ if(typeof window === "undefined"){
   module.exports = {CH:CH, COURSE:COURSE, QUIZ_RECORD:QUIZ_RECORD, CLASS_LOG:CLASS_LOG, PAPER:PAPER, GUIDE:GUIDE, FAITH:FAITH, LISTS:LISTS, EXAM50:EXAM50, EXAM_LEVELS:EXAM_LEVELS, examFiftyQuestions:examFiftyQuestions,
     QB:QB, PAIRSETS:PAIRSETS, VERDICTS:VERDICTS, CHAPTERS:CHAPTERS, TOPIC_NAMES:TOPIC_NAMES,
     fromBank:fromBank, fromPair:fromPair, fromList:fromList, listsFor:listsFor, topicQuestions:topicQuestions, chapterQuestions:chapterQuestions, quizTypesFor:quizTypesFor, mockQuestions:mockQuestions, questionsByKeys:questionsByKeys,
-    realKeys:realKeys, deckFor:deckFor, matchRound:matchRound, verdictFor:verdictFor};
+    realKeys:realKeys, deckFor:deckFor, matchRound:matchRound, verdictFor:verdictFor,
+    E2:E2, E2_QB:E2_QB, e2Questions:e2Questions, fromE2:fromE2, fromE2Check:fromE2Check};
   return;
 }
 
@@ -111,7 +112,7 @@ function makeQuiz(root, gen, opts){
   }
   function tagFor(q){
     var t = q.ap ? "Application" : (q.kind === "tf" ? "True or false" : (q.kind === "id" ? "Identification" : (q.kind === "list" ? "Name them" : "Multiple choice")));
-    return '<span class="qtag">'+t+'</span>' + (q.real ? '<span class="qtag real">Canvas quiz &middot; Q'+q.real+'</span>' : '');
+    return '<span class="qtag">'+t+'</span>' + (q.real ? '<span class="qtag real">Canvas quiz &middot; Q'+q.real+'</span>' : '') + (q.pc ? '<span class="qtag real">Study guide &middot; '+q.pc+'</span>' : '');
   }
   function render(){
     var body = shell(); dots();

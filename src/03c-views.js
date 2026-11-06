@@ -227,18 +227,18 @@ CHAPTERS.forEach(function(tp){
   segWire('.seg[data-qt="'+tp+'"]', "data-t", function(v){ qcfg.type = v; restart(); });
   renderNotes(tp);
 });
-renderGuide(); renderTimeline(); renderPaper(); renderLog(); renderFaith();
+renderGuide(); renderTimeline(); renderPaper(); renderLog(); renderFaith(); renderE2Start(); renderE2Guide();
 
-var ON_SHOW = {"exam/mock":function(){ if(!engines.mock) renderMockSetup(); }};
-var KEYS = {"exam/mock":function(e){ return engines.mock ? engines.mock.keys(e) : false; }};
+var ON_SHOW = {"exam/mock":function(){ if(!engines.mock) renderMockSetup(); }, "e2/quiz":function(){ if(!e2Engine) startE2Quiz(null); }};
+var KEYS = {"exam/mock":function(e){ return engines.mock ? engines.mock.keys(e) : false; }, "e2/quiz":function(e){ return e2Engine ? e2Engine.keys(e) : false; }};
 CHAPTERS.forEach(function(tp){
   ON_SHOW[tp+"/match"] = function(){ engines[tp+"Match"].ensure(); };
   ON_SHOW[tp+"/quiz"]  = function(){ engines[tp+"Quiz"].ensure(); };
   KEYS[tp+"/cards"] = function(e){ return engines[tp+"Cards"].keys(e); };
   KEYS[tp+"/quiz"]  = function(e){ return engines[tp+"Quiz"].keys(e); };
 });
-var TOPICS = ["guide","c1","c2","c3","c4","c5","c6","faith","exam"];
-var currentTopic = "guide", currentMode = {guide:"overview", c1:"notes", c2:"notes", c3:"notes", c4:"notes", c5:"notes", c6:"notes", faith:"paper", exam:"mock"};
+var TOPICS = ["guide","e2","c1","c2","c3","c4","c5","c6","faith","exam"];
+var currentTopic = "guide", currentMode = {guide:"overview", e2:"start", c1:"notes", c2:"notes", c3:"notes", c4:"notes", c5:"notes", c6:"notes", faith:"paper", exam:"mock"};
 function showMode(topic, mode){
   currentMode[topic] = mode;
   $$('.seg[data-modes="'+topic+'"] button').forEach(function(b){ b.setAttribute("aria-pressed", String(b.getAttribute("data-mode") === mode)); });
@@ -274,6 +274,8 @@ document.addEventListener("keydown", function(e){
 /* ---- come back to where you were ---- */
 (function(){
   var t = store.get("topic");
+  /* the Exam 2 tab is new: open on it once, then remember wherever she leaves off */
+  if(!store.get("seen.e2")){ store.set("seen.e2", "1"); t = "e2"; currentMode.e2 = "start"; }
   TOPICS.forEach(function(k){ var m = store.get("mode."+k); if(m && $('.seg[data-modes="'+k+'"] button[data-mode="'+m+'"]')) currentMode[k] = m; });
   showTopic(t && TOPICS.indexOf(t) >= 0 ? t : "guide");
 })();

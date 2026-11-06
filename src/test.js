@@ -297,7 +297,7 @@ panels.forEach(pn => {
   ok(html.includes('data-modes="' + t + '"'), 'panel ' + pn + ' has a mode switch');
   ok(new RegExp('data-modes="' + t + '"[\\s\\S]*?data-mode="' + mo + '"').test(html), 'panel ' + pn + ' has its mode button');
 });
-['guide', 'c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'faith', 'exam'].forEach(t => {
+['guide', 'e2', 'c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'faith', 'exam'].forEach(t => {
   ok(html.includes('data-topic="' + t + '"') && html.includes('id="topic-' + t + '"'), 'topic ' + t + ' has a tab and a section');
 });
 ok(/data-topic="guide"\s+aria-selected="true"/.test(html), 'Guide is the first, default tab');
@@ -347,6 +347,61 @@ head('chapter quiz options (length and kind)');
   ok(REAL.every(b => b.tp !== 'c6'), 'the real quizzes on record are chapters 1–5 (chapter 6 is next)');
   const realTf = REAL.filter(b => b.t === 'tf').length / REAL.length;
   ok(realTf > 0.05 && realTf < 0.2, 'the real quizzes run about 1 true/false in 10, which the style mirrors', (realTf * 100).toFixed(0) + '%');
+}
+
+// ---------- Exam 2 (chapters 7–12, from his study guide) ----------
+head('Exam 2 · chapters 7–12');
+{
+  const E = A.E2, Q = A.E2_QB;
+  ok(E.chapters.map(c => c.n).join() === '7,8,9,10,11,12', 'six chapters, 7 to 12, in order');
+  const wantTerms = {7: 14, 8: 8, 9: 15, 10: 17, 11: 14, 12: 17}, wantConcepts = {7: 6, 8: 6, 9: 5, 10: 8, 11: 7, 12: 8};
+  E.chapters.forEach(c => {
+    ok(c.question && c.goals && /^pp?\. \d/.test(c.pages), 'chapter ' + c.n + ': pages, central question and goals');
+    ok(c.terms.length === wantTerms[c.n], 'chapter ' + c.n + ': every key term from the guide', c.terms.length);
+    ok(c.concepts.length === wantConcepts[c.n] && c.concepts.every(k => k.h && k.p && k.a && k.ex), 'chapter ' + c.n + ': every core concept, each with a short answer and one example', c.concepts.length);
+    ok(c.review.length >= 3 && c.review.every(r => r[0] && r[1] && r[1].length > 40), 'chapter ' + c.n + ': review questions answered');
+    ok(c.checks.length === 3 && c.checks.every(i => E.checks[i].c === c.n), 'chapter ' + c.n + ': its three practice-check questions');
+    ok(Q.filter(b => b.c === c.n).length >= 14, 'chapter ' + c.n + ': plenty of practice questions', Q.filter(b => b.c === c.n).length);
+    ok(Q.some(b => b.c === c.n && b.ap) && Q.filter(b => b.c === c.n && b.t === 'tf').length >= 2, 'chapter ' + c.n + ': apply-it and true/false questions');
+  });
+  // his practice check, exactly as printed, with his answer key
+  const key = {'7.1':1,'7.2':2,'7.3':0,'8.1':2,'8.2':0,'8.3':3,'9.1':1,'9.2':0,'9.3':3,'10.1':1,'10.2':2,'10.3':0,'11.1':1,'11.2':0,'11.3':2,'12.1':0,'12.2':1,'12.3':2};
+  ok(E.checks.length === 18 && E.checks.every(p => key[p.n] === p.a && p.o.length === 4), 'all 18 practice-check questions carry his answer key');
+  ok(E.checks.find(p => p.n === '7.2').o[2] === 'Affective polarization', '7.2 is affective polarization');
+  ok(/4,800 ÷ 10,000.*48%/.test(E.chapters[1].concepts[0].ex) && /60%/.test(E.chapters[1].concepts[0].ex), 'turnout example: 48% VAP, 60% VEP');
+  ok(/6,000 ÷ 12,000 = 50%/.test(E.chapters[1].concepts[0].ex), 'the assessment’s own turnout numbers');
+  ok(/plurality/.test(E.chapters[2].review[6][1]) && /not a majority/.test(E.chapters[2].review[6][1]), 'plurality application: A wins, not a majority');
+  ok(E.chapters[3].concepts.some(k => /Effects of Elections on Policy/.test(k.a)), 'the coverage limit on p. 239 is said, not guessed');
+  ok(/39 D/.test(E.key45) && /45 A/.test(E.key45), 'the 45-question answer key is there, marked as questions not supplied');
+  ok(E.cross.items.length === 8 && E.cross.theme, 'cross-chapter review: theme and eight questions');
+  ok(E.start.pairs.length >= 10 && E.start.numbers.length === 5, 'Start here: the pairs and the worked examples');
+  // question quality
+  Q.forEach((b, i) => {
+    ok(b.q && b.e && b.e.length >= 20, 'Exam 2 question has a real explanation #' + i, b.q);
+    if (b.t === 'mc') ok(b.w.length === 3 && !b.w.includes(b.a) && new Set([b.a].concat(b.w)).size === 4, 'Exam 2 four distinct options #' + i, b.q);
+    else ok(b.t === 'tf' && typeof b.a === 'boolean', 'Exam 2 true/false has a boolean answer #' + i);
+  });
+  ok(new Set(Q.map(b => b.q)).size === Q.length, 'no duplicate Exam 2 questions');
+  const mc = Q.filter(b => b.t === 'mc'), longest = mc.filter(b => b.a.length > Math.max(...b.w.map(w => w.length)));
+  ok(longest.length / mc.length < 0.3, 'the right answer is not usually the longest choice', longest.length + ' of ' + mc.length);
+  const tf = Q.filter(b => b.t === 'tf');
+  ok(Math.abs(tf.filter(b => b.a).length - tf.filter(b => !b.a).length) <= 3, 'true and false roughly balanced', tf.filter(b => b.a).length + ' true / ' + tf.filter(b => !b.a).length + ' false');
+  ok(!/\b(bruh|cooked|GOAT|cheeks|lol)\b/i.test(JSON.stringify(E) + JSON.stringify(Q)), 'no slang');
+  // the practice engine
+  ok(A.e2Questions({ch:'all', n:15, kind:'all'}).length === 15, 'a mixed fifteen');
+  const all = A.e2Questions({ch:'all', n:0, kind:'all'});
+  ok(all.length === Q.length + 18 && new Set(all.map(q => q.key)).size === all.length, 'All: every question plus his 18, no repeats', all.length);
+  [7, 8, 9, 10, 11, 12].forEach(c => {
+    const qs = A.e2Questions({ch:String(c), n:0, kind:'all'});
+    ok(qs.length === Q.filter(b => b.c === c).length + 3 && qs.every(q => q.tp === 'e' + c), 'chapter ' + c + ' only: its questions and its practice check', qs.length);
+    ok(A.TOPIC_NAMES['e' + c] === undefined || /^Ch\. /.test(A.TOPIC_NAMES['e' + c]), 'chapter label');
+  });
+  const pc = A.e2Questions({ch:'all', n:0, kind:'pc'});
+  ok(pc.length === 18 && pc.every(q => q.pc && q.opts.filter(o => o.ok).length === 1), 'his practice check: 18 questions, one right answer each');
+  ok(A.e2Questions({ch:'all', n:0, kind:'tf'}).every(q => q.kind === 'tf'), 'true/false only');
+  ok(A.e2Questions({ch:'all', n:0, kind:'ap'}).every(q => q.ap), 'apply-it only');
+  const back = A.questionsByKeys(all.slice(0, 20).map(q => q.key));
+  ok(back.length === 20 && back.every((q, i) => q.key === all[i].key), 'Exam 2 questions rebuild from their keys (for “practice the misses”)');
 }
 
 console.log('\n' + (fails === 0 ? 'ALL ' + checks + ' CHECKS PASSED' : fails + ' FAILURES out of ' + checks + ' checks'));
